@@ -1,0 +1,22 @@
+{
+  "name": "rest",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "",
+    "prestart": "npm install",
+    "__start": "http-server -a localhost -p 8000 -c-1",
+    "start": "node index.js",
+    "pretest": "npm install",
+    "test": "karma start karma.conf.js",
+    "start-mongodb-rest":"mongodb-rest ",
+    "start-mongodb-rest2":"node mongodb-rest/index.js"
+  },
+  "author": "gotaheads",
+  "license": "MIT",
+  "dependencies": {
+    "mongodb": "~2.0.31",
+    "mongodb-rest": "~0.10.12"
+  }
+}
