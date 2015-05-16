@@ -1,5 +1,5 @@
 {
-  "name": "rest",
+  "name": "jobq-service",
   "version": "0.1.0",
   "description": "",
   "main": "index.js",
@@ -10,13 +10,16 @@
     "start": "node index.js",
     "pretest": "npm install",
     "test": "karma start karma.conf.js",
-    "start-mongodb-rest":"mongodb-rest ",
-    "start-mongodb-rest2":"node mongodb-rest/index.js"
+    "_not_working_start-mongodb-rest": "mongodb-rest ",
+    "start-mongodb-rest2": "node mongodb-rest/index.js"
   },
   "author": "gotaheads",
   "license": "MIT",
   "dependencies": {
+    "curlrequest": "^0.5.2",
     "mongodb": "~2.0.31",
-    "mongodb-rest": "~0.10.12"
+    "mongodb-rest": "^0.10",
+    "node-rest-client": "^1.5",
+    "request-as-curl": "~0.1.0"
   }
 }
