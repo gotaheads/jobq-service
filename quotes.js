@@ -5,17 +5,15 @@ var http = require("http");
 //mongoose = require('mongoose');
 //mongoose.connect('mongodb://localhost/dfl');
 
-exports.jobs = (function() {
-    var jobs = {}
+exports.quotes = (function() {
+    var quotes = {}
 
     var client = new Client();
 
-    jobs.get = function() {
+    quotes.get = function() {
         return new Promise(function(resolve) {
-            url = "http://localhost:3000/dfl/jobs";
+            url = "http://localhost:3000/dfl/quotes";
             var request = http.get(url, function (response) {
-                // data is streamed in chunks from the server
-                // so we have to handle the "data" event
                 var buffer = "",
                     data,
                     route;
@@ -28,13 +26,12 @@ exports.jobs = (function() {
                     data = JSON.parse(buffer);
                     console.log('data:%s, len:%s, typeof:%s',data, data.length, typeof data);
                     ids = []
-                    data.forEach(function(job) {
-                        console.log('data:%s %s',job.quoteId, job.id);
-                        ids.push({id:job.id, quoteId:job.quoteId, _id:job._id})
-                        //ids.push({id:job.id, quoteId:job.quoteId, job:job})
+                    data.forEach(function(quota) {
+                        console.log('data:%s %s',quota.quoteId, quota.id);
+                        ids.push({id:quota.id, quoteId:quota.quoteId, _id:quota._id})
 
                     })
-                    console.log('ids:%s, %s',ids.length, ids);
+                    console.log('ids:%s, %j',ids.length, ids);
 
                     resolve(ids);
                 });
@@ -42,24 +39,18 @@ exports.jobs = (function() {
         });
 
     }
-//client.get("http://localhost:3000/dfl/jobs", function (data, response) {
-    //    console.log('loaded: %j', data);
-    //    resolve(data);
-    //});
-
-    jobs.post = function(job) {
-        console.log('job: %j', job)
-        // set content-type header and data as json in args parameter
+    quotes.post = function(quote) {
+        console.log('quote: %j', quote)
         var args = {
-            data: job,
+            data: quote,
             headers: {"Content-Type": "application/json"}
         };
 
-        client.post("http://localhost:3000/dfl/jobs", args, function (data, response) {
+        client.post("http://localhost:3000/dfl/quotes", args, function (data, response) {
             console.log('created: %s', data.id);
         });
     }
 
-    return jobs
+    return quotes
 
 })()

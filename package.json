@@ -9,7 +9,8 @@
     "__start": "http-server -a localhost -p 8000 -c-1",
     "start": "node index.js",
     "pretest": "npm install",
-    "test": "karma start karma.conf.js",
+    "__test": "karma start karma.conf.js",
+    "test": "mocha *.spec.js -R list",
     "_not_working_start-mongodb-rest": "mongodb-rest ",
     "start-mongodb-rest2": "node mongodb-rest/index.js"
   },
@@ -20,6 +21,11 @@
     "mongodb": "~2.0.31",
     "mongodb-rest": "^0.10",
     "node-rest-client": "^1.5",
-    "request-as-curl": "~0.1.0"
+    "request-as-curl": "~0.1.0",
+    "bluebird": "~2.9.25",
+    "mongoose": "~4.0.3",
+    "mocha": "~2.2.5",
+    "superagent": "~1.2.0",
+    "expect.js": "~0.3.1"
   }
 }
