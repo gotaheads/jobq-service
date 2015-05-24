@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en" ng-app="jobq">
+    <head>
+        <meta charset="utf-8">
+        <title>DFL Job Quoting/Contract</title>
+        <meta name="ROBOTS" content="NOINDEX, NOFOLLOW"/>
+        <link href="lib/bootstrap/css/bootstrap.min.css"
+              rel="stylesheet">
+        <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" >
+        <link href="lib/angular-ui/angular-ui.min.css" rel="stylesheet" media="screen">
+        <link href="lib/angular-ui-ng-grid/ng-grid.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/app.css"/>
+    </head>
+    <body>
+        <div class="navbar" ng-show="showMenu"
+             ng-controller="MenuCtrl" ng-cloak>
+            <div class="navbar-inner">
+                <ul class="nav">
+                    <li><a href="#/dashboard">Dashboard</a></li>
+                    <li><a href="#/new-job">Create Job</a></li>
+                    <li><a href="#/settings">Settings</a></li>
+
+                    <li ng-repeat="i in recentJobs2">
+                        <a href="#{{i.path}}">{{i.name}}</a></li>
+                    
+                    <li><a href="login.html">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="loading" class="alert alert-info span5">
+            <img src="img/loading.gif" width="20px" height="20px"> Loading please wait...</div>
+
+        <div ng-view ng-cloak></div>
+
+
+        <!-- div>version <span app-version></span></div -->
+
+        <!-- In production use:
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.2/angular.min.js"></script>
+        -->
+        <script src="http://code.jquery.com/jquery-latest.js"></script>
+        
+
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+        <!-- script src="lib/angular/angular.js"></script -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular-resource.js"></script>
+
+        <script src="lib/angular-ui/angular-ui.min.js"></script>
+        <script src="lib/angular-strap/angular-strap.min.js"></script>
+        <script src="lib/angular-ui-ng-grid/ng-grid-2.0.4.min.js"></script>
+        
+        <script src="lib/bootstrap/js/bootstrap.min.js"></script>
+        <script src="lib/bootstrap/js/bootstrap-dropdown.js"></script>
+        
+        <script src="lib/ui-bootstrap/ui-bootstrap-tpls-0.3.0-SNAPSHOT.js"></script>
+
+        <script src="lib/json3.min.js"></script>
+        <script src="lib/BrowserDetect.js"></script>
+        <script src="js/app.js"></script>
+        <script src="js/services.js"></script>
+        <script src="js/QuoteCore.js"></script>
+        <script src="js/QuoteService.js"></script>
+
+        <script src="js/controllers.js"></script>
+        <script src="js/QuoteCtrl.js"></script>
+        <script src="js/EditWorksCtrl.js"></script>
+        <script src="js/ContractCtrl.js"></script>
+        <script src="js/MenuCtrl.js"></script>
+
+        <script src="js/filters.js"></script>
+        <script src="js/directives.js"></script>
+    </body>
+</html>

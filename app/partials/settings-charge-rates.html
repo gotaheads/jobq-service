@@ -1,0 +1,28 @@
+                <hr>
+                <h4>Your Charge Rate</h4>
+                <p>Charge rate is used in quote to determine the charge of a specific labour or task performed by a specific role with the charge rate.</p>
+                <label>Award Rate (Specify hours you work per day)</label>
+                
+                <input type="text"
+                       class="span12"
+                       placeholder="Enter hours per week."
+                       ng-model="business.awardRate">
+                <hr>
+                <label>Charge Out Rate</label>
+                <button class="btn btn-primary" ng-click="addNewChargeRate()">
+                    <i class="icon-plus"></i> Add New Rate</button>
+                <hr>
+
+                <div ng-repeat="i in business.chargeRates" class="">
+                    <input type="text"
+                           class="span6"
+                           placeholder="Enter name of labour."
+                           ng-model="i.labour"
+                           capitalize-first>
+                    <span> per hour $</span>
+                    <input type="text"
+                           class="span5"
+                           placeholder="Enter rate."
+                           ng-model="i.rate">
+
+                </div>

@@ -1,0 +1,54 @@
+<hr>
+<h4><a class="text-info"
+   href="#/edit-works/{{userProfile.id}}/{{workIdx}}">
+    <i class="icon-time"></i> {{editing.works.length}} Works</a></h4>
+<div class="items-summary top10"
+     ng-show="!emptyWorks(editing)">
+    <div class=" text-success">{{work.title}}</div>
+    <ul class="">
+        <li  class="text-info">{{work.outlines.length}}
+            <span> outlines</span>
+        </li>
+        <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+        <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+    </ul>
+    <ul class="">
+        <li  class="text-info">{{work.itemTotal.retail | currency | nodecimal}}
+            <span>{{work.items.length}} items</span>
+        </li>
+        <li  class="text-info">{{work.labourTotal | currency | nodecimal}} 
+            <span>{{work.labours.length}} labours</span>
+        </li>
+        <li class="text-info">{{work.plantTotal.retail | currency | nodecimal}}
+            <span>{{work.plants.length}} plants</span>
+        </li>
+    </ul>
+    <ul class="">
+        <li class="text-info">{{work.totalPrice | currency | nodecimal}}
+            <span>Total</span>
+        </li>
+        <li class="text-info">
+            {{work.finalPrice | currency | nodecimal}}
+            <span>Final</span>
+        </li>
+        <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+    </ul>
+</div>
+
+<ul class="nav nav-tabs nav-stacked work-list top10">
+    <!-- li>
+        <span class="span9">Work</span>
+        <span class="span2">Price</span>
+        <span class="span1"></span>
+    </li -->
+    <li ng-repeat="w in editing.works | orderBy:predicate:rowNumber"
+        class="highlight" st-fade="$index">
+        <div class="work span12"
+             ng-class="{active: w.id == work.id}"
+             ng-click="loadWork($index)"><!-- $index + 1 -->
+            <span class="span9">{{w.title}}</span>
+            <span class="span2">{{w.finalPrice | currency | nodecimal}}</span>
+        <span class="span1"></span>
+        </div>
+    </li>
+</ul>

@@ -1,0 +1,49 @@
+<div class="container">
+
+
+    <h3>Job Brief</h3>
+
+    <div class="row">
+
+        <span class="span11">{{created | date:'dd/MM/yyyy'}}</span>
+
+        <address class="offset8">
+            <span class="span4">{{business.business}}</span>
+            <span class="span4">{{business.address1}}</span>
+            <span class="span4">{{business.address2}}</span>
+            <span class="span4">{{business.tel}}</span>
+            <span class="span4">{{business.email}}</span>
+        </address>
+
+        <p class="lead">
+            <span class="span11">{{job.client}}</span>
+            <span class="span11">{{job.address}}</span>
+        </p>
+
+    </div>
+
+    <div class="row top25">
+        <h3 class="span11">Budget</h3>
+        <span class="span11">{{quote.budget | currency}}</span>
+        
+        <h3 class="span11">Brief</h3>
+        <span class="span11 top20">{{job.brief}}</span>
+        
+    </div>
+
+    <div class="row  top25">
+        <div ng-repeat='s in contract.sections'>
+            <p class="span11 top11">{{s.content}}</p>
+        </div>
+    </div>
+
+    <div class="row  top25">
+        <div class="well span10">
+            <p class="span11 top20">Date: {{created | date:'dd/MM/yyyy'}}</p>
+            <p class="span3 top10 offset1">{{quote.client}} </p><p class="span4 offset5">Sign _____________________________</p>
+            <p class="span3 top10 offset1">{{business.business}} </p><p class="span4 offset5">Sign _____________________________</p>
+
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,69 @@
+<div ng-include src="'partials/job-header.html'"></div>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span3" >
+            <div ng-include src="'partials/quote-menu.html'"></div>
+            <div ng-include src="'partials/quote-works.html'"></div>
+        </div>
+        <div class="span9">
+            <h3 class="span11">Labour for {{work.title}}</h3>
+            <form class="well form-inline span12 custom-form">
+                    <h4>New Labour</h4>
+
+                    <div class="new-item row-fluid">
+                        <div class="">
+                            <input type="text" ng-model="newLabourEntry.labour"
+                                   placeholder="Enter labour"
+                                   class="span6"
+                                   id="newItem"
+                                   select-on-click
+                                   init-focus
+                                   capitalize-first>
+                            <input type="text" ng-model="newLabourEntry.inDays"
+                                   class="span2" ng-change="updateLabourCost()"
+                                   placeholder="Days">
+                            <button class="btn btn-primary" ng-click="addNew()">
+                                <i class="icon-plus"></i> Add New</button>
+                        </div>
+                        <div class="top10">
+                            <select ng-model="newLabourEntry.labourType"
+                                    ng-options="i for i in labourTypes"
+                                    class="span4"
+                                    ng-change="typeChanged()">
+                            </select>
+                            <label>Hourly Rate: </label>
+                            <input type="text" value="{{newLabourEntry.hourlyRate | currency}}"
+                                   class="span2" readonly="true">
+                            <label>Daily Rate: </label>
+                            <input type="text" value="{{newLabourEntry.dailyRate | currency}}"
+                                   class="span2" readonly="true">
+                            <br>
+                            <div class="top10"></div>
+                            <span> ({{newLabourEntry.hoursPerDay}} hours per day, inc. GST)</span>
+
+                            <div class="item-total">
+                                <div class="item-summary" ng-show="newLabourEntry.totalPrice">
+                                    <ul class="">
+                                        <li  class="text-info">{{newLabourEntry.totalPrice | currency}}
+                                            <span>Total</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </form>
+            <form class="well form-inline span12 custom-form">
+                <button class="btn btn-primary" ng-click="save()">Save</button>
+                <br>
+                <label>Labour ({{work.labours.length}})</label>
+                <a href="" class="text-error offset8" ng-click="remove()">
+                    <i class="icon-remove"></i> Remove selected</a>
+
+                <div class="gridStyle item-grid" ng-grid="labourGridOptions"></div>
+
+            </form>
+        </div>
+    </div>
+</div>
+

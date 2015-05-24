@@ -1,0 +1,87 @@
+<div ng-include src="'partials/job-header.html'"></div>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span3">
+            <div ng-include src="'partials/quote-menu.html'"></div>
+            <div ng-include src="'partials/quote-works.html'"></div>
+        </div>
+        <div class="span9">
+            <h3 class="span11">Plant for {{work.title}}</h3>
+            <form class="well form-inline span12 custom-form">
+                <h4>New Plant</h4>
+                <div class="new-item row-fluid">
+                    <div class="">
+                        <input type="text" ng-model="newEntry.item"
+                               placeholder="Common name"
+                               class="span3"
+                               id="newItem"
+                               select-on-click
+                               init-focus
+                               capitalize-first>
+                        <input type="text" ng-model="newEntry.botanicalName"
+                               placeholder="Botanical name"
+                               class="span3"
+                               select-on-click
+                               capitalize-first>
+
+                        <input type="text" ng-model="newEntry.potSize"
+                               class="span2" ng-change="updateItemCost()"
+                               placeholder="Pot Size">
+
+                    </div>
+                    <div class="top10">
+                        <input type="text" ng-model="newEntry.quantity"
+                               class="span2" ng-change="updateItemCost()"
+                               placeholder="Qty.">
+                        <input type="text" ng-model="newEntry.wholesale"
+                               class="span3" ng-change="updateItemCost()"
+                               placeholder="W/S unit (include GST)">
+                        <select ng-model="newEntry.margin"
+                                ng-options="i.value as i.label for i in margins"
+                                class="span2" ng-change="updateItemCost()">
+                        </select>
+
+                        <button class="btn btn-primary" ng-click="addNew()">
+                            <i class="icon-plus"></i> Add New</button>
+
+                        <div class="item-total">
+                            <div class="item-summary" ng-show="newEntry.wholesaleTotal">
+                                <ul class="">
+                                    <li  class="text-info">{{newEntry.retail | currency}}
+                                        <span>Retail unit</span>
+                                    </li>
+                                    <li  class="text-info">{{newEntry.wholesaleTotal | currency}}
+                                        <span>W/S Total</span>
+                                    </li>
+                                    <li  class="text-info">{{newEntry.retailTotal | currency}}
+                                        <span>Retail Total</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+            <form class="well form-inline span12 custom-form">
+                <div class="control-group ">
+                    <button class="btn btn-primary" ng-click="save()">
+                        <i class="icon-save"></i> Save</button>
+                    <button class="btn btn-primary" ng-click="printPlants()">
+                            <i class="icon-print"></i> Print</button>
+
+                </div>
+
+                <label class="top10">Plant ({{work.plants.length}})</label>
+
+                <a href="" class="text-error offset8" ng-click="remove()">
+                    <i class="icon-remove"></i> Remove selected</a>
+
+                <div class="gridStyle item-grid" ng-grid="plantGridOptions"></div>
+
+            </form>
+        </div>
+    </div>
+</div>
+

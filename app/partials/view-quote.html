@@ -1,0 +1,44 @@
+<div ng-include src="'partials/job-header.html'"></div>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span3">
+            <div ng-include src="'partials/quote-menu.html'"></div>
+        </div>
+        <div class="span9">
+            <h3 class="span11">Quote summary</h3>
+
+            <div class="span10  top20">
+                <table class="table  table-striped">
+                    <tbody>
+                        <tr>
+                            <td>{{userProfile.works.length}} works</td>
+                            <td>
+                                <a ng-repeat="item in userProfile.works">
+                                    {{item.title}}
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>{{userProfile.plants.length}} plants</td>
+                            <td>
+                                <a ng-repeat="item in userProfile.plants">
+                                    {{item.item}}
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Contract</td>
+                            <td>
+                                <h5>Intro</h5>
+                                <p>{{editing.contract.intro}}</p>
+                                <h5>Payment Intro</h5>
+                                <p>{{editing.contract.paymentIntro}}</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

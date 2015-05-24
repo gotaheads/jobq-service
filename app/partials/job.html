@@ -1,0 +1,67 @@
+<div class="container">
+    <h3>{{title}}</h3>
+    <div class="row">
+    
+    <span>{{result}}</span>
+        <form class="well form-inline span10 custom-form">    
+            <div class="span6">
+                <fieldset>
+                    <div class="control-group">
+                        <label class="control-label" for="input01">Client</label>
+                        <div class="controls">
+                            <input type="text" 
+                                   class="input-small span6" id="client" 
+                                   placeholder="Enter client name."
+                                   ng-model="job.client"
+                                   required
+                                   init-focus
+                                   capitalize-first>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div class="control-group">
+                        <label class="control-label" for="input01">Address</label>
+                        <div class="controls">
+                            <input type="text" class="input-small span6" id="address" 
+                                   placeholder="Enter client's address."
+                                   ng-model="job.address"
+                                   required
+                                   capitalize-first>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div class="control-group">
+                        <label class="control-label" for="input01">Budget</label>
+                        <div class="controls">
+                            <input type="number" class="input-small span6" id="budget" 
+                                   placeholder="Enter the job's budget."
+                                   ng-model="job.budget"
+                                   required>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div class="control-group">
+                        <label class="control-label" for="input01">Job brief</label>
+                        <div class="controls">
+                            <textarea ng-model="job.brief" rows="8"
+                                      class="span6 rounded shaded left clearboth" id="job.brief"
+                                      required>
+                            </textarea>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <div class="control-group">
+                        <button class="btn btn-primary" ng-click="save()">Save</button>
+                    </div>
+                </fieldset>
+            </div>         
+        </form>
+    </div>
+
+
+</div> <!-- /container -->

@@ -1,0 +1,30 @@
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span3">
+            <div ng-include src="'partials/settings-menu.html'"></div>
+        </div>
+
+        <div class="span9">
+            <h3 class="span11">Your Business Profile</h3>
+
+            <form class="well form-inline span12 custom-form">
+                <div class="control-group ">
+                    <button class="btn btn-primary" ng-click="save()">
+                        <i class="icon-save"></i> Save</button>
+                </div>
+
+                <div ng-include src="'partials/settings-business.html'"></div>
+                <div ng-include src="'partials/settings-charge-rates.html'"></div>
+                <div ng-include src="'partials/settings-item-types.html'"></div>
+                
+                <div ng-include src="'partials/settings-contract.html'"></div>
+                <div ng-include src="'partials/settings-payments.html'"></div>
+
+            </form>
+
+        </div>
+
+
+    </div>
+</div>
+

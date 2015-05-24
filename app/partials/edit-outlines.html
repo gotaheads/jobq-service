@@ -1,0 +1,71 @@
+<div ng-include src="'partials/job-header.html'"></div>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span3">
+            <div ng-include src="'partials/quote-menu.html'"></div>
+            <div ng-include src="'partials/quote-works.html'"></div>
+
+            <!-- ul class="nav nav-tabs nav-stacked work-list">
+                <li ng-repeat="w in editing.works" class="" st-fade="$index">
+
+                    <div class="work span12"
+                         ng-class="{active: w.id == work.id}"
+                         ng-click="loadWork(w.id)">
+                        <span class="span2">{{w.outlines.length}}</span>
+                        <span class="span10">{{w.title}}</span>
+                    </div>
+                </li>
+            </ul -->
+        </div>
+        <div class="span9">
+            <h3 class="span11">Work Outline for {{work.title}}</h3>
+            <form class="well form-inline span12 custom-form">
+                <div class="control-group ">
+                    <button class="btn btn-primary" ng-click="save()">Save Now</button>
+                </div>
+
+                <label>Title</label>
+                <input type="text"
+                       class="span12" id="title"
+                       placeholder="Enter title."
+                       ng-model="work.title"
+                       required
+                       init-focus>
+                <hr>
+                <label>Outline ({{work.outlines.length}})</label> 
+                <button class="btn btn-primary" ng-click="add()">
+                    <i class="icon-plus"></i> Add New Outline</button>
+                <hr>
+                <div class="icon-container"
+                    ng-repeat='outline in work.outlines' st-fade="$index">
+                    <!-- textarea ng-model="outline.content" name="outline" rows="1" cols="50"
+                              class="input-no-width rounded shaded left clearboth span11"
+                              id="outline_{{$index}}" on-enter="addRow(this)">
+                    </textarea  -->
+                    <input type="text" name="outline" 
+                           ng-model="outline.content" class="span10"
+                           id="outline_{{$index}}"
+                           select-on-click
+                           capitalize-first>
+
+                    <span ng-include src="'partials/items-actions.html'"></span>
+
+                </div>
+                <hr>
+                <label>Note</label>
+                <textarea ng-model="work.note" name="note" rows="8" cols="50"
+                          class="input-no-width rounded shaded left clearboth span12"
+                          id="note">
+                </textarea>
+
+
+
+
+            </form>
+
+        </div>
+
+    </div>
+</div>
+

@@ -1,0 +1,56 @@
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+          <div class="span3 job-header">
+              <p><i class="icon-user"></i> {{userProfile.client}}
+                  {{userProfile.address}}</p>
+              <span>Client</span>
+          </div>
+          <div class="span1 job-header">
+            <p>{{userProfile.createdLong | date:'dd/MM/yyyy'}}
+            </p>
+            <span>Created</span>
+          </div>
+          <div class="span1 job-header">
+              <p class="font-smaller">{{userProfile.status}}</p>
+            <span>Status</span>
+          </div>
+          <div class="span1 job-header">
+            <p>{{userProfile.version}}</p>
+            <span>Revision</span>
+          </div>
+          <div class="span3 job-header">
+            <p>{{userProfile.updated | date:'dd/MM HH:mm'}}
+                <i ng-show="editingChanged" class="icon-warning-sign"></i>
+            </p>
+            <span>Last Saved</span>
+          </div>
+
+            <div class="quote-summary">
+                <ul class="">
+                    <li class="text-info">{{userProfile.budget | noFractionCurrency}}
+                        <span>Budget</span>
+                    </li>
+                    <li class="text-info">{{userProfile.works.length}}
+                        <span>Works</span>
+                    </li>
+                    <li class="text-info">{{userProfile.totalPrice | noFractionCurrency}}
+                        <span>Total Price</span>
+                    </li>
+                    <li  class="text-info">{{userProfile.finalPrice | noFractionCurrency}}
+                        <span>Final Price</span>
+                    </li>
+                </ul>
+
+            </div>
+
+            <hr>
+
+        </div>
+
+    </div>
+</div>
+
+
+
+

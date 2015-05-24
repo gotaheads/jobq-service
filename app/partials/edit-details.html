@@ -1,0 +1,39 @@
+<form class="well form-inline span12 custom-form">
+
+    <h5 class="">Contract</h5>
+
+    <span ng-model="editing.contract.dear"></span>
+
+    <label>To</label>
+    <div>{{editing.contract.dear}}</div>
+    <label>Title</label>
+    <div>{{editing.contract.title}}</div>
+    <label>Intro</label>
+    <div class="">{{editing.contract.intro}}</div>
+
+    <label>Payment Intro</label>
+    <div class="">{{editing.contract.paymentIntro}}</div>
+
+    <label>Payments</label>
+    <div ng-repeat="p in editing.contract.payments">
+        <div class="">{{p.title}}</div>
+        <div class="">{{p.portion}}</div>
+    </div>
+
+    <label>Contents</label>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat='c in editing.contract.contents'>
+                <td>
+                    {{c}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</form>

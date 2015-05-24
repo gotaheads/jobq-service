@@ -1,0 +1,50 @@
+<div ng-include src="'partials/job-header.html'"></div>
+
+<div ng-include src="'partials/job-tabs.html'"></div>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span3">
+            <ul class="nav nav-tabs nav-stacked span12">
+                <li  class="active"><a href="#/edit-job/{{editing.id}}">Details</a></li>
+                <li><a href="#/job-quotes/{{editing.id}}">Quotes</a></li>
+            </ul>
+        </div>
+        <div class="span9">
+
+            <h5 class="">Quotes</h5>
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Version</th>
+                        <th>Total cost</th>
+                        <th>Final price</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="userProfile in job.quotes">
+                        <td>
+                            {{quote.version}}
+                        </td>
+                        <td>{{quote.totalPrice | currency}}</td>
+                        <td>{{quote.finalPrice | currency}}</td>
+                        <td>{{quote.status}}</td>
+                        <!-- td>
+                            <a href='/worksheet-dev.html?id={{quote.id}}'>Quote</a>
+                            <a href="#/edit-contract/{{quote.id}}">Contract</a>
+                        </td -->
+                    </tr>
+                </tbody>
+            </table>
+
+
+        </div>
+
+
+
+
+    </div>
+</div>
+

@@ -1,0 +1,72 @@
+<div ng-include src="'partials/job-header.html'"></div>
+
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span3">
+            <div ng-include src="'partials/quote-menu.html'"></div>
+        </div>
+        <div class="span9">
+            <h3 class="span11">Job Details</h3>
+            <form class="well form-inline span12 custom-form">
+                <div class="control-group ">
+                    <button class="btn btn-primary" ng-click="save()">
+                        <i class="icon-save"></i> Save</button>
+                    <button class="btn btn-primary" ng-click="printJob()">
+                            <i class="icon-print"></i> Print Job Brief</button>
+                    <button class="btn btn-success" ng-click="complete()">
+                            <i class="icon-ok"></i> Completed</button>
+                    <button class="btn btn-warning" ng-click="cancel()">
+                            <i class="icon-remove-sign"></i> Cancelled</button>
+
+                    <button class="btn btn-danger left20" ng-click="remove()">
+                        <i class="icon-remove"></i> Delete</button>
+
+                </div>
+
+                <label>Status</label><br>
+                
+                <select ng-model="job.status"
+                        ng-options="i for i in statuses"
+                        class="span5"
+                        >
+                </select><br>
+
+
+                <label>Client</label>
+                <input type="text"
+                       class="span12" id="client"
+                       placeholder="Enter client name."
+                       ng-model="job.client"
+                       required
+                       capitalize-first>
+                <label>Address</label>
+                <div class="controls">
+                    <input type="text" class="span12" id="address"
+                           placeholder="Enter client's address."
+                           ng-model="job.address"
+                           required
+                           capitalize-first>
+                </div>
+                <label>Budget</label>
+                <input type="number" class="span12"
+                       id="budget"
+                       placeholder="Enter the job's budget."
+                       ng-model="job.budget"
+                       required>
+
+                <label>Job brief</label>
+                <textarea ng-model="job.brief" rows="8"
+                          class="span12 rounded shaded left clearboth" id="job.brief"
+                          >
+                </textarea>
+
+
+            </form>
+
+        </div>
+
+
+    </div>
+</div>
+

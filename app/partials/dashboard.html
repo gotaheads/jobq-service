@@ -1,0 +1,50 @@
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span2">
+            <h5 class="top50">Dashboard</h5>
+            <!-- form action="/job/save" method="post">
+                <input type="hidden" name="action" value="DEMO" />
+                <input type="submit" value="Demo create new job" />
+            </form -->
+
+        </div>
+        <div class="span10">
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Job</th>
+                        <th>Budget</th>
+                        <th>Final Price</th>
+                        <th>Version</th>
+                        <th>Status</th>
+                        <th>Created</th>
+                        <th>Updated</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="job in jobs | orderBy:'updated':true"
+                        ng:class="{completed: job.status=='Completed'}">
+                        <td>
+                            {{job.client}} {{job.address}}
+                        </td>
+                        <td>{{job.budget | currency}}</td>
+                        <td>{{job.finalPrice | currency}}</td>
+                        
+                        <td>{{job.version}}</td>
+                        <td>{{job.status}}</td>
+                        <td>{{job.created | date:'dd/MM/yyyy '}}</td>
+                        <td>{{job.updated | date:'dd/MM/yyyy hh:m'}}</td>
+                        <td>
+                            <a href='#/edit-job/{{job.id}}'>Edit</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+        </div>
+    </div>
+</div>
+

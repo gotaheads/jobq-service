@@ -1,0 +1,76 @@
+<div ng-include src="'partials/job-header.html'"></div>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span3">
+            <div ng-include src="'partials/quote-menu.html'"></div>
+        </div>
+
+        <div class="span9">
+            <h3 class="span11">Contract</h3>
+            <form class="well form-inline span12 custom-form">
+                <div class="control-group ">
+                    <button class="btn btn-primary" ng-click="save()">Save</button>
+                </div>
+
+                <label>To</label>
+                <input type="text"
+                       class="span12" id="dear"
+                       placeholder="Dear"
+                       ng-model="editing.contract.dear">
+                <label>Title</label>
+                <input type="text"
+                       class="span12" id="title"
+                       placeholder="Title"
+                       ng-model="editing.contract.title">
+                
+                <div ng-include src="'partials/edit-contract-content.html'"></div>
+
+                <label>Intro</label>
+                <textarea ng-model="editing.contract.intro" name="intro" rows="5" cols="50"
+                          class="input-no-width rounded shaded left clearboth span12">
+                </textarea>
+
+                <hr>
+                <label>Contents ({{editing.contract.sections.length}})</label>
+
+                <button class="btn btn-primary" ng-click="add()">
+                    <i class="icon-plus"></i> Add New Content</button>
+
+                <hr>
+                <div ng-repeat='c in editing.contract.sections' st-fade="$index">
+                    <textarea ng-model="c.content" name="content" rows="1" cols="50"
+                              class="input-no-width rounded shaded left clearboth span10"
+                              id="content_{{$index}}" on-enter="addRow(this)">
+                    </textarea>
+                    
+                    <span ng-include src="'partials/items-actions.html'"></span>
+                </div>
+                <hr>
+                <label>Payment Intro</label>
+                <textarea ng-model="editing.contract.paymentIntro" name="paymentIntro" rows="5" cols="50"
+                          class="input-no-width rounded shaded left clearboth span12">
+                </textarea>
+                <hr>
+                <label>Payments</label>
+                <div ng-repeat="p in editing.contract.payments">
+                    <input type="text"
+                           class="span5"
+                           placeholder="Payment title"
+                           ng-model="p.title">
+                    <input type="text"
+                           class="span5"
+                           placeholder="Portion"
+                           ng-model="p.portion">
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function() {
+        $("textarea").height($("textarea")[0].scrollHeight);
+    });
+</script>

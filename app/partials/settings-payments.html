@@ -1,0 +1,26 @@
+                <hr>
+                <h4>Payment schedule for Contract</h4>
+                <p>Payment schedule appears in your job contract based on the template below.</p>
+
+                <label>Payment Summary</label>
+                <textarea ng-model="template.paymentIntro" name="paymentIntro" rows="5" cols="50"
+                          class="input-no-width rounded shaded left clearboth span12">
+                </textarea>
+
+                <label>Payments</label>
+                <button class="btn btn-primary" ng-click="addNewPayment()">
+                    <i class="icon-plus"></i> Add New Payment</button>
+                <hr>
+                <div ng-repeat="i in template.payments" class="">
+                    <input type="text"
+                           class="span6"
+                           placeholder="Enter payment title."
+                           ng-model="i.title"
+                           capitalize-first>
+                    <span> portion</span>
+                    <input type="text"
+                           class="span5"
+                           placeholder="Enter .1 for 10%"
+                           ng-model="i.portion">%
+
+                </div>

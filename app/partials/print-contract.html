@@ -1,0 +1,112 @@
+<div class="container">
+
+    <h3>Job Contract</h3>
+
+    <div class="row">
+
+        <span class="span11">{{created | date:'dd/MM/yyyy'}}</span>
+
+        <address class="offset8">
+            <span class="span4 business">{{userProfile.business.business}}</span>
+            <span class="span4">ABN: {{userProfile.business.abn}}</span>
+            <span class="span4 top10">{{userProfile.business.address1}}</span>
+            <span class="span4">{{userProfile.business.address2}}</span>
+            <span class="span4">{{userProfile.business.tel}}</span>
+            <span class="span4">{{userProfile.business.email}}</span>
+
+            <span class="span4"><!-- ABN: {{userProfile.business.abn}} --></span>
+        </address>
+
+        <p class="lead">
+            <span class="span11 client">{{quote.client}}</span>
+            <span class="span11">{{quote.address}}</span>
+        </p>
+
+        <span class="span11 top35">{{contract.dear}}</span>
+        <span class="span11 top20">{{contract.title}}</span>
+
+        <p class="span11 top20">
+            {{contract.intro}}
+        </p>
+    </div>
+
+    <div class="row top25">
+
+        <h3 class="span11">Works to include</h3>
+
+        <div class=""
+             ng-repeat="work in quote.works | orderBy:'rowNumber'">
+            <h4 class="span11">{{work.title}}</h4>
+            <ul class="span10 offset1">
+                <li ng-repeat='item in work.outlines'>{{item.content}}</li>
+            </ul>
+            <p class="span10 offset1" ng-show="work.note"><i>{{work.note}}</i></p>
+        </div>
+    </div>
+
+
+    <div class="row top25">
+        <h3 class="span11">Costing overview</h3>
+        <div class="span10 ">
+            <table class="table  table-striped">
+                <thead>
+                    <tr>
+                        <th>Works</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="work in quote.works | orderBy:predicate:true">
+                        <td>{{work.title}}</td>
+                        <td>{{work.finalPrice | noFractionCurrency}}</td>
+                    </tr>
+
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>Total</th>
+                        <th>{{quote.finalPrice | noFractionCurrency}}</th>
+                    </tr>
+                </tfoot>
+            </table>
+
+        </div>
+    </div>
+    <div class="row top25">
+        <h3 class="span11">Pricing structure</h3>
+        <p class="span11">{{contract.paymentIntro}}</p>
+        <div class="span10  top20">
+            <table class="table  table-striped">
+                <thead>
+                    <tr>
+                        <th>Payment</th>
+                        <th>Percent</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr ng-repeat='payment in contract.payments'>
+                        <td>{{payment.title}}</td>
+                        <td>{{payment.portion | percentf}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row  top25">
+        <div ng-repeat='s in contract.sections'>
+            <p class="span11 top11">{{s.content}}</p>
+        </div>
+    </div>
+
+    <div class="row  top25">
+        <div class="well span10">
+            <p class="span11 top20">Date: {{created | date:'dd/MM/yyyy'}}</p>
+            <p class="span3 top10 offset1">{{quote.client}} </p><p class="span4 offset5">Sign _____________________________</p>
+            <p class="span3 top10 offset1">{{userProfile.business.business}} </p><p class="span4 offset5">Sign _____________________________</p>
+
+        </div>
+    </div>
+
+</div>

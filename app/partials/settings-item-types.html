@@ -1,0 +1,21 @@
+                <hr>
+                <h4>Your Item Types for Purachased Goods</h4>
+                <p>The item types are used in quote to specify the category of purchased goods.</p>
+                <label>Item Type</label>
+                <button class="btn btn-primary" ng-click="addNewItemType()">
+                    <i class="icon-plus"></i> Add New Item Type</button>
+                <hr>
+
+                <div ng-repeat="i in business.itemTypes" class="">
+                    <input type="text"
+                           class="span6"
+                           placeholder="Enter name of item type."
+                           ng-model="i.type"
+                           capitalize-first>
+                    <span> Margin: </span>
+                    <input type="text"
+                           class="span5"
+                           placeholder="Enter the margin of the item type."
+                           ng-model="i.margin">%
+
+                </div>
