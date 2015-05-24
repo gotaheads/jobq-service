@@ -50,5 +50,3 @@ exports.landscapequoting = function () {
     }
     return landscapequoting
 }()
-
-//http://landscapequoting.appspot.com/restlet/jobs

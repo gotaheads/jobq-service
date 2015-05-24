@@ -4,8 +4,8 @@ console.log('starting..');
 jobs = require('./jobs').jobs,
 //quotes = require('./quotes').quotes,
 landscapequoting = require('./landscapequoting').landscapequoting
-exports.jobs = function() {
-    console.log('starting module..');
+exports.createDatabase = function() {
+    console.log('starting createDatabase..');
 
 
     jobs.get().then(function(jobs) {
