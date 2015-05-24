@@ -2,6 +2,7 @@ Client = require('node-rest-client').Client;
 Promise = require("bluebird");
 var http = require("http");
 
+config = require('./config').config
 //mongoose = require('mongoose');
 //mongoose.connect('mongodb://localhost/dfl');
 
@@ -40,14 +41,16 @@ exports.quotes = (function() {
 
     }
     quotes.post = function(quote) {
-        console.log('quote: %j', quote)
+        console.log('quote: %s', quote.id)
         var args = {
             data: quote,
             headers: {"Content-Type": "application/json"}
         };
 
-        client.post("http://localhost:3000/dfl/quotes", args, function (data, response) {
-            console.log('created: %s', data.id);
+        url = config.target.createUrl('/quotes')
+        console.log('quotes post url: %s', url)
+        client.post(url, args, function (data, response) {
+            //console.log('created: %s', data);
         });
     }
 

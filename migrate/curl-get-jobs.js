@@ -3,7 +3,7 @@ console.log('starting..');
 curl = require('curlrequest');
 //curl = require('node-curl');
 
-exports.jobs = function() {
+exports.loadJobs = function() {
     console.log('starting module..');
 
     var options = { url: 'http://landscapequoting.appspot.com/restlet/jobs', include: true };

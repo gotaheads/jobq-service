@@ -1,6 +1,9 @@
 Client = require('node-rest-client').Client;
 Promise = require("bluebird");
-var http = require("http");
+http = require("http");
+request = require('superagent');
+
+config = require('./config').config
 
 //mongoose = require('mongoose');
 //mongoose.connect('mongodb://localhost/dfl');
@@ -12,8 +15,8 @@ exports.jobs = (function() {
 
     jobs.get = function() {
         return new Promise(function(resolve) {
-            url = "http://localhost:3000/dfl/jobs";
-            var request = http.get(url, function (response) {
+            //url = "http://localhost:3000/dfl/jobs";
+            var request = http.get(config.target.createUrl('/jobs'), function (response) {
                 // data is streamed in chunks from the server
                 // so we have to handle the "data" event
                 var buffer = "",
@@ -42,21 +45,18 @@ exports.jobs = (function() {
         });
 
     }
-//client.get("http://localhost:3000/dfl/jobs", function (data, response) {
-    //    console.log('loaded: %j', data);
-    //    resolve(data);
-    //});
 
     jobs.post = function(job) {
         console.log('job: %j', job)
-        // set content-type header and data as json in args parameter
         var args = {
             data: job,
             headers: {"Content-Type": "application/json"}
         };
 
-        client.post("http://localhost:3000/dfl/jobs", args, function (data, response) {
-            console.log('created: %s', data.id);
+        url = config.target.createUrl('/jobs')
+        console.log('job post url: %s', url)
+        client.post(url, args, function (data, response) {
+            //console.log('created: %s', data._id);
         });
     }
 

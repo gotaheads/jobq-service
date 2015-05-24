@@ -7,10 +7,10 @@
     "postinstall": "",
     "prestart": "npm install",
     "__start": "http-server -a localhost -p 8000 -c-1",
-    "start": "node index.js",
+    "start": "node migrate/index.js",
     "pretest": "npm install",
     "__test": "karma start karma.conf.js",
-    "test": "mocha *.spec.js -R list",
+    "test": "mocha migrate/*.spec.js -R list",
     "_not_working_start-mongodb-rest": "mongodb-rest ",
     "start-mongodb-rest2": "node mongodb-rest/index.js"
   },
@@ -26,6 +26,7 @@
     "mongoose": "~4.0.3",
     "mocha": "~2.2.5",
     "superagent": "~1.2.0",
-    "expect.js": "~0.3.1"
+    "expect.js": "~0.3.1",
+    "dateformat": "~1.0.11"
   }
 }

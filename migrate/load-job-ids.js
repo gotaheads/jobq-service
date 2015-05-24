@@ -4,7 +4,7 @@ fs = require('fs');
 var curl = require('curlrequest'),
     jobs = require('./jobs')
 
-exports.jobs = function() {
+exports.loadJobs = function() {
     console.log('starting module..');
 
     var options = { url: 'http://landscapequoting.appspot.com/restlet/jobs', include: true };
@@ -18,7 +18,7 @@ exports.jobs = function() {
     //jobs.jobs.post(s[0])
 
     s.forEach(function(j) {
-        jobs.jobs.post(j)
+        jobs.loadJobs.post(j)
     })
 
 

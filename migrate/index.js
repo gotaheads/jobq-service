@@ -1,21 +1,13 @@
-console.log('starting..');
-//fs = require('fs');
-//curl = require('curlrequest'),
-jobs = require('./jobs').jobs,
-//quotes = require('./quotes').quotes,
 landscapequoting = require('./landscapequoting').landscapequoting
-exports.createDatabase = function() {
-    console.log('starting createDatabase..');
 
+exports.loadLandscapequoting = function() {
+    console.log('starting loadLandscapequoting..')
 
-    jobs.get().then(function(jobs) {
-        jobs.forEach(function(j) {
-            console.log('loaded: %j', j);
-
-            landscapequoting.loadQuota(j.quoteId).then()
-
-        })
-
+    landscapequoting.loadJobs().then(function(loaded) {
+        console.log(('loadLandscapequoting loaded: %s', loaded.length))
+        landscapequoting.loadQuotes()
     })
+
+
 
 }()
