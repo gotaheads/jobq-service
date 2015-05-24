@@ -60,7 +60,8 @@ myApp.run(['$rootScope', '$location', '$log', '$filter', '$http',
     $rootScope.showMenu = true;
     
     $rootScope.loadUserProfile = function()  {
-        $http.get('/restlet/user-profile/' + 'admin').success(function(up) {
+        var url = 'http://localhost:3000/dfl201522242105/userprofiles/5561b460012c3cff1b35313c'
+        $http.get(url).success(function(up) {
             $rootScope.userProfile = up.userProfile;
             $rootScope.userProfile.business = up.business;
             $rootScope.userProfile.template = up.template;

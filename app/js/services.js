@@ -57,13 +57,15 @@ servicesModule.factory('JobService', ['$rootScope', '$http', '$log', function ($
     JobService.saveJob = function(param) {
         var json = JSON.stringify(param);
         $log.info('saveJob json is ' + json);
-        return $http.put('/restlet/jobs/'+ param.id, json);
+        var url = createUrl('/jobs/' + param.id);
+        return $http.put(url, json);
     }
 
     JobService.remove = function(param) {
         var json = JSON.stringify(param);
         $log.info('saveJob json is ' + json);
-        return $http({method: 'DELETE', url: '/restlet/jobs/'+ param.id} );
+        var url = createUrl('/jobs/' + param.id);
+        return $http({method: 'DELETE', url: url} );
     }
     
 

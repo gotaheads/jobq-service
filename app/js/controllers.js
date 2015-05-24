@@ -1,7 +1,12 @@
 'use strict';
 
+function createUrl(path) {
+    return 'http://localhost:3000/dfl201522242105' + path;
+}
+
 function DashboardCtrl($scope, $http) {
-    $http.get('/restlet/jobs').success(function(jobs) {
+    var url = createUrl('/jobs');
+    $http.get(url).success(function(jobs) {
         $scope.jobs = jobs;
     });
 
@@ -20,7 +25,8 @@ function CreateJobCtrl($scope, $http) {
     };
               
     $scope.save = function() {
-        $http.post('/restlet/jobs/-1', $scope.job)
+        var url = createUrl('/jobs/-1');
+        $http.post(url, $scope.job)
         .success(function(data, status) {
             console.log('job saved d:' + data + ' id '+ data.id + ' s:' + status);
 
@@ -37,7 +43,9 @@ CreateJobCtrl.$inject = ['$scope','$http'];
 
 function PrintJobCtrl($scope, JobService, $http, $routeParams) {
     $scope.jobId = $routeParams.jobId;
-    $http.get('/restlet/jobs/' + $scope.jobId).success(function(job) {
+
+    var url = createUrl('/jobs/' + $scope.jobId);
+    $http.get(url).success(function(job) {
         $scope.job = job;
         $scope.userProfile = job.quotes[0];
     });
@@ -53,8 +61,9 @@ function EditJobCtrl($scope, JobService, $http, $routeParams, QuoteService) {
     ,'Completed', 'Cancelled'];
     
     $scope.$log.info("EditJobCtrl " + $scope.jobId);
-    
-    $http.get('/restlet/jobs/' + $scope.jobId).success(function(job) {
+
+    var url = createUrl('/jobs/' + $scope.jobId);
+    $http.get(url).success(function(job) {
         $scope.job = job;
         $scope.editing = job;
 
