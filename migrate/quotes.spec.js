@@ -12,8 +12,8 @@ describe('Migrate Quotes', function() {
             expect(res).to.exist;
             expect(res.status).to.equal(200);
             text = res.text
-            quote = JSON.parse(text)
-            expect(quote.id).to.equal(id);
+            userProfile = JSON.parse(text)
+            expect(userProfile.id).to.equal(id);
 
             done();
         });

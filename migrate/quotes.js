@@ -41,9 +41,9 @@ exports.quotes = (function() {
 
     }
     quotes.post = function(quote) {
-        console.log('quote: %s', quote.id)
+        console.log('quote: %s', userProfile.id)
         var args = {
-            data: quote,
+            data: userProfile,
             headers: {"Content-Type": "application/json"}
         };
 

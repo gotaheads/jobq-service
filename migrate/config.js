@@ -1,7 +1,7 @@
 var dateFormat = require('dateformat');
 exports.config = (function () {
     now = new Date()
-    stamp =  dateFormat(now, "yyyyMM");
+    stamp =  dateFormat(now, "yyyyMMddHHmm");
     console.log('stamp:%s', stamp)
     return {
         src:{
@@ -15,6 +15,16 @@ exports.config = (function () {
             createUrl:function(path) {
                 return this.basePath + path;
             }
+        },
+        toJson: function(err, res) {
+            s = res.text
+
+            if(s.indexOf('Internal Server Error') > -1) {
+                return;
+            }
+
+            s = s.replace(/\n/g, "\\n")
+            return JSON.parse(s)
         }
 
 

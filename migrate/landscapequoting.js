@@ -3,14 +3,23 @@ request = require('superagent');
 curl = require('curlrequest')
 
 config = require('./config').config
+toJson = config.toJson
 
 jobs = require('./jobs').jobs
 quotes = require('./quotes').quotes
+userProfiles = require('./userProfiles').userProfiles
 
 module.exports.landscapequoting = (function () {
     console.log('starting landscapequoting with %j', config)
 
     landscapequoting = {}
+
+    landscapequoting.loadUserProfiles = function() {
+        userProfiles.get().then(function(userProfile) {
+            console.log('loading userProfile for: %s userProfile', userProfile);
+            userProfiles.post(userProfile)
+        })
+    }
 
     landscapequoting.loadQuotes = function() {
         jobs.get().then(function(jobs) {
@@ -28,22 +37,13 @@ module.exports.landscapequoting = (function () {
     landscapequoting.loadQuote = function (id) {
         return new Promise(function (resolve) {
             url = config.src.createUrl('/job/quote/'+id)
-
-            console.log('getting quote: %s', url)
-
+            console.log('loading quote: %s', url)
             request.get(url).end(function(err, res) {
-                //console.log('quote loaded: %s, status:%s, err:%s', res.text, res.status,
-                //    res.text.indexOf('Internal Server Error'))
-                s = res.text
+                quote = toJson(err, res)
 
-                if(s.indexOf('Internal Server Error') > -1) {
-                    return;
-                }
+                if(!quote) return
 
-                s = s.replace(/\n/g, "\\n"),
-                quote = JSON.parse(s)
-
-                quotes.post(s)
+                quotes.post(quote)
 
                 resolve(s);
 
@@ -55,18 +55,12 @@ module.exports.landscapequoting = (function () {
     landscapequoting.loadJobs = function () {
         return new Promise(function (resolve) {
             var url =  config.src.createUrl('/jobs')
-
+            console.log('loading jobs: %s', url)
             request.get(url).end(function(err, res) {
-                console.log('jobs loaded: %s, status:%s, err:%s', res.text, res.status)
-
-                s = res.text
-                s = s.replace(/\n/g, "\\n"),
-                jobsLoaded = JSON.parse(s)
-
+                jobsLoaded = toJson(err, res)
                 jobsLoaded.forEach(function (j) {
                     jobs.post(j)
                 })
-
                 resolve(jobsLoaded);
 
             });
