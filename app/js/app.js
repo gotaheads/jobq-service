@@ -152,7 +152,7 @@ myApp.run(['$rootScope', '$location', '$log', '$filter', '$http',
 
     $rootScope.dropdown = [];
     function emptyWorks(editing) {
-        if(!editing.works || editing.works.length == 0) {
+        if(!editing || !editing.works || editing.works.length == 0) {
             return true;
         }
         return false;
@@ -160,7 +160,7 @@ myApp.run(['$rootScope', '$location', '$log', '$filter', '$http',
     $rootScope.emptyWorks = emptyWorks;
     
     $rootScope.updateQuoteActions = function($scope) {
-        var quoteId = $scope.userProfile.id;
+        var quoteId = $scope.quote.id;
         $log.info('updateQuoteActions loc path: ' + $scope.location.path() +
                   ' quoteId: ' + quoteId);
         
