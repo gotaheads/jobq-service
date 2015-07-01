@@ -12,14 +12,15 @@
     "__test": "karma start karma.conf.js",
     "test": "mocha migrate/*.spec.js -R list",
     "_not_working_start-mongodb-rest": "mongodb-rest ",
-    "start-mongodb-rest2": "node mongodb-rest/index.js"
+    "start-mongodb-rest2": "node mongodb-rest/index.js",
+    "_mongodb-rest-orig-ver":"^0.10"
   },
   "author": "gotaheads",
   "license": "MIT",
   "dependencies": {
     "curlrequest": "^0.5.2",
     "mongodb": "~2.0.31",
-    "mongodb-rest": "^0.10",
+    "mongodb-rest": "git://github.com/gotaheads/mongodb-rest.git#master",
     "node-rest-client": "^1.5",
     "request-as-curl": "~0.1.0",
     "bluebird": "~2.9.25",
