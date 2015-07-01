@@ -74,8 +74,10 @@ function EditJobCtrl($scope, JobService, $http, $routeParams, QuoteService) {
 
     $scope.save = function() {
         JobService.saveJob($scope.job).then(function(result) {
-//            $scope.$log.info("saveJob finished " + result.data);
+            $scope.$log.info("saveJob finished " + result.data);
+
             var job = result.data;
+
             QuoteService.updateStatus($scope.userProfile, job);
             QuoteService.updateQuoteStatus(job);
         });

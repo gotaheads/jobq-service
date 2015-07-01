@@ -160,11 +160,6 @@ function EditLabourCtrl($scope, QuoteService) {
 EditLabourCtrl.$inject = ['$scope', 'QuoteService'];
 
 
-function ViewQuoteCtrl($scope, QuoteService) {
-    QuoteService.findOrCreateForView($scope);
-}
-ViewQuoteCtrl.$inject = ['$scope', 'QuoteService'];
-
 
 function PrintPlantCtrl($scope, QuoteService, $routeParams) {
 
