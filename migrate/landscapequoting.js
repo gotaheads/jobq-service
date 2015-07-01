@@ -24,28 +24,39 @@ module.exports.landscapequoting = (function () {
     landscapequoting.loadQuotes = function() {
         jobs.get().then(function(jobs) {
             console.log('loading quotes for: %s jobs', jobs.length);
-            jobs.forEach(function(j) {
-                console.log('loading quote for: %s', j.id);
+            jobs.forEach(function(job) {
+                console.log('loading quote for: %s', job.id);
 
-                landscapequoting.loadQuote(j.quoteId).then()
+                landscapequoting.loadQuote(job).then()
 
             })
 
         })
     }
 
-    landscapequoting.loadQuote = function (id) {
+    landscapequoting.loadQuote = function (job) {
         return new Promise(function (resolve) {
-            url = config.src.createUrl('/job/quote/'+id)
+            url = config.src.createUrl('/job/quote/'+job.quoteId)
             console.log('loading quote: %s', url)
             request.get(url).end(function(err, res) {
                 quote = toJson(err, res)
 
                 if(!quote) return
 
-                quotes.post(quote)
+                //delete quote._id
+                //job.migrated = true
+                //job.quote = quote
+                job.quotes.push(quote)
 
-                resolve(s);
+
+                jobs.post(job)
+                .then(function(job) {
+                    console.log('job saved: %s', job.migrated);
+                    resolve(s);
+                })
+                //quotes.post(quote)
+
+
 
             });
 
@@ -59,7 +70,10 @@ module.exports.landscapequoting = (function () {
             request.get(url).end(function(err, res) {
                 jobsLoaded = toJson(err, res)
                 jobsLoaded.forEach(function (j) {
-                    jobs.post(j)
+
+                    landscapequoting.loadQuote(j)
+
+                    //jobs.post(j)
                 })
                 resolve(jobsLoaded);
 
