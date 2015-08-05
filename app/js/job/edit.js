@@ -41,7 +41,7 @@ function EditJobCtrl($scope, JobService, $http, $routeParams, QuoteService) {
 
         JobService.updateActions($scope);
 
-        $scope.addRecentJob(job.id, job.client);
+        $scope.addRecentJob(job._id, job.client);
     });
 
     $scope.printQuote = function() {
