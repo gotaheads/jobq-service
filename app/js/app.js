@@ -60,7 +60,7 @@ myApp.run(['$rootScope', '$location', '$log', '$filter', '$http',
     $rootScope.showMenu = true;
     
     $rootScope.loadUserProfile = function()  {
-        var url = 'http://localhost:3000/dfl201522242105/userprofiles/5561b460012c3cff1b35313c'
+        var url = 'http://localhost:3000/dfl201505062208/userprofiles/55c34d907d61abda0f50169e'
         $http.get(url).success(function(up) {
             $rootScope.userProfile = up.userProfile;
             $rootScope.userProfile.business = up.business;
@@ -160,7 +160,7 @@ myApp.run(['$rootScope', '$location', '$log', '$filter', '$http',
     $rootScope.emptyWorks = emptyWorks;
     
     $rootScope.updateQuoteActions = function($scope) {
-        var quoteId = $scope.quote.id;
+        var quoteId = $scope.editing._quoteId;
         $log.info('updateQuoteActions loc path: ' + $scope.location.path() +
                   ' quoteId: ' + quoteId);
         
