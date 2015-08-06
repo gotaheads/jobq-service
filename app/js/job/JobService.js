@@ -3,7 +3,7 @@ servicesModule.factory('JobService', ['$rootScope', '$http', '$log', function ($
     var JobService = {};
     JobService.updateActions = function($scope) {
         $rootScope.jobTabs[0].id = $scope.editing._id;
-        $rootScope.jobTabs[1].id = $scope.userProfile.id;
+        $rootScope.jobTabs[1].id = $scope.editing._quoteId;
         $rootScope.updateQuoteActions($scope);
     }
 
