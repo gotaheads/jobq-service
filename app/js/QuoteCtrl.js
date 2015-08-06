@@ -165,12 +165,12 @@ function PrintPlantCtrl($scope, QuoteService, $routeParams) {
 
     QuoteService.find($routeParams.quoteId).then(function(result) {
         $scope.$log.info("loading from repository... " + result.data.id);
-        $scope.userProfile = result.data;
+        $scope.quotes = result.data;
         $scope.plants = [];
         $scope.created = new Date();
         var plantTotal = {retail:0};
         
-        $scope.userProfile.works.forEach(function(i) {
+        $scope.quotes.works.forEach(function(i) {
             i.plants.forEach(function(j) {
                 $scope.plants.push(j);
             });
@@ -193,11 +193,11 @@ function EditPlantCtrl($scope, QuoteService) {
     QuoteService.findOrCreateForPlants($scope);
 
     $scope.printPlants = function() {
-        $log.info("printPlants save first: " + $scope.userProfile.id);
+        $log.info("printPlants save first: " + $scope.quotes.id);
 
         var open = function(quote) {
             window.open(
-              '#/print-plants/' + userProfile.id,
+              '#/print-plants/' + quotes.id,
               '_blank'
             );
         }
