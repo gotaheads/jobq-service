@@ -24,7 +24,7 @@ exports.userProfiles = (function() {
     userProfiles.post = function(userProfile) {
         return new Promise(function(resolve, reject) {
             url = config.target.createUrl('/userprofiles')
-            console.log('post userProfile: %s, %j', url, userProfile)
+            //console.log('post userProfile: %s, %j', url, userProfile)
             request.post(url, userProfile).end(function(err, res) {
                 console.log('res: %s', res.status)
             });

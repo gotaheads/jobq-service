@@ -5,9 +5,9 @@ exports.loadLandscapequoting = function() {
 
     landscapequoting.loadJobs().then(function(loaded) {
         console.log(('loadLandscapequoting loaded: %s', loaded.length))
-        //landscapequoting.loadQuotes()
+        landscapequoting.loadQuotes()
     })
 
-    landscapequoting.loadUserProfiles()
+    //landscapequoting.loadUserProfiles()
 
 }()
