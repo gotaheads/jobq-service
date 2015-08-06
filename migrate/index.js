@@ -8,6 +8,6 @@ exports.loadLandscapequoting = function() {
         landscapequoting.loadQuotes()
     })
 
-    //landscapequoting.loadUserProfiles()
+    landscapequoting.loadUserProfiles()
 
 }()
