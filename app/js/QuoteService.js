@@ -27,7 +27,7 @@ servicesModuleQuote.factory('QuoteService',
 
             QuoteService.find = function(quoteId) {
                 $log.info('find quoteId is ' + quoteId);
-                var url = createUrl('/jobs/' + quoteId);
+                var url = createUrl('/quotes/' + quoteId);
                 return $http.get(url);
             }
 
@@ -100,10 +100,10 @@ servicesModuleQuote.factory('QuoteService',
                 $rootScope.loadForEdit = true;
             }
 
-            QuoteService.loadForEdit = function($scope, toLoad, job) {
+            QuoteService.loadForEdit = function($scope, toLoad, quote) {
                 $log.info('loadForEdit start: ' + toLoad);
-                $rootScope.job = job;
-                var quote = job.quotes[0];
+                //$rootScope.job = job;
+                //var quote = job.quotes[0];
 
                 $rootScope.editing = quote;
                 $rootScope.quote = $rootScope.editing;
@@ -263,10 +263,9 @@ servicesModuleQuote.factory('QuoteService',
                 $rootScope.currentQuoteId = $scope.quoteId;
 
                 QuoteService.find($scope.quoteId).then(function(result) {
-                    var job = result.data,
-                        quote = job.quotes[0];
-                    $scope.$log.info("loading from repository... " + job._id);
-                    QuoteService.loadForEdit($scope, toLoad, job);
+                    var quote = result.data;
+                    $scope.$log.info("loading from repository... " + quote._id);
+                    QuoteService.loadForEdit($scope, toLoad, quote);
                 });
 
             }
