@@ -1,7 +1,7 @@
 'use strict';
 
 function createUrl(path) {
-    return 'http://localhost:3000/dfl201547282206' + path;
+    return 'http://localhost:3000/dfl201500062208' + path;
 }
 
 function DashboardCtrl($scope, $http) {
@@ -47,7 +47,7 @@ function PrintJobCtrl($scope, JobService, $http, $routeParams) {
     var url = createUrl('/jobs/' + $scope.jobId);
     $http.get(url).success(function(job) {
         $scope.job = job;
-        $scope.userProfile = job.quotes[0];
+        $scope.quotes = job.quotes[0];
     });
 }
 
@@ -64,12 +64,12 @@ function ViewContractCtrl($scope, ContractService, $routeParams,QuoteService) {
     ContractService.find($scope.quoteId).then(function(result) {
         $scope.$log.info("found " + result.data.id);
         var quote = result.data;
-        $scope.contract = userProfile.contract;
-        $scope.userProfile = userProfile;
-        $scope.editing = userProfile;
+        $scope.contract = quotes.contract;
+        $scope.quotes = quotes;
+        $scope.editing = quotes;
         $scope.printQuote = function() {
-            $log.info("ViewContractCtrl printQuote : " + $scope.userProfile.id);
-            QuoteService.openPrint($scope.userProfile);
+            $log.info("ViewContractCtrl printQuote : " + $scope.quotes.id);
+            QuoteService.openPrint($scope.quotes);
         }
         
         $scope.updateQuoteActions($scope);
