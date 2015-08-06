@@ -12,6 +12,7 @@ exports.config = (function () {
         }
 
         s = s.replace(/\n/g, "\\n")
+
         return JSON.parse(s)
     }
     return {
@@ -19,6 +20,14 @@ exports.config = (function () {
             basePath: 'http://landscapequoting.appspot.com/restlet',
             createUrl:function(path) {
                 return this.basePath + path;
+            },
+            toJson: function(err, res) {
+                s = res.text
+                if(s.indexOf('Internal Server Error') > -1) {
+                    return;
+                }
+                s = s.replace(/\n/g, "\\n")
+                return JSON.parse(s)
             }
         },
         target:{
@@ -30,6 +39,10 @@ exports.config = (function () {
                 id = res.header.id
                 //console.log('json res: %j, %s', res.header, id)
                 return id
+            },
+            toJson: function(err, res) {
+                s = res.text
+                return JSON.parse(s)
             }
         },
         toJson: toJson

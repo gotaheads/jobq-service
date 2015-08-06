@@ -13,7 +13,7 @@ exports.userProfiles = (function() {
         return new Promise(function(resolve) {
             url = config.src.createUrl('/user-profile/admin')
             request.get(url).end(function(err, res) {
-                userProfile = toJson(err, res)
+                userProfile = config.src.toJson(err, res)
                 if(!userProfile) return
                 resolve(userProfile);
 

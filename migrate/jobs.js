@@ -19,7 +19,7 @@ exports.jobs = (function() {
             console.log('finding job using url: %s', url)
             superagent.get(url)
                 .end(function(e, res){
-                    resolve(res);
+                    resolve(config.target.toJson(e, res));
                 })
 
         });
@@ -32,7 +32,7 @@ exports.jobs = (function() {
             superagent.put(url)
                 .send(job)
                 .end(function(e, res){
-                    resolve(job);
+                    resolve(config.target.toJson(e, res));
                 })
         });
     }

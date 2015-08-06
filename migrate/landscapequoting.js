@@ -24,22 +24,23 @@ module.exports.landscapequoting = (function () {
     }
 
     landscapequoting.loadQuotes = function() {
-        jobs.get().then(function(jobs) {
-            console.log('loading quotes for: %s jobs', jobs.length);
-            jobs.forEach(function(j) {
-                console.log('loading quote for job id: %s, new job id: %s', j.id,j._id);
+        jobs.get().then(function(jobsLoaded) {
+            console.log('loading quotes for: %s jobs', jobsLoaded.length);
+            jobsLoaded.forEach(function(job) {
+                console.log('loading quote for job id: %s, new job id: %s', job.id,job._id);
 
-                landscapequoting.loadQuote(j.quoteId, j).then(function(quote) {
+                landscapequoting.loadQuote(job.quoteId, job).then(function(quote) {
 
                     console.log('loaded quote job to update the _quoteId: %s', quote._id);
-                    //jobs.find(quote._jobId).then(function(job) {
-                    //    console.log('got job to update the _quoteId: %s', job._id);
-                    //    job._quoteId = quote._id
-                    //    //jobs.put(job)
-                    //})
-                    })
 
+                    jobs.find(quote._jobId).then(function(job) {
+                        console.log('got job to update: j:%s | q:%s', job._id, quote._id);
+                        job._quoteId = quote._id
+                        jobs.put(job)
+                    })
                 })
+
+            })
 
         })
 
@@ -50,7 +51,7 @@ module.exports.landscapequoting = (function () {
             url = config.src.createUrl('/job/quote/'+id)
             console.log('loading quote: %s for job %s', url, job)
             request.get(url).end(function(err, res) {
-                quote = toJson(err, res)
+                quote = config.src.toJson(err, res)
 
                 if(!quote) return
                 quote._jobId = job._id
@@ -72,7 +73,7 @@ module.exports.landscapequoting = (function () {
             var url =  config.src.createUrl('/jobs')
             console.log('loading jobs: %s', url)
             request.get(url).end(function(err, res) {
-                jobsLoaded = toJson(err, res)
+                jobsLoaded = config.src.toJson(err, res)
                 jobsLoaded.forEach(function (j) {
                     jobs.post(j).then(function(id) {
                         console.log('job created: %s', id)
