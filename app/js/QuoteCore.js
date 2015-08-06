@@ -306,7 +306,7 @@ servicesModuleQuote.factory('Quote',
                 var item = work.items[idx];
                 item = Quote.updateItemCost(item);
             }
-            updateWorkTotal($scope, userProfile, work);
+            updateWorkTotal($scope, quote, work);
         }
 
         Quote.updateLabourTotal = function($scope, quote, work, idx) {
@@ -316,7 +316,7 @@ servicesModuleQuote.factory('Quote',
                 labour = Quote.updateLabourCost(labour);
             }
 
-            updateWorkTotal($scope, userProfile, work);
+            updateWorkTotal($scope, quote, work);
         }
 
         Quote.updateLabourCost = function(labour) {
@@ -337,7 +337,7 @@ servicesModuleQuote.factory('Quote',
                 item = Quote.updateItemCost(item);
             }
 
-            updateWorkTotal($scope, userProfile, work);
+            updateWorkTotal($scope, quote, work);
         }
 
         Quote.updateWorksTotal = function($scope, quote) {
@@ -350,7 +350,7 @@ servicesModuleQuote.factory('Quote',
             $log.info("updateWorksTotal plant total: " +
                 ' ' + angular.toJson(total));
 
-            angular.forEach(userProfile.works, function(work) {
+            angular.forEach(quotes.works, function(work) {
                 $log.info("updateWorksTotal work total: " +
                     ' ' + work.finalPrice +
                     ' ' + work.totalPrice);
@@ -364,9 +364,9 @@ servicesModuleQuote.factory('Quote',
             $log.info("updateWorksTotal work total: " +
                 ' ' + angular.toJson(total));
 
-            userProfile.finalPrice = total.finalPrice;
-            userProfile.totalPrice = total.totalPrice;
-            userProfile.totalDiff = total.totalDiff;
+            quotes.finalPrice = total.finalPrice;
+            quotes.totalPrice = total.totalPrice;
+            quotes.totalDiff = total.totalDiff;
 
             Quote.updateSummary($scope);
 
@@ -432,7 +432,7 @@ servicesModuleQuote.factory('Quote',
                 ' work.totalPrice:' + work.totalPrice +
                 ' work.finalPrice:' + work.finalPrice);
 
-            Quote.updateWorksTotal($scope, userProfile);
+            Quote.updateWorksTotal($scope, quotes);
         }
 
 
