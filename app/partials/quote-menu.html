@@ -1,20 +1,22 @@
 <h4><a class="text-success"
-   href="#/edit-job/{{userProfile.jobId}}">
+   href="#/edit-job/{{jobId}}">
     <i class="icon-wrench"></i> Job Detail</a></h4>
 <hr class="">
 <h4><a class=""
-   href="#/view-quote/{{userProfile.id}}/">
+   href="#/view-quote/{{quoteId}}/">
     <i class="icon-money"></i> Quote</a></h4>
+
 <a class="btn btn-success quote-actions"
    ng-repeat="item in quoteActions"
    href="{{item.href}}/{{workIdx}}"
    ng-class="{selectedAction: item.text == actionLabel}">
     <i class="{{item.icon}}"></i> <span style=""> {{item.text}}</span>
 </a>
+
 <div ng-show="contractActions.length > 0">
     <hr class="">
     <h4><a class="text-info"
-       href="#/edit-contract/{{quote.id}}">
+       href="#/edit-contract/{{quoteId}}">
         <i class="icon-legal"></i> Contract</a></h4>
     <a class="btn btn-info quote-actions" ng-repeat="item in contractActions"
        href="{{item.href}}"

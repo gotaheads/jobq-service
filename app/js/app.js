@@ -38,9 +38,9 @@ var myApp = angular.module('jobq', ['$strap.directives', 'ui.bootstrap', 'ngGrid
   }]);
 
 myApp.run(['$rootScope', '$location', '$log', '$filter', '$http',
-           'Quote','Coolections',
+           'Quote','Coolections','QuoteActions',
            function($rootScope, $location, $log, $filter,$http,
-                    Quote, Coolections) {
+                    Quote, Coolections, QuoteActions) {
     $rootScope.location = $location;
     $rootScope.$log = $log;
     $rootScope.capitalize = $filter('capitalize');
@@ -151,83 +151,76 @@ myApp.run(['$rootScope', '$location', '$log', '$filter', '$http',
     $rootScope.jobTabs.push({key:'job-quotes', path:'#/view-quote/',label:'Quote/Contract', id:'123'});
 
     $rootScope.dropdown = [];
-    function emptyWorks(editing) {
-        if(!editing || !editing.works || editing.works.length == 0) {
-            return true;
-        }
-        return false;
-    }
-    $rootScope.emptyWorks = emptyWorks;
-    
-    $rootScope.updateQuoteActions = function($scope) {
-        var quoteId = $scope.editing._quoteId;
-        $log.info('updateQuoteActions loc path: ' + $scope.location.path() +
-                  ' quoteId: ' + quoteId);
-        
-        $rootScope.quoteActions = [];
 
-        $rootScope.quoteActions.push({
-            "icon":"icon-print",
-            "text": "Summary",
-            "href": "#/view-quote/" + quoteId
-            });
-
-        $rootScope.quoteActions.push({
-            "icon":"icon-edit",
-            "text": "Works",
-            "href": "#/edit-works/" + quoteId
-            });
-            
+//    $rootScope.updateQuoteActions = function($scope) {
+//        var quoteId = $scope.editing._quoteId;
+//        $log.info('updateQuoteActions loc path: ' + $scope.location.path() +
+//                  ' quoteId: ' + quoteId);
+//
+//        $rootScope.quoteActions = [];
+//
+//        $rootScope.quoteActions.push({
+//            "icon":"icon-print",
+//            "text": "Summary",
+//            "href": "#/view-quote/" + quoteId
+//            });
+//
+//        $rootScope.quoteActions.push({
+//            "icon":"icon-edit",
+//            "text": "Works",
+//            "href": "#/edit-works/" + quoteId
+//            });
+//
+////        if(!emptyWorks($rootScope.editing)) {
+//            $rootScope.quoteActions.push({
+//                "icon":"icon-edit",
+//                "text": "Work Outlines",
+//                "href": "#/edit-outlines/" + quoteId
+//                });
+//            $rootScope.quoteActions.push({
+//                "icon":"icon-edit",
+//                "text": "Items",
+//                "href": "#/edit-quote/" + quoteId
+//                });
+//            $rootScope.quoteActions.push({
+//                "icon":"icon-edit",
+//                "text": "Labours",
+//                "href": "#/edit-labours/" + quoteId
+//                });
+//            $rootScope.quoteActions.push({
+//                "icon":"icon-edit",
+//                "text": "Plants",
+//                "href": "#/edit-plants/" + quoteId
+//                });
+////        }
+//
+//        angular.forEach($rootScope.quoteActions, function(i) {
+//            if(i.href.indexOf($rootScope.location.path()) !== -1) {
+//                $rootScope.actionLabel = i.text;
+//            }
+//        } )
+//
+//        $rootScope.contractActions = [];
+//
 //        if(!emptyWorks($rootScope.editing)) {
-            $rootScope.quoteActions.push({
-                "icon":"icon-edit",
-                "text": "Work Outlines",
-                "href": "#/edit-outlines/" + quoteId
-                });
-            $rootScope.quoteActions.push({
-                "icon":"icon-edit",
-                "text": "Items",
-                "href": "#/edit-quote/" + quoteId
-                });
-            $rootScope.quoteActions.push({
-                "icon":"icon-edit",
-                "text": "Labours",
-                "href": "#/edit-labours/" + quoteId
-                });
-            $rootScope.quoteActions.push({
-                "icon":"icon-edit",
-                "text": "Plants",
-                "href": "#/edit-plants/" + quoteId
-                });
+//            $rootScope.contractActions.push({
+//                "icon":"icon-edit",
+//                "text": "Edit",
+//                "href": "#/edit-contract/" + quoteId
+//                });
+//    //        $rootScope.contractActions.push({
+//    //            "icon":"icon-camera-retro",
+//    //            "text": "View",
+//    //            "href": "#/view-contract/" + quoteId
+//    //            });
 //        }
-
-        angular.forEach($rootScope.quoteActions, function(i) {
-            if(i.href.indexOf($rootScope.location.path()) !== -1) {
-                $rootScope.actionLabel = i.text;
-            }
-        } )
-
-        $rootScope.contractActions = [];
-
-        if(!emptyWorks($rootScope.editing)) {
-            $rootScope.contractActions.push({
-                "icon":"icon-edit",
-                "text": "Edit",
-                "href": "#/edit-contract/" + quoteId
-                });
-    //        $rootScope.contractActions.push({
-    //            "icon":"icon-camera-retro",
-    //            "text": "View",
-    //            "href": "#/view-contract/" + quoteId
-    //            });
-        }
-        
-        angular.forEach($rootScope.contractActions, function(i) {
-            if(i.href.indexOf($rootScope.location.path()) !== -1) {
-                $rootScope.actionLabel = i.text;
-            }
-        } )
-
-    }
+//
+//        angular.forEach($rootScope.contractActions, function(i) {
+//            if(i.href.indexOf($rootScope.location.path()) !== -1) {
+//                $rootScope.actionLabel = i.text;
+//            }
+//        } )
+//
+//    }
 
 }]);

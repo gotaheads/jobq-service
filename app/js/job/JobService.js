@@ -2,9 +2,9 @@
 servicesModule.factory('JobService', ['$rootScope', '$http', '$log', function ($rootScope, $http, $log) {
     var JobService = {};
     JobService.updateActions = function($scope) {
-        $rootScope.jobTabs[0].id = $scope.editing._id;
-        $rootScope.jobTabs[1].id = $scope.editing._quoteId;
-        $rootScope.updateQuoteActions($scope);
+        var jobId = $rootScope.jobTabs[0].id = $scope.editing._id;
+        var quoteId = $rootScope.jobTabs[1].id = $scope.editing._quoteId;
+        $rootScope.updateQuoteActions($scope, jobId, quoteId);
     }
 
     JobService.saveJob = function(job) {

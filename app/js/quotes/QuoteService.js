@@ -107,7 +107,8 @@ servicesModuleQuote.factory('QuoteService',
 
                 $rootScope.editing = quote;
                 $rootScope.quote = $rootScope.editing;
-                $rootScope.quoteId = $rootScope.editing.id;
+                var quoteId = $rootScope.quoteId = $rootScope.editing._id;
+                var jobId = $rootScope.editing._jobId;
 
                 if($scope.workIdx == undefined) {
                     $scope.workIdx = 0;
@@ -133,7 +134,7 @@ servicesModuleQuote.factory('QuoteService',
                 }
 
 
-                $scope.updateQuoteActions($scope);
+                $scope.updateQuoteActions($scope, jobId, quoteId);
 
                 if(!$rootScope.editingChanged) {
                     $rootScope.editingChanged = false;
@@ -169,7 +170,7 @@ servicesModuleQuote.factory('QuoteService',
                 $scope.workIdx = $routeParams.workIdx;
 
                 if($rootScope.currentQuoteId == $scope.quoteId) {
-                    $scope.$log.info("loading from cache: " + $rootScope.editing.id +
+                    $scope.$log.info("loading from cache: " + $rootScope.editing._id +
                     ' widx:' +$scope.workIdx +
                     ' changed?: ' + $rootScope.editingChanged);
 
@@ -187,7 +188,7 @@ servicesModuleQuote.factory('QuoteService',
             }
 
             var saveCurrent = function (editing, afterSave) {
-                $log.info("saveCurrent:" + editing.id);
+                $log.info("saveCurrent:" + editing._id);
                 var worksheet = {};
                 worksheet.quote = editing;
 
@@ -197,14 +198,15 @@ servicesModuleQuote.factory('QuoteService',
                     $log.info("QuoteService save finished updating:" + quote.id + ' u: ' + quote.updated);
 
                     $rootScope.loadForEdit = true;
-                    $rootScope.currentQuoteId = quote.id;
-                    $rootScope.quoteId = quote.id;
-                    $rootScope.quote.id = quote.id;
+                    var quoteId = $rootScope.currentQuoteId = quote._id;
+                    $rootScope.quoteId = quote._id;
+                    $rootScope.quote._id = quote._id;
+                    var jobId = quote._jobId;
                     $rootScope.quote.version = quote.version;
                     $rootScope.quote.updated = quote.updated;
                     $rootScope.quote.status = quote.status;
 
-                    $rootScope.updateQuoteActions($rootScope);
+                    $rootScope.updateQuoteActions($rootScope, jobId, quoteId);
 
                     if(afterSave !== undefined) {
                         afterSave(result.data.quote);
@@ -234,7 +236,7 @@ servicesModuleQuote.factory('QuoteService',
                 ' cur:' + $rootScope.currentQuoteId);
 
                 $scope.printQuote = function() {
-                    $log.info("QuoteService print save first if changed: " + $rootScope.editing.id);
+                    $log.info("QuoteService print save first if changed: " + $rootScope.editing._id);
 
                     if($rootScope.editingChanged) {
                         $log.info("editingChanged: " + $rootScope.editingChanged);
