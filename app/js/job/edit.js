@@ -16,7 +16,7 @@ function EditJobCtrl($scope, JobService, $http, $routeParams, QuoteService) {
         $scope.editing = job;
 
 
-        var workIdx = job.quotes.length - 1;
+        var workIdx = 0;
         $scope.quote = {};
         $scope.workIdx = workIdx;
 
@@ -45,18 +45,19 @@ function EditJobCtrl($scope, JobService, $http, $routeParams, QuoteService) {
     });
 
     $scope.printQuote = function() {
-        $log.info("EditJobCtrl printQuote : " + $scope.quotes.id);
-        QuoteService.openPrint($scope.quotes);
+        $log.info("EditJobCtrl printQuote : " + $scope.quote._id);
+        QuoteService.openPrint($scope.quote);
     }
 
     $scope.printJob = function() {
-        $log.info("EditJobCtrl printJob: " + $scope.job.id);
+        var jobId = $scope.job._id;
+        $log.info("EditJobCtrl printJob: " + jobId);
 
         JobService.saveJob($scope.job).then(function(result) {
             var job = result.data;
-            $scope.$log.info("saveJob finished " + job.id);
+            $scope.$log.info("saveJob finished " + jobId);
             window.open(
-                '#/print-job/' + job.id,
+                '#/print-job/' + jobId,
                 '_blank'
             );
         });
@@ -73,12 +74,12 @@ function EditJobCtrl($scope, JobService, $http, $routeParams, QuoteService) {
     }
 
     $scope.save = function() {
-        JobService.saveJob($scope.job).then(function(result) {
+        var job = $scope.job;
+
+        JobService.saveJob(job).then(function(result) {
             $scope.$log.info("saveJob finished " + result.data);
 
-            var job = result.data;
-
-            QuoteService.updateStatus($scope.quotes, job);
+            QuoteService.updateStatus($scope.quote, job);
             QuoteService.updateQuoteStatus(job);
         });
     };

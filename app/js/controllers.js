@@ -28,9 +28,9 @@ function CreateJobCtrl($scope, $http) {
         var url = createUrl('/jobs/-1');
         $http.post(url, $scope.job)
         .success(function(data, status) {
-            console.log('job saved d:' + data + ' id '+ data.id + ' s:' + status);
+            console.log('job saved d:' + data + ' id '+ data._id + ' s:' + status);
 
-            $scope.location.path('edit-job/' + data.id);
+            $scope.location.path('edit-job/' + data._id);
         })
         .error(function(data, status) {
             $scope.data = data || "Request failed";
@@ -47,7 +47,8 @@ function PrintJobCtrl($scope, JobService, $http, $routeParams) {
     var url = createUrl('/jobs/' + $scope.jobId);
     $http.get(url).success(function(job) {
         $scope.job = job;
-        $scope.quotes = job.quotes[0];
+
+        //$scope.quote = job.quotes[0];
     });
 }
 
@@ -64,12 +65,12 @@ function ViewContractCtrl($scope, ContractService, $routeParams,QuoteService) {
     ContractService.find($scope.quoteId).then(function(result) {
         $scope.$log.info("found " + result.data.id);
         var quote = result.data;
-        $scope.contract = quotes.contract;
-        $scope.quotes = quotes;
-        $scope.editing = quotes;
+        $scope.contract = quote.contract;
+        $scope.quote = quote;
+        $scope.editing = quote;
         $scope.printQuote = function() {
-            $log.info("ViewContractCtrl printQuote : " + $scope.quotes.id);
-            QuoteService.openPrint($scope.quotes);
+            $log.info("ViewContractCtrl printQuote : " + $scope.quote._id);
+            QuoteService.openPrint($scope.quote);
         }
         
         $scope.updateQuoteActions($scope);

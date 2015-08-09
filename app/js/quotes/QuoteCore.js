@@ -350,7 +350,7 @@ servicesModuleQuote.factory('Quote',
             $log.info("updateWorksTotal plant total: " +
                 ' ' + angular.toJson(total));
 
-            angular.forEach(quotes.works, function(work) {
+            angular.forEach(quote.works, function(work) {
                 $log.info("updateWorksTotal work total: " +
                     ' ' + work.finalPrice +
                     ' ' + work.totalPrice);
@@ -364,9 +364,9 @@ servicesModuleQuote.factory('Quote',
             $log.info("updateWorksTotal work total: " +
                 ' ' + angular.toJson(total));
 
-            quotes.finalPrice = total.finalPrice;
-            quotes.totalPrice = total.totalPrice;
-            quotes.totalDiff = total.totalDiff;
+            quote.finalPrice = total.finalPrice;
+            quote.totalPrice = total.totalPrice;
+            quote.totalDiff = total.totalDiff;
 
             Quote.updateSummary($scope);
 
@@ -432,7 +432,7 @@ servicesModuleQuote.factory('Quote',
                 ' work.totalPrice:' + work.totalPrice +
                 ' work.finalPrice:' + work.finalPrice);
 
-            Quote.updateWorksTotal($scope, quotes);
+            Quote.updateWorksTotal($scope, quote);
         }
 
 

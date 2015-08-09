@@ -68,13 +68,13 @@ servicesModule.factory('ContractService',
 
     ContractService.find = function(quoteId) {
         $log.info('find quoteId is ' + quoteId);
-        return $http.get('/restlet/job/quote/' + quoteId);
+        return $http.get(createUrl('/quotes/' + quoteId));
     }
 
     ContractService.save = function(param) {
-        var json = JSON.stringify(param);
-        $log.info('save id: ' + param.id  + '  '+ json);
-        return $http.put('/restlet/job/quote/'+ param.id, param);
+        var json = JSON.stringify(param),id = param._id;
+        $log.info('save id: ' + id  + '  '+ json);
+        return $http.put(createUrl('/quotes/'+ id), param);
     }
 
     return ContractService;

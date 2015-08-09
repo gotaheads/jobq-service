@@ -58,7 +58,7 @@ function ViewContractCtrl($scope, $http, $routeParams) {
     }
                                
     $http.get('/restlet/job/contract/' + $scope.quoteId).success(function(quote) {
-        $scope.contract = quotes.contract;
+        $scope.contract = quote.contract;
 
         if(!$scope.contract.payments) {
             $scope.contract.payments = paymentsDefault.payments;
@@ -67,11 +67,11 @@ function ViewContractCtrl($scope, $http, $routeParams) {
 
         $scope.created = new Date();
         
-        $scope.quotes = quotes;
+        $scope.quote = quote;
         
         $scope.printQuote = function() {
-            $log.info("EditJobCtrl printQuote : " + $scope.quotes.id);
-            QuoteService.openPrint($scope.quotes);
+            $log.info("EditJobCtrl printQuote : " + $scope.quote.id);
+            QuoteService.openPrint($scope.quote);
         }
 
     });    

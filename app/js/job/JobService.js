@@ -17,7 +17,7 @@ servicesModule.factory('JobService', ['$rootScope', '$http', '$log', function ($
     JobService.remove = function(param) {
         var json = JSON.stringify(param);
         $log.info('saveJob json is ' + json);
-        var url = createUrl('/jobs/' + param.id);
+        var url = createUrl('/jobs/' + param._id);
         return $http({method: 'DELETE', url: url} );
     }
 

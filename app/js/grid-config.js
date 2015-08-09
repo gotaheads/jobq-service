@@ -22,7 +22,7 @@ servicesModuleQuote.factory('QuoteService',
             $scope.itemTypes = ['Material', 'Equipment'];
 
             QuoteService.find($scope.quoteId).then(function(result) {
-                $scope.$log.info("found " + result.data.id);
+                $scope.$log.info("found " + result.data._id);
                 $scope.editing = result.data;
 
                 if($scope.editing.works !==undefined) {
@@ -103,7 +103,7 @@ servicesModuleQuote.factory('QuoteService',
             $scope.itemTypes = ['Material', 'Equipment'];
 
             QuoteService.find($scope.quoteId).then(function(result) {
-                $scope.$log.info("found " + result.data.id);
+                $scope.$log.info("found " + result.data._id);
                 $scope.editing = result.data;
                 if($scope.editing.works !==undefined) {
                     $scope.work = $scope.editing.works[0];

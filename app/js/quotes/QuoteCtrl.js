@@ -164,13 +164,13 @@ EditLabourCtrl.$inject = ['$scope', 'QuoteService'];
 function PrintPlantCtrl($scope, QuoteService, $routeParams) {
 
     QuoteService.find($routeParams.quoteId).then(function(result) {
-        $scope.$log.info("loading from repository... " + result.data.id);
-        $scope.quotes = result.data;
+        $scope.$log.info("loading from repository... " + result.data._id);
+        $scope.quote = result.data;
         $scope.plants = [];
         $scope.created = new Date();
         var plantTotal = {retail:0};
         
-        $scope.quotes.works.forEach(function(i) {
+        $scope.quote.works.forEach(function(i) {
             i.plants.forEach(function(j) {
                 $scope.plants.push(j);
             });
@@ -193,11 +193,11 @@ function EditPlantCtrl($scope, QuoteService) {
     QuoteService.findOrCreateForPlants($scope);
 
     $scope.printPlants = function() {
-        $log.info("printPlants save first: " + $scope.quotes.id);
+        $log.info("printPlants save first: " + $scope.quote._id);
 
         var open = function(quote) {
             window.open(
-              '#/print-plants/' + quotes.id,
+              '#/print-plants/' + quote.id,
               '_blank'
             );
         }

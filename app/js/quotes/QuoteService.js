@@ -102,8 +102,6 @@ servicesModuleQuote.factory('QuoteService',
 
             QuoteService.loadForEdit = function($scope, toLoad, quote) {
                 $log.info('loadForEdit start: ' + toLoad);
-                //$rootScope.job = job;
-                //var quote = job.quotes[0];
 
                 $rootScope.editing = quote;
                 $rootScope.quote = $rootScope.editing;
@@ -189,13 +187,13 @@ servicesModuleQuote.factory('QuoteService',
 
             var saveCurrent = function (editing, afterSave) {
                 $log.info("saveCurrent:" + editing._id);
-                var worksheet = {};
-                worksheet.quote = editing;
+                var quote = {};
+                quote = editing;
 
-                QuoteService.save(worksheet).then(function(result) {
-                    var quote = result.data.quote;
+                QuoteService.save(quote).then(function(result) {
+                    //var quote = result.data.quote;
 
-                    $log.info("QuoteService save finished updating:" + quote.id + ' u: ' + quote.updated);
+                    $log.info("QuoteService save finished updating:" + quote._id + ' u: ' + quote.updated);
 
                     $rootScope.loadForEdit = true;
                     var quoteId = $rootScope.currentQuoteId = quote._id;
@@ -221,7 +219,7 @@ servicesModuleQuote.factory('QuoteService',
 
             QuoteService.openPrint = function(quote) {
                 window.open(
-                    '#/print-contract/' + quote.id,
+                    '#/print-contract/' + quote._id,
                     '_blank'
                 );
 //            window.open(
@@ -360,10 +358,10 @@ servicesModuleQuote.factory('QuoteService',
                 QuoteService.load($scope);
             }
 
-            QuoteService.save = function(worksheet) {
-                var json = JSON.stringify(worksheet);
+            QuoteService.save = function(quote) {
+                var json = JSON.stringify(quote);
                 $log.info('save json is ' + json);
-                return $http.put('/restlet/job/worksheet/'+ worksheet.quote.id, json);
+                return $http.put(createUrl('/quotes/'+ quote._id), json);
             }
 
             return QuoteService;
