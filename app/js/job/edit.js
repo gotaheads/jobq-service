@@ -2,7 +2,7 @@
 function EditJobCtrl($scope, JobService, $http, $routeParams, QuoteService) {
     var $log = $scope.$log;
     $scope.title = 'Edit job';
-    $scope.jobId = $routeParams.jobId;
+    var jobId = $scope.jobId = $routeParams.jobId;
     $scope.finalised = false;
     $scope.statuses = ['Preparing Quote', 'Quote approved',
         'Work in progress'
@@ -11,13 +11,15 @@ function EditJobCtrl($scope, JobService, $http, $routeParams, QuoteService) {
     $scope.$log.info("EditJobCtrl " + $scope.jobId);
 
     var url = createUrl('/jobs/' + $scope.jobId);
-    $http.get(url).success(function(job) {
+
+    JobService.load(jobId).then(function(job) {
         $scope.job = job;
+        $scope.quote = job.quote;
         $scope.editing = job;
 
 
         var workIdx = 0;
-        $scope.quote = {};
+        //$scope.quote = {};
         $scope.workIdx = workIdx;
 
         switch(job.status) {
