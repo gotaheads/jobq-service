@@ -172,10 +172,6 @@ servicesModuleQuote.factory('QuoteService',
                     ' widx:' +$scope.workIdx +
                     ' changed?: ' + $rootScope.editingChanged);
 
-//                if($rootScope.editingChanged) {
-//                    saveCurrent($rootScope.editing);
-//                }
-
                     QuoteService.loadForEdit($scope, toLoad, $rootScope.editing);
 
 
@@ -188,7 +184,9 @@ servicesModuleQuote.factory('QuoteService',
             var saveCurrent = function (editing, afterSave) {
                 $log.info("saveCurrent:" + editing._id);
                 var quote = {};
-                quote = editing;
+                quote = editing,
+                quote.updated = new Date(),
+                quote.version++;
 
                 QuoteService.save(quote).then(function(result) {
                     //var quote = result.data.quote;
@@ -197,12 +195,12 @@ servicesModuleQuote.factory('QuoteService',
 
                     $rootScope.loadForEdit = true;
                     var quoteId = $rootScope.currentQuoteId = quote._id;
-                    $rootScope.quoteId = quote._id;
-                    $rootScope.quote._id = quote._id;
+                    //$rootScope.quoteId = quote._id;
+                    //$rootScope.quote._id = quote._id;
                     var jobId = quote._jobId;
-                    $rootScope.quote.version = quote.version;
-                    $rootScope.quote.updated = quote.updated;
-                    $rootScope.quote.status = quote.status;
+                    //$rootScope.quote.version = quote.version;
+                    //$rootScope.quote.updated = quote.updated;
+                    //$rootScope.quote.status = quote.status;
 
                     $rootScope.updateQuoteActions($rootScope, jobId, quoteId);
 

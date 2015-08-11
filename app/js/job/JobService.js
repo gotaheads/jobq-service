@@ -26,6 +26,8 @@ servicesModule.factory('JobService',
     }
 
     JobService.saveJob = function(job) {
+
+
         var json = JSON.stringify(job);
         $log.info('saveJob json is ' + json);
         var url = createUrl('/jobs/' + job._id);

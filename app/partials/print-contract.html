@@ -7,12 +7,12 @@
         <span class="span11">{{created | date:'dd/MM/yyyy'}}</span>
 
         <address class="offset8">
-            <span class="span4 business">{{quotes.business.business}}</span>
-            <span class="span4">ABN: {{quotes.business.abn}}</span>
-            <span class="span4 top10">{{quotes.business.address1}}</span>
-            <span class="span4">{{quotes.business.address2}}</span>
-            <span class="span4">{{quotes.business.tel}}</span>
-            <span class="span4">{{quotes.business.email}}</span>
+            <span class="span4 business">{{quote.business.business}}</span>
+            <span class="span4">ABN: {{quote.business.abn}}</span>
+            <span class="span4 top10">{{quote.business.address1}}</span>
+            <span class="span4">{{quote.business.address2}}</span>
+            <span class="span4">{{quote.business.tel}}</span>
+            <span class="span4">{{quote.business.email}}</span>
 
             <span class="span4"><!-- ABN: {{userProfile.business.abn}} --></span>
         </address>
@@ -104,7 +104,7 @@
         <div class="well span10">
             <p class="span11 top20">Date: {{created | date:'dd/MM/yyyy'}}</p>
             <p class="span3 top10 offset1">{{quote.client}} </p><p class="span4 offset5">Sign _____________________________</p>
-            <p class="span3 top10 offset1">{{quotes.business.business}} </p><p class="span4 offset5">Sign _____________________________</p>
+            <p class="span3 top10 offset1">{{quote.business.business}} </p><p class="span4 offset5">Sign _____________________________</p>
 
         </div>
     </div>
