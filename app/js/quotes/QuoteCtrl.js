@@ -197,7 +197,7 @@ function EditPlantCtrl($scope, QuoteService) {
 
         var open = function(quote) {
             window.open(
-              '#/print-plants/' + quote.id,
+              '#/print-plants/' + quote._id,
               '_blank'
             );
         }

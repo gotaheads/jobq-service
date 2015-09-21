@@ -8,11 +8,12 @@
     "prestart": "npm install",
     "http": "http-server -a localhost -p 8000 -c-1",
     "start": "node migrate/index.js",
+    "migrate": "node migrate/index.js",
     "pretest": "npm install",
     "__test": "karma start karma.conf.js",
     "test": "mocha migrate/*.spec.js -R list",
     "_not_working_start-mongodb-rest": "mongodb-rest ",
-    "start-mongodb-rest2": "node mongodb-rest/index.js",
+    "start-mongodb": "node mongodb-rest/index.js",
     "_mongodb-rest-orig-ver":"^0.10"
   },
   "author": "gotaheads",

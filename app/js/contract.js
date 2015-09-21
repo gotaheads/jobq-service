@@ -70,7 +70,7 @@ function ViewContractCtrl($scope, $http, $routeParams) {
         $scope.quote = quote;
         
         $scope.printQuote = function() {
-            $log.info("EditJobCtrl printQuote : " + $scope.quote.id);
+            $log.info("EditJobCtrl printQuote : " + $scope.quote._id);
             QuoteService.openPrint($scope.quote);
         }
 

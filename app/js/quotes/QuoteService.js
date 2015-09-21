@@ -205,7 +205,7 @@ servicesModuleQuote.factory('QuoteService',
                     $rootScope.updateQuoteActions($rootScope, jobId, quoteId);
 
                     if(afterSave !== undefined) {
-                        afterSave(result.data.quote);
+                        afterSave(quote);
                     }
 
                 });
