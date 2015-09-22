@@ -60,11 +60,11 @@ myApp.run(['$rootScope', '$location', '$log', '$filter', '$http',
     $rootScope.showMenu = true;
     
     $rootScope.loadUserProfile = function()  {
-        var url = 'http://localhost:3000/dfl201505062208/userprofiles/55c34d907d61abda0f50169e'
-        $http.get(url).success(function(up) {
-            $rootScope.userProfile = up.userProfile;
-            $rootScope.userProfile.business = up.business;
-            $rootScope.userProfile.template = up.template;
+        var url = createUrl('/userprofiles')
+        return $http.get(url).then(function(res) {
+            var profile = res.data[0];
+            return $rootScope.userProfile = profile;
+            //return $rootScope.userProfile;
         });
     }
 

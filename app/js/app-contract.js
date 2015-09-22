@@ -16,12 +16,12 @@ myApp.run(['$rootScope', '$location', '$http', '$log',function($rootScope, $loca
     $log.info('myApp path: ' + $rootScope.location.path());
     
     $rootScope.loadUserProfile = function()  {
-        //http://localhost:3000/dfl201522242105/userprofiles/5561b460012c3cff1b35313c
         var url = 'http://localhost:3000/dfl201522242105/userprofiles/5561b460012c3cff1b35313c'
         $http.get(url).success(function(up) {
             $rootScope.userProfile = up.userProfile;
             $rootScope.userProfile.business = up.business;
             $rootScope.userProfile.template = up.template;
+            return $rootScope.userProfile;
         });
     }
     $rootScope.loadUserProfile();

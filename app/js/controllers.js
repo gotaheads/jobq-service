@@ -1,9 +1,5 @@
 'use strict';
 
-function createUrl(path) {
-    return 'http://localhost:3000/dfl201500062208' + path;
-}
-
 function DashboardCtrl($scope, $http) {
     var url = createUrl('/jobs');
     $http.get(url).success(function(jobs) {
@@ -123,16 +119,12 @@ function SettingsCtrl($scope, $http, QuoteService) {
     }
     
     $scope.save = function() {
-        var profile = {};
-        profile.business = $scope.business;
-        profile.template = $scope.template;
-        $http.put('/restlet/business/' + $scope.userProfile.businessId, profile)
+        var profile = $scope.userProfile;
+        var url = createUrl('/userprofiles/'+profile._id);
+        $http.put(url, profile)
         .success(function(data, status) {
             console.log('settings saved d:' + data + ' s:' + status);
-            $scope.status = status;
-            $scope.data = data;
-            $scope.result = data; // Show result from server in our <pre></pre> element
-            $scope.loadUserProfile();
+            //$scope.loadUserProfile();
         })
         .error(function(data, status) {
             $scope.data = data || "Request failed";
@@ -141,8 +133,8 @@ function SettingsCtrl($scope, $http, QuoteService) {
     };
 
     $scope.$watch('userProfile.businessId', function(evt, cur, prev) {
-        $http.get('/restlet/business/' + $scope.userProfile.businessId).
-        success(function(profile) {
+
+        $scope.loadUserProfile().then(function(profile) {
 
             $scope.business = profile.business;
             $scope.template = profile.template;
