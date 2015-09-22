@@ -63,6 +63,7 @@ function ViewContractCtrl($scope, ContractService, $routeParams,QuoteService) {
         var quote = result.data;
         $scope.contract = quote.contract;
         $scope.quote = quote;
+        $scope.quote.business = $scope.userProfile.business;
         $scope.editing = quote;
         $scope.printQuote = function() {
             $log.info("ViewContractCtrl printQuote : " + $scope.quote._id);
