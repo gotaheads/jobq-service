@@ -14,7 +14,7 @@ userProfiles = require('./userProfiles').userProfiles
 module.exports.landscapequoting = (function () {
     console.log('starting landscapequoting with %j', config)
 
-    landscapequoting = {},jobQuote = []
+    landscapequoting = {}
 
     landscapequoting.loadUserProfiles = function() {
         userProfiles.get().then(function(userProfile) {
@@ -57,7 +57,6 @@ module.exports.landscapequoting = (function () {
                 quote._jobId = job._id
 
                 quotes.post(quote).then(function(id) {
-                    jobQuote.push({jobId:job._id, quoteIdSrc:id})
                     console.log('quote created: %s', id)
                     quote._id = id
                     resolve(quote);
