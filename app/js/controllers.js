@@ -10,23 +10,44 @@ function DashboardCtrl($scope, $http) {
 }
 DashboardCtrl.$inject = ['$scope','$http'];
 
-function CreateJobCtrl($scope, $http) {
+function CreateJobCtrl($scope, $http, Quote) {
     $scope.title = 'Create new job';
     
     console.log("CreateJobCtrl");
     $scope.job = {
-        "client":"",
-        "address":"",
-        "budget":0
+        address: '',
+        budget: 0,
+        client: '',
+        created: new Date(),
+        finalPrice: 0,
+        quoteId:-1,
+        quotes: [],
+        status: "Pending",
+        totalDiff: 0,
+        totalPrice: 0,
+        version: 1
     };
               
     $scope.save = function() {
-        var url = createUrl('/jobs/-1');
-        $http.post(url, $scope.job)
-        .success(function(data, status) {
-            console.log('job saved d:' + data + ' id '+ data._id + ' s:' + status);
+        var url = createUrl('/jobs'),job = $scope.job;
 
-            $scope.location.path('edit-job/' + data._id);
+        $http.post(url, $scope.job)
+        .success(function(data, status, headers, config) {
+            var jobId = data.id;
+                job._id = jobId;
+                var quote = Quote.newQuota(job);
+                console.log('job saved d:' + ' id '+ jobId);
+
+                $http.post(createUrl('/quotes'), quote)
+                    .success(function(data, status, headers, config) {
+                        var quoteId = data.id;
+                        job._quoteId = quoteId;
+                        $http.put(createUrl('/jobs/'+jobId), job)
+                            .success(function(data, status, headers, config) {
+                                console.log('job saved d:' + ' id '+ quoteId);
+                                $scope.location.path('edit-job/' + jobId);
+                            })
+                    });
         })
         .error(function(data, status) {
             $scope.data = data || "Request failed";
@@ -35,7 +56,7 @@ function CreateJobCtrl($scope, $http) {
     };    
 }
 
-CreateJobCtrl.$inject = ['$scope','$http'];
+CreateJobCtrl.$inject = ['$scope','$http', 'Quote'];
 
 function PrintJobCtrl($scope, JobService, $http, $routeParams) {
     $scope.jobId = $routeParams.jobId;

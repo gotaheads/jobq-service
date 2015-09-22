@@ -10,6 +10,40 @@ servicesModuleQuote.factory('Quote',
     function ($log, $rootScope) {
         var Quote = {};
 
+        var newQuota = function() {
+            return {
+                "client": "",
+                "address": "",
+                "budget": 0,
+                "created": new Date(),
+                "updated": undefined,
+                "totalPrice": 0,
+                "finalPrice": 0,
+                "totalDiff": 0,
+                "status": "Draft",
+                "version": 1,
+                "works": [],
+                "contract": {
+                    "dear": "",
+                    "title": "",
+                    "intro": "",
+                    "paymentIntro": "",
+                    "payments": [],
+                    "sections": []
+                },
+                "_jobId": ""
+            };
+        }
+
+        Quote.newQuota =function(job) {
+            var quota = newQuota();
+            quota._jobId = job._id;
+            quota.budget = job.budget;
+            quota.client = job.client;
+            quota.address =job.address;
+
+            return quota;
+        }
         var _newItemId = -1;
         function newId() {
             var id = _newItemId;
