@@ -5,8 +5,12 @@
 
 // Declare app level module which depends on filters, and services
 var myApp = angular.module('jobq', ['$strap.directives', 'ui.bootstrap', 'ngGrid',
-    'jobq.filters', 'jobq.services', 'jobq.quote.services', 'jobq.directives','jobq.spinnerServices',
-    'jobq.quote.core']).
+    'jobq.filters', 'jobq.services',
+    'jobq.quote.services',
+    'jobq.directives',
+    'jobq.spinnerServices',
+    'jobq.quote.core',
+    'jobq.auth']).
   config(['$routeProvider', function($routeProvider) {
     $routeProvider.when('/dashboard', {templateUrl: 'partials/dashboard.html', controller: DashboardCtrl});
     $routeProvider.when('/new-job', {templateUrl: 'partials/job.html', controller: CreateJobCtrl});
@@ -34,13 +38,19 @@ var myApp = angular.module('jobq', ['$strap.directives', 'ui.bootstrap', 'ngGrid
       {templateUrl: 'partials/print-plants.html', controller: PrintPlantCtrl});
 
     $routeProvider.when('/settings', {templateUrl: 'partials/settings.html', controller: SettingsCtrl});
+
+    $routeProvider.when('/login', {templateUrl: 'features/auth/login/login.html', controller: LoginCtrl});
+
     $routeProvider.otherwise({redirectTo: '/dashboard'});
   }]);
 
 myApp.run(['$rootScope', '$location', '$log', '$filter', '$http',
-           'Quote','Coolections','QuoteActions',
-           function($rootScope, $location, $log, $filter,$http,
-                    Quote, Coolections, QuoteActions) {
+           'Quote','Coolections','QuoteActions', 'Auths',
+   function($rootScope, $location, $log, $filter,$http,
+            Quote, Coolections, QuoteActions, Auths) {
+    $rootScope.authenticated = Auths.isAuthenticated();
+    Auths.forwardToLogin($location.path());
+
     $rootScope.location = $location;
     $rootScope.$log = $log;
     $rootScope.capitalize = $filter('capitalize');
@@ -116,15 +126,10 @@ myApp.run(['$rootScope', '$location', '$log', '$filter', '$http',
     }
 
     $rootScope.$on('$routeChangeStart', function(evt, cur, prev) {
-        $log.info('$routeChangeStart...' + $location.path());
-        if($location.path().indexOf('print') != -1) {
-            $rootScope.showMenu = false;
-            return;
-        }
+        var path = $location.path();
+        $log.info('$routeChangeStart...' + path);
 
-//        if($location.path().indexOf('edit-job') != -1) {
-//        }
-
+        Auths.forwardToLogin(path);
     });
 
     $rootScope.addRecentJob = function(jobId, client) {

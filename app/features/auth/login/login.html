@@ -1,0 +1,19 @@
+<div class="container">
+
+    <form class="form-signin">
+        <h2 class="form-signin-heading">Please login</h2>
+        <input type="text" class="input-block-level"
+               placeholder="Username"
+               name="username" id="username"
+               ng-model="user.username">
+        <input type="password" class="input-block-level"
+               placeholder="Password"
+               name="password" id="password"
+                ng-model="user.password">
+        <!-- label class="checkbox">
+            <input type="checkbox" value="remember-me"> Remember me
+        </label -->
+        <button class="btn btn-large btn-primary" ng-click="login(user)">Sign in</button>
+    </form>
+
+</div>
