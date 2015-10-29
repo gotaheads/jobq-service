@@ -11,7 +11,7 @@ servicesModuleAuths.factory('Auths',
 
             Auths.authenticate = function(user) {
                 authenticated = false;
-                if(user.username === 'admin' || user.password === 'dfl') {
+                if(user.username === 'admin' && user.password === 'dflgertrude') {
                     authenticated =true;
                 }
                 return authenticated;
