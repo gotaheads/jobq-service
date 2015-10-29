@@ -254,6 +254,9 @@ margin-top: 0.1em;
 }
 
 @media print {
+    .no-print {
+        display: none !important;
+    }
     #controls, .footer, .footerarea{ display: none; }
     html, body {
     }

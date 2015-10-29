@@ -6,9 +6,9 @@ var servicesModuleQuote =
  *
  */
 servicesModuleQuote.factory('QuoteService',
-    ['$rootScope', '$routeParams', '$http', '$log', 'Quote',
+    ['$rootScope', '$routeParams', '$http', '$log', 'Quote','$location',
         function ($rootScope, $routeParams, $http, $log,
-                  Quote) {
+                  Quote, $location) {
 
             var QuoteService = {};
             $rootScope.quote = {};
@@ -216,10 +216,11 @@ servicesModuleQuote.factory('QuoteService',
             }
 
             QuoteService.openPrint = function(quote) {
-                window.open(
-                    '#/print-contract/' + quote._id,
-                    '_blank'
-                );
+                $location.path('print-contract/' + quote._id);
+                //window.open(
+                //    '#/print-contract/' + quote._id,
+                //    '_blank'
+                //);
 //            window.open(
 //              'contract.html#/contract/' + quote.id,
 //              '_blank'
