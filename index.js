@@ -20,7 +20,7 @@ app.use('/api', proxy('localhost:3200', {
 //    });
 //});
 
-var server = app.listen(8000, function () {
+var server = app.listen(8100, function () {
     var host = server.address().address;
     var port = server.address().port;
 

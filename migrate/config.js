@@ -2,7 +2,7 @@ var dateFormat = require('dateformat');
 exports.config = (function () {
     now = new Date()
     //stamp =  dateFormat(now, "yyyyMMddHHmm");
-    stamp =  dateFormat(now, "yyyyMMdd");
+    stamp =  '1'
     //console.log('stamp:%s', stamp)
 
     var toJson = function(err, res) {
