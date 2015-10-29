@@ -5,31 +5,34 @@
   "main": "index.js",
   "scripts": {
     "postinstall": "",
-    "prestart": "npm install",
+    "prestart": "",
+    "start": "node index.js",
     "http": "http-server -a localhost -p 8000 -c-1",
-    "start": "node migrate/index.js",
-    "migrate": "node --debug migrate/index.js",
+    "migrate": "node migrate/index.js",
+    "migrate-debug": "node --debug migrate/index.js",
     "pretest": "npm install",
     "__test": "karma start karma.conf.js",
     "test": "mocha migrate/*.spec.js -R list",
     "_not_working_start-mongodb-rest": "mongodb-rest ",
     "start-mongodb": "node mongodb-rest/index.js",
-    "_mongodb-rest-orig-ver":"^0.10"
+    "_mongodb-rest-orig-ver": "^0.10"
   },
   "author": "gotaheads",
   "license": "MIT",
   "dependencies": {
+    "bluebird": "~2.9.25",
     "curlrequest": "^0.5.2",
+    "dateformat": "~1.0.11",
+    "expect.js": "~0.3.1",
+    "express": "^4.13.3",
+    "http-server": "~0.8.0",
+    "mocha": "~2.2.5",
     "mongodb": "~2.0.31",
     "mongodb-rest": "git://github.com/gotaheads/mongodb-rest.git#master",
+    "mongoose": "~4.0.3",
+    "mongoskin": "^2.0.3",
     "node-rest-client": "^1.5",
     "request-as-curl": "~0.1.0",
-    "bluebird": "~2.9.25",
-    "mongoose": "~4.0.3",
-    "mocha": "~2.2.5",
-    "superagent": "~1.2.0",
-    "expect.js": "~0.3.1",
-    "dateformat": "~1.0.11",
-    "http-server": "~0.8.0"
+    "superagent": "~1.2.0"
   }
 }

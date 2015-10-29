@@ -31,12 +31,18 @@ exports.config = (function () {
             }
         },
         target:{
-            basePath: 'http://localhost:3000/dfl' + stamp,
+            basePath: 'http://localhost:3200/dfl' + stamp,
             createUrl:function(path) {
                 return this.basePath + path
             },
             idCreated:function(res) {
-                id = res.header.id
+                var parts = res.header.location.split('/')
+                    id = parts[parts.length - 1];
+
+                if(id === undefined) {
+                    console.error('id has not been found  %j', res, res.text)
+                    throw new Error('id has not been found')
+                }
                 //console.log('json res: %j, %s', res.header, id)
                 return id
             },
