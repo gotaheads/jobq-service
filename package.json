@@ -25,6 +25,7 @@
     "dateformat": "~1.0.11",
     "expect.js": "~0.3.1",
     "express": "^4.13.3",
+    "express-http-proxy": "^0.6.0",
     "http-server": "~0.8.0",
     "mocha": "~2.2.5",
     "mongodb": "~2.0.31",
