@@ -10,6 +10,7 @@ function LoginCtrl($scope, $location, Auths) {
         if(yes) {
             $location.path('/dashboard');
         }
+
     }
     //var url = createUrl('/jobs');
     //$location.get(url).success(function(jobs) {

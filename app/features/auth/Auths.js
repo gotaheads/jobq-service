@@ -1,28 +1,32 @@
 'use strict';
 
 var servicesModuleAuths =
-    angular.module('jobq.auth', []);
+angular.module('jobq.auth', []).factory('Auths',
+  function ($rootScope, $routeParams, $http, $log, $location, Sessions, Validations) {
 
-servicesModuleAuths.factory('Auths',
-    ['$rootScope', '$routeParams', '$http', '$log','$location',
-        function ($rootScope, $routeParams, $http, $log, $location) {
-
-            var Auths = {}, authenticated = false;
+            var Auths = {}, isDefined = Validations.isDefined,
+                sessionKey = 'auth';
 
             Auths.authenticate = function(user) {
-                authenticated = false;
+                Sessions.save(sessionKey, {});
+
                 if(user.username === 'admin' && user.password === 'dflgertrude') {
-                    authenticated =true;
+                    user.loggedIn = new Date();
+                    Sessions.save(sessionKey, user);
+                    return true
+
                 }
-                return authenticated;
+
+                return false;
             }
 
             Auths.isAuthenticated = function() {
-                return authenticated;
+                var user = Sessions.find(sessionKey);
+                return (isDefined(user) && isDefined(user.loggedIn));
             }
 
             Auths.logout = function() {
-                authenticated = false;
+                Sessions.save(sessionKey, {});
             }
 
 
@@ -34,5 +38,5 @@ servicesModuleAuths.factory('Auths',
             }
 
             return Auths;
-        }]);
+        });
 
