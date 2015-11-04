@@ -188,18 +188,18 @@ function PrintPlantCtrl($scope, QuoteService, $routeParams) {
 PrintPlantCtrl.$inject = ['$scope', 'QuoteService', '$routeParams'];
 
 
-function EditPlantCtrl($scope, QuoteService) {
+function EditPlantCtrl($scope, $location, QuoteService) {
     var $log = $scope.$log;
     QuoteService.findOrCreateForPlants($scope);
 
     $scope.printPlants = function() {
         $log.info("printPlants save first: " + $scope.quote._id);
-
         var open = function(quote) {
-            window.open(
-              '#/print-plants/' + quote._id,
-              '_blank'
-            );
+            $location.path('print-plants/' + quote._id);
+            //window.open(
+            //  '#/print-plants/' + quote._id,
+            //  '_blank'
+            //);
         }
         QuoteService.saveCurrent(open);
     }
@@ -265,7 +265,7 @@ function EditPlantCtrl($scope, QuoteService) {
 
     }
 }
-EditPlantCtrl.$inject = ['$scope', 'QuoteService'];
+EditPlantCtrl.$inject = ['$scope', '$location', 'QuoteService'];
 
 
 function EditOutlineCtrl($scope, QuoteService, $http, $routeParams) {

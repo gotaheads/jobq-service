@@ -186,9 +186,12 @@ servicesModuleQuote.factory('QuoteService',
             var saveCurrent = function (editing, afterSave) {
                 $log.info("saveCurrent:" + editing._id);
                 var quote = {};
-                quote = editing,
+                quote = angular.copy(editing),
                 quote.updated = new Date(),
                 quote.version++;
+                quote.works.forEach(function(i) {
+                    delete i.$$hashKey;
+                })
 
                 QuoteService.save(quote).then(function(result) {
                     //var quote = result.data.quote;
@@ -196,13 +199,9 @@ servicesModuleQuote.factory('QuoteService',
                     $log.info("QuoteService save finished updating:" + quote._id + ' u: ' + quote.updated);
 
                     $rootScope.loadForEdit = true;
+                    $rootScope.editingChanged = false;
                     var quoteId = $rootScope.currentQuoteId = quote._id;
-                    //$rootScope.quoteId = quote._id;
-                    //$rootScope.quote._id = quote._id;
                     var jobId = quote._jobId;
-                    //$rootScope.quote.version = quote.version;
-                    //$rootScope.quote.updated = quote.updated;
-                    //$rootScope.quote.status = quote.status;
 
                     $rootScope.updateQuoteActions($rootScope, jobId, quoteId);
 
