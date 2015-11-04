@@ -148,6 +148,7 @@ myApp.run(['$rootScope', '$location', '$log', '$filter', '$http',
         $log.info('adding recentJobs: ' + client);
 
         $rootScope.recentJobs.push({path:'/edit-job/'+jobId, name:client});
+        //UserProfiles.addRecentJobs(jobId, client);
     }
 
 

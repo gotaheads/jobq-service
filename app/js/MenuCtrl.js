@@ -22,7 +22,10 @@ function MenuCtrl($scope, $rootScope, $location, UserProfiles) {
 
         $scope.recentJobs2 = $scope.recentJobs;
 
+
+
     });
+
     $rootScope.$on('$routeChangeStart', function(evt, cur, prev) {
         var path = $location.path();
 
@@ -30,6 +33,7 @@ function MenuCtrl($scope, $rootScope, $location, UserProfiles) {
 
         $log.info('MenuCtrl $routeChangeStart...', path, $scope.showMenu);
 
+        //$scope.recentJobs2 = UserProfiles.userProfile().recentJobs;
         //edit-job
     });
 
