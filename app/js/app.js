@@ -45,9 +45,9 @@ var myApp = angular.module('jobq', ['$strap.directives', 'ui.bootstrap', 'ngGrid
   }]);
 
 myApp.run(['$rootScope', '$location', '$log', '$filter', '$http',
-           'Quote','Coolections','QuoteActions', 'Auths',
+           'Quote','Coolections','QuoteActions', 'Auths','UserProfiles',
    function($rootScope, $location, $log, $filter,$http,
-            Quote, Coolections, QuoteActions, Auths) {
+            Quote, Coolections, QuoteActions, Auths, UserProfiles) {
     $rootScope.authenticated = Auths.isAuthenticated();
     Auths.forwardToLogin($location.path());
 

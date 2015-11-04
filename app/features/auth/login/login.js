@@ -6,15 +6,13 @@ function LoginCtrl($scope, $location, Auths) {
     $scope.user = {};
 
     $scope.login = function(user) {
-        var yes = Auths.authenticate(user);
-        if(yes) {
+        Auths.authenticate(user).then(function() {
             $location.path('/dashboard');
-        }
+        }, function() {
+            alert('Invalid login, please try again.');
+        });
 
     }
-    //var url = createUrl('/jobs');
-    //$location.get(url).success(function(jobs) {
-    //});
 
 
 }

@@ -96,7 +96,9 @@ servicesModuleQuote.factory('QuoteService',
             QuoteService.updateQuoteStatus = function(job) {
                 $log.info('updateQuoteStatus: ' + job.status);
                 QuoteService.updateStatus($rootScope.quote, job);
-                QuoteService.updateStatus($rootScope.editing, job);
+
+                //QuoteService.updateStatus($rootScope.editing, job);
+
                 $rootScope.loadForEdit = true;
             }
 

@@ -2,31 +2,31 @@
 
 var servicesModuleAuths =
 angular.module('jobq.auth', []).factory('Auths',
-  function ($rootScope, $routeParams, $http, $log, $location, Sessions, Validations) {
+  function ($rootScope, $routeParams, $http, $log, $location, $q,
+            Sessions, Validations, UserProfiles) {
 
-            var Auths = {}, isDefined = Validations.isDefined,
-                sessionKey = 'auth';
+            var Auths = {}, isDefined = Validations.isDefined
+                ;
 
             Auths.authenticate = function(user) {
-                Sessions.save(sessionKey, {});
+                UserProfiles.clear();
 
-                if(user.username === 'admin' && user.password === 'dflgertrude') {
-                    user.loggedIn = new Date();
-                    Sessions.save(sessionKey, user);
-                    return true
+                return $http.post('/auth', user).then(function(res) {
+                    var userProfile = res.data;
+                    $log.info('userProfile: ', userProfile);
+                    UserProfiles.save(userProfile);
 
-                }
-
-                return false;
+                    return true;
+                })
             }
 
             Auths.isAuthenticated = function() {
-                var user = Sessions.find(sessionKey);
-                return (isDefined(user) && isDefined(user.loggedIn));
+                var userProfile = UserProfiles.userProfile();
+                return (isDefined(userProfile) && isDefined(userProfile.loggedIn));
             }
 
             Auths.logout = function() {
-                Sessions.save(sessionKey, {});
+                UserProfiles.clear();
             }
 
 
