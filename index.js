@@ -4,7 +4,7 @@ var app = express();
 var bodyParser = require('body-parser');
 var jsonParser = bodyParser.json();
 
-var db = require('mongoskin').db('mongodb://localhost:27017/dfl201543212210');
+var db = require('mongoskin').db('mongodb://localhost:27017/dfl1');
 
 app.use(express.static('app'));
 
