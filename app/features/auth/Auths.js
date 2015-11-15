@@ -13,8 +13,10 @@ angular.module('jobq.auth', []).factory('Auths',
 
                 return $http.post('/auth', user).then(function(res) {
                     var userProfile = res.data;
-                    $log.info('userProfile: ', userProfile);
+                    $log.info('userProfile: ', userProfile, userProfile.token);
                     UserProfiles.save(userProfile);
+
+                    $http.defaults.headers.common['token'] = userProfile.token;
 
                     return true;
                 })

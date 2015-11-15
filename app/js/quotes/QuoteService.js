@@ -6,9 +6,9 @@ var servicesModuleQuote =
  *
  */
 servicesModuleQuote.factory('QuoteService',
-    ['$rootScope', '$routeParams', '$http', '$log', 'Quote','$location',
+    ['$rootScope', '$routeParams', '$http', '$log', 'Quote','$location','Quotes',
         function ($rootScope, $routeParams, $http, $log,
-                  Quote, $location) {
+                  Quote, $location,Quotes) {
 
             var QuoteService = {};
             $rootScope.quote = {};
@@ -186,14 +186,16 @@ servicesModuleQuote.factory('QuoteService',
             var saveCurrent = function (editing, afterSave) {
                 $log.info("saveCurrent:" + editing._id);
                 var quote = {};
-                quote = angular.copy(editing),
+                quote = editing,
                 quote.updated = new Date(),
                 quote.version++;
+
+                quote = angular.copy(quote),
                 quote.works.forEach(function(i) {
                     delete i.$$hashKey;
                 })
 
-                QuoteService.save(quote).then(function(result) {
+                Quotes.save(quote).then(function(result) {
                     //var quote = result.data.quote;
 
                     $log.info("QuoteService save finished updating:" + quote._id + ' u: ' + quote.updated);

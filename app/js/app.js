@@ -10,8 +10,31 @@ var myApp = angular.module('jobq', ['$strap.directives', 'ui.bootstrap', 'ngGrid
     'jobq.directives',
     'jobq.spinnerServices',
     'jobq.quote.core',
-    'jobq.auth']).
-  config(['$routeProvider', function($routeProvider) {
+    'jobq.auth',
+    'jobq.quotes']).
+  config(['$routeProvider', '$provide', '$httpProvider', function($routeProvider, $provide, $httpProvider) {
+    //$provide.factory('myHttpInterceptor', function($q, $location) {
+    //    return function(promise) {
+    //        return promise.then(function(response) {
+    //            // do something on success
+    //        }, function(response) {
+    //            var status = response.status;
+    //            switch (status) {
+    //                case 403:
+    //                    $location.path('/login');
+    //            }
+    //            //// do something on error
+    //            //if (canRecover(response)) {
+    //            //    return responseOrNewPromise
+    //            //}
+    //
+    //            return $q.reject(response);
+    //        });
+    //    }
+    //});
+    //
+    //$httpProvider.responseInterceptors.push('myHttpInterceptor');
+
     $routeProvider.when('/dashboard', {templateUrl: 'partials/dashboard.html', controller: DashboardCtrl});
     $routeProvider.when('/new-job', {templateUrl: 'partials/job.html', controller: CreateJobCtrl});
     $routeProvider.when('/edit-job/:jobId',
