@@ -188,7 +188,7 @@ function PrintPlantCtrl($scope, QuoteService, $routeParams) {
 PrintPlantCtrl.$inject = ['$scope', 'QuoteService', '$routeParams'];
 
 
-function EditPlantCtrl($scope, $location, QuoteService) {
+function EditPlantCtrl($scope, $location, QuoteService, Plants) {
     var $log = $scope.$log;
     QuoteService.findOrCreateForPlants($scope);
 
@@ -217,8 +217,8 @@ function EditPlantCtrl($scope, $location, QuoteService) {
         if($scope.rowIndex !== undefined) {
             $scope.utils.remove($scope.work.plants, $scope.rowIndex);
             $scope.qot.initRowNumbers($scope.work.plants);
-            
             $scope.qot.updatePlantTotal($scope, $scope.editing, $scope.work);
+
         }
     }
 
@@ -232,6 +232,15 @@ function EditPlantCtrl($scope, $location, QuoteService) {
         var idx = $scope.work.plants.length;
         $scope.utils.add($scope.work.plants,
                          $scope.newEntry);
+
+        $scope.work.plants = Plants.sort($scope.work.plants);
+        //
+        //$scope.work.plants.sort(function(a,b) {
+        //    if(a.botanicalName < b.botanicalName) return -1;
+        //    if(a.botanicalName > b.botanicalName) return 1;
+        //    return 0;
+        //})
+
         $scope.qot.updatePlantTotal($scope, $scope.editing, $scope.work, idx);
         $scope.newEntry = $scope.qot.newPlant($scope.work.plants.length, 
                           $scope.userProfile.business, $scope.newEntry.margin);
@@ -243,6 +252,7 @@ function EditPlantCtrl($scope, $location, QuoteService) {
         $scope.utils.add($scope.work.plants,
                          $scope.qot.newPlant($scope.work.plants.length,
                          $scope.userProfile.business));
+        $scope.work.plants = Plants.sort($scope.work.plants);
     }
 
     $scope.cellChanged = function(row, col) {
@@ -265,7 +275,7 @@ function EditPlantCtrl($scope, $location, QuoteService) {
 
     }
 }
-EditPlantCtrl.$inject = ['$scope', '$location', 'QuoteService'];
+EditPlantCtrl.$inject = ['$scope', '$location', 'QuoteService', 'Plants'];
 
 
 function EditOutlineCtrl($scope, QuoteService, $http, $routeParams) {

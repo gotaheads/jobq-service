@@ -2,13 +2,9 @@
 
 var servicesModuleQuote =
     angular.module('jobq.quote.services', ['ngResource']);
-/**
- *
- */
-servicesModuleQuote.factory('QuoteService',
-    ['$rootScope', '$routeParams', '$http', '$log', 'Quote','$location','Quotes',
+angular.module('jobq.quote.services').factory('QuoteService',
         function ($rootScope, $routeParams, $http, $log,
-                  Quote, $location,Quotes) {
+                  Quote, $location,Quotes,Plants) {
 
             var QuoteService = {};
             $rootScope.quote = {};
@@ -346,7 +342,7 @@ servicesModuleQuote.factory('QuoteService',
                     $scope.$log.info("load Work " + idx);
                     $scope.workIdx = idx;
                     $scope.work = $scope.editing.works[idx];
-
+                    $scope.work.plants = Plants.sort($scope.work.plants);
                     $scope.qot.initItemNumbers($scope.work, 'plants');
                     $scope.newPlantEntry = Quote.newPlant($scope.work.plants.length,
                         $scope.userProfile.business);
@@ -367,5 +363,5 @@ servicesModuleQuote.factory('QuoteService',
             }
 
             return QuoteService;
-        }]);
+        });
 

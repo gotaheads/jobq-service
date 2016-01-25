@@ -5,9 +5,8 @@ angular.module('jobq.quote.core', ['ngResource']);
 /**
  *
  */
-servicesModuleQuote.factory('Quote',
-    ['$log','$rootScope',
-    function ($log, $rootScope) {
+angular.module('jobq.quote.core').factory('Quote',
+    function ($log, $rootScope, Plants) {
         var Quote = {};
 
         var newQuota = function() {
@@ -252,8 +251,8 @@ servicesModuleQuote.factory('Quote',
         Quote.createPlantsGrid = function($scope) {
             Quote.createGrid($scope, 'plantGridOptions', 'work.plants',
                 [columnDef('rowNumber',30,'#'),
+                    columnDefEditable('botanicalName',140,'Botanical'),
                 columnDefEditable('item',140,'Common'),
-                columnDefEditable('botanicalName',140,'Botanical'),
                 columnDefEditableCM('potSize',70,'Pot Size'),
                 columnDefEditable('quantity',60,'Qty.'),
                 columnDefEditableCurrency('wholesale',70,'W/S unit'),
@@ -278,6 +277,7 @@ servicesModuleQuote.factory('Quote',
                 switch(toLoad) {
                     case 'plants':
                         $scope.qot.initItemNumbers($scope.work, 'plants');
+                        $scope.work.plants = Plants.sort($scope.work.plants);
                         $scope.newEntry =
                             Quote.newPlant($scope.work.plants.length, $scope.userProfile.business);
                     case 'items':
@@ -483,10 +483,9 @@ servicesModuleQuote.factory('Quote',
         }
 
         return Quote;
-    }]);
+    });
 
 servicesModuleQuote.factory('Coolections',
-    ['$log',
     function ($log) {
         var Coolections = {};
 
@@ -546,4 +545,4 @@ servicesModuleQuote.factory('Coolections',
         }
         
         return Coolections;
-    }]);
+    });
