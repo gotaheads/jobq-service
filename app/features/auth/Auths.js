@@ -16,7 +16,8 @@ angular.module('jobq.auth', []).factory('Auths',
                     $log.info('userProfile: ', userProfile, userProfile.token);
                     UserProfiles.save(userProfile);
 
-                    $http.defaults.headers.common['token'] = userProfile.token;
+                    //$http.defaults.headers.common['token'] = userProfile.token;
+                    $http.defaults.headers.common['Authorization'] = 'Bearer ' + userProfile.token;
 
                     return true;
                 })

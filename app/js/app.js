@@ -20,8 +20,10 @@ var myApp = angular.module('jobq', ['$strap.directives', 'ui.bootstrap', 'ngGrid
     //        }, function(response) {
     //            var status = response.status;
     //            switch (status) {
+    //                case 401:
     //                case 403:
-    //                    $location.path('/login');
+    //                    console.error('401/403');
+    //                    //$location.path('/login');
     //            }
     //            //// do something on error
     //            //if (canRecover(response)) {
@@ -87,7 +89,12 @@ myApp.run(['$rootScope', '$location', '$log', '$filter', '$http',
     $rootScope.hostname = window.location.hostname;
     $log.info('myApp hostname: ' + $rootScope.hostname);
     $log.info('myApp path: ' + $rootScope.location.path());
-    
+
+
+    if(UserProfiles.userProfile()) {
+        //$http.defaults.headers.common['token'] = userProfile.token;
+        $http.defaults.headers.common['Authorization'] = 'Bearer ' + UserProfiles.userProfile().token;
+    }
     $rootScope.userProfile = {business:{itemTypes:[],chargeRates:{}}};
     
     $rootScope.showMenu = true;
@@ -98,6 +105,8 @@ myApp.run(['$rootScope', '$location', '$log', '$filter', '$http',
             var profile = res.data[0];
             return $rootScope.userProfile = profile;
             //return $rootScope.userProfile;
+        },function(res) {
+            $location.path('/login');
         });
     }
 

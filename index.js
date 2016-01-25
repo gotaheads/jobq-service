@@ -3,7 +3,9 @@ var proxy = require('express-http-proxy');
 var app = express();
 var bodyParser = require('body-parser');
 var jsonParser = bodyParser.json();
-var jwt = require('jsonwebtoken');
+var jsonwebtoken = require('jsonwebtoken');
+var jwt = require("express-jwt");
+var unless = require('express-unless');
 
 var db = require('mongoskin').db('mongodb://localhost:27017/dfl1');
 
@@ -12,7 +14,11 @@ var secret = 'jobq-secret-aws-u14123654789874';
 var name = 'DFL';
 
 app.use(express.static('app'));
-
+var jwtCheck = jwt({
+    secret: secret
+});
+jwtCheck.unless = unless;
+app.use(jwtCheck.unless({path: ['*.html', '/auth']}));
 app.use('/api', proxy('localhost:3200', {
     forwardPath: function(req, res) {
         //var token = req.headers['token'];
@@ -25,6 +31,7 @@ app.use('/api', proxy('localhost:3200', {
         //    console.log('user: ' + decoded.user);
         //});
         //var decoded = jwt.verify(token, secret);
+
         return require('url').parse(req.url).path;
     }
 }));
@@ -40,8 +47,7 @@ app.post('/auth', jsonParser, function (req, res) {
 
     if(user.username === 'admin' && user.password === 'dflgertrude') {
 
-        var token = jwt.sign({ user: user }, secret);
-
+        var token = jsonwebtoken.sign({ user: user }, secret);
 
         db.collection('userprofiles').find().toArray(function(err, result) {
             if (err) throw err;
@@ -49,7 +55,7 @@ app.post('/auth', jsonParser, function (req, res) {
             userProfile.loggedIn = new Date();
             console.log(userProfile);
             userProfile.token = token;
-            res.json(userProfile);
+            res.status(200).json(userProfile);
         });
         return;
     }
