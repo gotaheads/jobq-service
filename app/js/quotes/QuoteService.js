@@ -22,8 +22,8 @@ servicesModuleQuote.factory('QuoteService',
                 {"value":0.2, "label":'Margin 20%'},
                 {"value":0.25, "label":'Margin 25%'},
                 {"value":0.3, "label":'Margin 30%'},
-                {"value":0.3, "label":'Margin 35%'},
-                {"value":0.4, "label":'Margin kaede40%'}];
+                {"value":0.35, "label":'Margin 35%'},
+                {"value":0.4, "label":'Margin 40%'}];
 
             QuoteService.find = function(quoteId) {
                 $log.info('find quoteId is ' + quoteId);
