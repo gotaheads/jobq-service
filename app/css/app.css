@@ -238,6 +238,10 @@ margin-top: 0.1em;
   font-size: 1.2em;
   min-height: 12px !important;
 }
+.job-header adress {
+  font-size: 1em;
+}
+
 
 .job-header-label div {
   color: #7a7a7a;
@@ -246,6 +250,11 @@ margin-top: 0.1em;
   font-weight: normal;
   line-height: 1.2;
   margin-top: 0.01em;
+}
+
+.job-header-label status {
+  font-size: 1.2em;
+  color: #819A61;
 }
 
 .job-header span {
