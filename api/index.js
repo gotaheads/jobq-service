@@ -3,7 +3,7 @@ var express = require('express')
 module.exports = (function(name, database) {
     'use strict';
     var api = express.Router()
-    var pg = database.pg
+    //var pg = database.pg
 
     //api.createGetRoute = function(route, query, transform) {
     //    api.route(route)

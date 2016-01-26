@@ -6,7 +6,28 @@ var ObjectID = mongodb.ObjectID;
 module.exports = (function (api, database) {
     'use strict';
     api.route('/quotes/:id')
-        .put(function (req, res) {
+      //.get(function (req, res) {
+      //  var id = req.params.id,
+      //    quote = req.body,
+      //    jobId = quote._jobId;
+      //  quote._id = ObjectID.createFromHexString(id)
+      //
+      //  console.log('get id:%s v:%s, ', id, quote.version, jobId)
+      //
+      //  database.collection('jobs').findOne({'_id': ObjectID.createFromHexString(jobId)}, function(err, result) {
+      //    console.log('job found: %s', result._id);
+      //    var job = result;
+      //    job.version = quote.version;
+      //    job.updated = quote.updated;
+      //    job.finalPrice = quote.finalPrice;
+      //    //res.json(quote);
+      //  });
+      //
+      //
+      //
+      //
+      //})
+      .put(function (req, res) {
             var id = req.params.id,
                 quote = req.body,
                 jobId = quote._jobId;
