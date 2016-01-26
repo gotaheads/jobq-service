@@ -1,8 +1,6 @@
 'use strict';
 
 /**
- * data class
- * @module data/session
  */
 angular.module('jobq')
     .factory('UserProfiles',

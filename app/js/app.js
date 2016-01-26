@@ -37,7 +37,7 @@ var myApp = angular.module('jobq', ['$strap.directives', 'ui.bootstrap', 'ngGrid
     //
     //$httpProvider.responseInterceptors.push('myHttpInterceptor');
 
-    $routeProvider.when('/dashboard', {templateUrl: 'partials/dashboard.html', controller: DashboardCtrl});
+    $routeProvider.when('/dashboard', {templateUrl: 'features/dashboards/dashboard.html', controller: DashboardCtrl});
     $routeProvider.when('/new-job', {templateUrl: 'partials/job.html', controller: CreateJobCtrl});
     $routeProvider.when('/edit-job/:jobId',
       {templateUrl: 'partials/edit-job.html', controller: EditJobCtrl});
