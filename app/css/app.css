@@ -224,11 +224,30 @@ font-weight: normal;
 line-height: 1.2;
 margin-top: 0.1em;
 }
+.job-header .number {
+  color: #3a87ad;
+  font-size: 1.4em;
+  text-align: right;
+}
+.right {
+  text-align: right;
+}
 
-.job-header p {
+.job-header p  {
   color: #819A61;
   font-size: 1.2em;
+  min-height: 12px !important;
 }
+
+.job-header-label div {
+  color: #7a7a7a;
+  display: block;
+  font-size: 0.9em;
+  font-weight: normal;
+  line-height: 1.2;
+  margin-top: 0.01em;
+}
+
 .job-header span {
   color: #7a7a7a;
   display: block;
