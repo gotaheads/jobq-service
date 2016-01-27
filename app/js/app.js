@@ -39,10 +39,13 @@ var myApp = angular.module('jobq', ['$strap.directives', 'ui.bootstrap', 'ngGrid
 
     $routeProvider.when('/dashboard', {templateUrl: 'features/dashboards/dashboard.html', controller: DashboardCtrl});
     $routeProvider.when('/new-job', {templateUrl: 'partials/job.html', controller: CreateJobCtrl});
+
     $routeProvider.when('/edit-job/:jobId',
-      {templateUrl: 'partials/edit-job.html', controller: EditJobCtrl});
+      {templateUrl: 'features/jobs/edit/edit-job.html', controller: EditJobCtrl});
     $routeProvider.when('/print-job/:jobId', {templateUrl: 'partials/print-job.html', controller: PrintJobCtrl});
-    $routeProvider.when('/job-quotes/:jobId', {templateUrl: 'partials/job-quotes.html', controller: EditJobCtrl});
+
+    $routeProvider.when('/job-quotes/:jobId',
+      {templateUrl: 'partials/job-quotes.html', controller: EditJobCtrl});
 
     $routeProvider.when('/view-quote/:quoteId/:workIdx',
       {templateUrl: 'features/quotes/view/view-quote.html', controller: ViewQuoteCtrl});
@@ -209,7 +212,13 @@ myApp.run(['$rootScope', '$location', '$log', '$filter', '$http',
          :text.substring(0, maxLen-3)+'...');
      }
 
+     var actions = ['edit-quote','edit-labours','edit-plants','edit-outlines'];
      $rootScope.workSelected = function(workIdx, idx, actionClass) {
+       var action = $rootScope.currentAction;
+       if(actions.indexOf(action) === -1) {
+         return '';
+       }
+
        return (idx == workIdx?actionClass:'');
      }
 

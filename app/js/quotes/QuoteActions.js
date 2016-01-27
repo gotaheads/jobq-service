@@ -52,6 +52,7 @@ servicesModule.factory('QuoteActions',
                 "href": "#/edit-plants/" + quoteId
             });
 
+            $rootScope.currentAction = $rootScope.location.path().split('/')[1];
             angular.forEach($rootScope.quoteActions, function(i) {
               var action = i.href.split('/')[1];
               if($rootScope.location.path().indexOf(action) !== -1) {
