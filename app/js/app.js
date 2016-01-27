@@ -227,4 +227,9 @@ myApp.run(['$rootScope', '$location', '$log', '$filter', '$http',
        return (idx == workIdx?actionClass:'');
      }
 
-}]);
+     $rootScope.fromNow =function(date) {
+       return moment(date).fromNow();
+     }
+
+
+   }]);
