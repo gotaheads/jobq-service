@@ -1,44 +1,53 @@
 <div ng-include src="'features/quotes/quote-header.html'"></div>
 
 <div class="container-fluid">
-    <div class="row-fluid">
-        <!-- div class="span3">
-            <div ng-include src="'features/quotes/quote-menu.html'"></div>
-        </div -->
-        <div class="span9">
-            <h3 class="span11">Quote summary</h3>
+  <div class="row-fluid">
+    <!-- div class="span3">
+        <div ng-include src="'features/quotes/quote-menu.html'"></div>
+    </div -->
+    <div class="span12">
+      <h3 class="span11">Quote summary</h3>
 
-            <div class="span10  top20">
-                <table class="table  table-striped">
-                    <tbody>
-                        <tr>
-                            <td>{{quote.works.length}} works</td>
-                            <td>
-                                <a ng-repeat="item in quote.works">
-                                    {{item.title}}
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>{{quote.plants.length}} plants</td>
-                            <td>
-                                <a ng-repeat="item in quote.plants">
-                                    {{item.item}}
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Contract</td>
-                            <td>
-                                <h5>Intro</h5>
-                                <p>{{editing.contract.intro}}</p>
-                                <h5>Payment Intro</h5>
-                                <p>{{editing.contract.paymentIntro}}</p>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>Number</th>
+          <th>Work</th>
+          <th>Outlines</th>
+          <th class="right">Item Total</th>
+          <th class="right">Labour Total</th>
+          <th class="right">Plant Total</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="work in quote.works">
+          <td ng-bind="$index + 1"></td>
+          <td ng-bind="work.title"></td>
+          <td>
+            <a ng-href="#/edit-outlines/{{quoteId}}/{{$index}}">
+            <ol>
+              <li ng-repeat="o in work.outlines" ng-bind="o.content"></li>
+            </ol>
+            </a>
+          </td>
+
+          <td class="right">
+            <a ng-bind="work.itemTotal.retail | currency | nodecimal"
+               ng-href="#/edit-quote/{{quoteId}}/{{$index}}"></a>
+          </td>
+          <td class="right">
+            <a ng-bind="work.labourTotal | currency | nodecimal"
+               ng-href="#/edit-labours/{{quoteId}}/{{$index}}"></a>
+          </td>
+          <td class="right">
+            <a ng-bind="work.plantTotal.retail | currency | nodecimal"
+               ng-href="#/edit-plants/{{quoteId}}/{{$index}}"></a>
+          </td>
+
+        </tr>
+        </tbody>
+      </table>
     </div>
+  </div>
+
 </div>

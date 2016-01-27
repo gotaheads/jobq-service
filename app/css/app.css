@@ -229,8 +229,9 @@ margin-top: 0.1em;
   font-size: 1.4em;
   text-align: right;
 }
+
 .right {
-  text-align: right;
+  text-align: right !important;
 }
 
 .job-header p  {
