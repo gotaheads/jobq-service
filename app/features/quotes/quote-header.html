@@ -1,0 +1,96 @@
+<div class="container-fluid">
+  <div class="row-fluid job-header">
+    <p class="span5">
+      <client><i class="icon-user"></i> {{quote.client}}</client>
+      <adress>{{quote.address}}</adress>
+    </p>
+
+    <div class="span1 number">
+      {{quote.works.length}}
+    </div>
+    <div class="span1 number">
+      {{quote.budget | noFractionCurrency}}
+    </div>
+    <div class="span1 number">
+      {{quote.totalPrice | noFractionCurrency}}
+    </div>
+    <div class="span1 number">
+      {{quote.finalPrice | noFractionCurrency}}
+    </div>
+  </div>
+  <div class="row-fluid job-header-label">
+    <div class="span5">
+      <!-- Client -->
+      <status>{{quote.status}}</status> (Version {{quote.version}}).
+      created on {{quote.createdLong | date:'dd/MM/yy'}},
+      last saved {{fromNow(quote.updated)}}
+
+    </div>
+    <div class="span1 right">
+      Works
+    </div>
+    <div class="span1 right">
+      Budget
+    </div>
+    <div class="span1 right">
+      W/S Total
+    </div>
+    <div class="span1 right">
+      Retail Total
+    </div>
+  </div>
+  <div class="row-fluid job-header-works">
+    <span class="span1">
+      <a class="btn btn-success" ng-href="#/edit-job/{{jobId}}">Job Details</a>
+    </span>
+    <span class="span1">
+      <a class="btn btn-info" ng-href="#/edit-contract/{{quoteId}}">
+      <i class="icon-legal"></i> Edit Contract</a></span>
+    <span class="span1"><a class="btn btn-warning" ng-href="#/print-contract/{{quoteId}}">
+      <i class="icon-print"></i> Print Contract</a></span>
+    <span class="span1"><a class="btn btn-primary" ng-href="#/view-quote/{{quoteId}}">
+      <i class="icon-list"></i> Quote Summary</a></span>
+    <span class="span1"><a class="btn btn-info" ng-href="#/edit-works/{{quoteId}}">
+      <i class="icon-edit"></i> Quote Works</a></span>
+
+    <!-- works class="span1" ng-repeat="w in quote.works">
+      <a class="btn btn-default">{{chop(w.title,10)}}</a>
+    </works -->
+
+    <span class="span7">
+
+    <ul>
+      <li ng-repeat="w in quote.works">
+        <div class="btn-group">
+          <button type="button" class="btn btn-default dropdown-toggle"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                  ng-class="workSelected(workIdx, $index, 'btn-primary')">
+            {{chop(w.title,15)}} <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu">
+            <li>
+              <a ng-href=""><span ng-bind="w.title"></span> </a></li>
+            <li ng-repeat="item in quoteActions" ng-show="$index > 1" class="">
+              <a ng-href="{{item.href}}/{{$parent.$index}}"><span ng-bind="item.text"></span> </a></li>
+
+            <!-- li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Separated link</a></li -->
+          </ul>
+        </div>
+      </li>
+      <!-- li ng-repeat="w in quote.works">
+        <a class="btn btn-default">
+          {{chop(w.title,15)}}
+        </a>
+      </li -->
+    </ul>
+    </span>
+  </div>
+
+</div>
+
+
+
+

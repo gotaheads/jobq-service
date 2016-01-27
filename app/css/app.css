@@ -241,8 +241,10 @@ margin-top: 0.1em;
 .job-header adress {
   font-size: 1em;
 }
-
-
+.job-header-label, .job-header-works {
+  border-bottom: 1px solid #819A61;
+  margin-bottom: 10px;
+}
 .job-header-label div {
   color: #7a7a7a;
   display: block;
@@ -251,11 +253,36 @@ margin-top: 0.1em;
   line-height: 1.2;
   margin-top: 0.01em;
 }
+.row-fluid .job-header-label [class*="span"] {
+  min-height: 15px;
+}
 
 .job-header-label status {
   font-size: 1.2em;
   color: #819A61;
 }
+
+.job-header-works ul {
+  margin-left: 0px;
+}
+.job-header-works li {
+  display: inline;
+  list-style-type: none;
+  padding-right: 6px;
+}
+
+.job-header-works .btn-group {
+  margin-bottom: 5px;
+}
+
+.job-header-works .btn-group li {
+  line-height: 10px;
+}
+
+.job-header-works works {
+  overflow: hidden;
+}
+
 
 .job-header span {
   color: #7a7a7a;

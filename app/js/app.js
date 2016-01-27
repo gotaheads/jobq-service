@@ -44,17 +44,18 @@ var myApp = angular.module('jobq', ['$strap.directives', 'ui.bootstrap', 'ngGrid
     $routeProvider.when('/print-job/:jobId', {templateUrl: 'partials/print-job.html', controller: PrintJobCtrl});
     $routeProvider.when('/job-quotes/:jobId', {templateUrl: 'partials/job-quotes.html', controller: EditJobCtrl});
 
-    $routeProvider.when('/view-quote/:quoteId/:workIdx',
-      {templateUrl: 'partials/view-quote.html', controller: ViewQuoteCtrl});
+    $routeProvider.when('/view-quote/:quoteId',
+      {templateUrl: 'features/quotes/view/view-quote.html', controller: ViewQuoteCtrl});
     $routeProvider.when('/edit-contract/:quoteId',
     {templateUrl: 'partials/edit-contract.html', controller: EditContractCtrl});
-    $routeProvider.when('/edit-outlines/:quoteId/:workIdx', {templateUrl: 'partials/edit-outlines.html', controller: EditOutlineCtrl});
+    $routeProvider.when('/edit-outlines/:quoteId/:workIdx',
+      {templateUrl: 'features/quotes/outlines/outlines.html', controller: EditOutlineCtrl});
 
     $routeProvider.when('/print-contract/:quoteId',
     {templateUrl: 'partials/print-contract.html', controller: ViewContractCtrl});
     $routeProvider.when('/view-contract/:quoteId', {templateUrl: 'partials/view-contract.html', controller: ViewContractCtrl});
     
-    $routeProvider.when('/edit-works/:quoteId/:workIdx', {templateUrl: 'partials/edit-works.html', controller: EditWorksCtrl});
+    $routeProvider.when('/edit-works/:quoteId', {templateUrl: 'partials/edit-works.html', controller: EditWorksCtrl});
     $routeProvider.when('/edit-quote/:quoteId/:workIdx', {templateUrl: 'partials/edit-quote.html', controller: EditQuoteCtrl});
     $routeProvider.when('/edit-labours/:quoteId/:workIdx', {templateUrl: 'partials/edit-labours.html', controller: EditLabourCtrl});
 
@@ -190,75 +191,22 @@ myApp.run(['$rootScope', '$location', '$log', '$filter', '$http',
 
     $rootScope.dropdown = [];
 
-//    $rootScope.updateQuoteActions = function($scope) {
-//        var quoteId = $scope.editing._quoteId;
-//        $log.info('updateQuoteActions loc path: ' + $scope.location.path() +
-//                  ' quoteId: ' + quoteId);
-//
-//        $rootScope.quoteActions = [];
-//
-//        $rootScope.quoteActions.push({
-//            "icon":"icon-print",
-//            "text": "Summary",
-//            "href": "#/view-quote/" + quoteId
-//            });
-//
-//        $rootScope.quoteActions.push({
-//            "icon":"icon-edit",
-//            "text": "Works",
-//            "href": "#/edit-works/" + quoteId
-//            });
-//
-////        if(!emptyWorks($rootScope.editing)) {
-//            $rootScope.quoteActions.push({
-//                "icon":"icon-edit",
-//                "text": "Work Outlines",
-//                "href": "#/edit-outlines/" + quoteId
-//                });
-//            $rootScope.quoteActions.push({
-//                "icon":"icon-edit",
-//                "text": "Items",
-//                "href": "#/edit-quote/" + quoteId
-//                });
-//            $rootScope.quoteActions.push({
-//                "icon":"icon-edit",
-//                "text": "Labours",
-//                "href": "#/edit-labours/" + quoteId
-//                });
-//            $rootScope.quoteActions.push({
-//                "icon":"icon-edit",
-//                "text": "Plants",
-//                "href": "#/edit-plants/" + quoteId
-//                });
-////        }
-//
-//        angular.forEach($rootScope.quoteActions, function(i) {
-//            if(i.href.indexOf($rootScope.location.path()) !== -1) {
-//                $rootScope.actionLabel = i.text;
-//            }
-//        } )
-//
-//        $rootScope.contractActions = [];
-//
-//        if(!emptyWorks($rootScope.editing)) {
-//            $rootScope.contractActions.push({
-//                "icon":"icon-edit",
-//                "text": "Edit",
-//                "href": "#/edit-contract/" + quoteId
-//                });
-//    //        $rootScope.contractActions.push({
-//    //            "icon":"icon-camera-retro",
-//    //            "text": "View",
-//    //            "href": "#/view-contract/" + quoteId
-//    //            });
-//        }
-//
-//        angular.forEach($rootScope.contractActions, function(i) {
-//            if(i.href.indexOf($rootScope.location.path()) !== -1) {
-//                $rootScope.actionLabel = i.text;
-//            }
-//        } )
-//
-//    }
+
+     function append(text, maxLen) {
+       var append = maxLen - text.length;
+       return text;
+     }
+
+     $rootScope.chop =function(text, maxLen) {
+       if(!text) return '';
+
+       return (text.length <= maxLen
+         ?(append(text, maxLen))
+         :text.substring(0, maxLen-3)+'...');
+     }
+
+     $rootScope.workSelected = function(workIdx, idx, actionClass) {
+       return (idx == workIdx?actionClass:'');
+     }
 
 }]);

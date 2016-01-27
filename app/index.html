@@ -21,7 +21,7 @@
                     <li><a href="#/settings">Settings</a></li>
 
                     <li ng-repeat="i in recentJobs2">
-                        <a href="#{{i.path}}">{{i.name}}</a></li>
+                        <a href="#{{i.path}}"><span ng-bind="i.name"></span></a></li>
                     
                     <li><a href="#/login">Logout</a></li>
                 </ul>
@@ -94,6 +94,8 @@
 
         <script src="features/dashboards/dashboard.js"></script>
         <script src="features/Apis.js"></script>
+        <script src="features/quotes/outlines/outlines.js"></script>
+
 
     </body>
 </html>

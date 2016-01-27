@@ -53,9 +53,10 @@ servicesModule.factory('QuoteActions',
             });
 
             angular.forEach($rootScope.quoteActions, function(i) {
-                if(i.href.indexOf($rootScope.location.path()) !== -1) {
+              var action = i.href.split('/')[1];
+              if($rootScope.location.path().indexOf(action) !== -1) {
                     $rootScope.actionLabel = i.text;
-                }
+              }
             } )
 
             $rootScope.contractActions = [];
@@ -69,7 +70,8 @@ servicesModule.factory('QuoteActions',
             }
 
             angular.forEach($rootScope.contractActions, function(i) {
-                if(i.href.indexOf($rootScope.location.path()) !== -1) {
+              var action = i.href.split('/')[1];
+              if($rootScope.location.path().indexOf(action) !== -1) {
                     $rootScope.actionLabel = i.text;
                 }
             } )
