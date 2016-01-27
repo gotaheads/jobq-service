@@ -1,4 +1,4 @@
-function EditJobCtrl($scope, JobService, $http, $routeParams, QuoteService) {
+function EditJobCtrl($scope, JobService, $location, $routeParams, QuoteService) {
   var $log = $scope.$log;
   $scope.title = 'Edit job';
   var jobId = $scope.jobId = $routeParams.jobId;
@@ -57,11 +57,11 @@ function EditJobCtrl($scope, JobService, $http, $routeParams, QuoteService) {
     JobService.saveJob($scope.job).then(function (result) {
       var job = result.data;
       $scope.$log.info("saveJob finished " + jobId);
-
-      window.open(
-        '#/print-job/' + jobId,
-        '_blank'
-      );
+      $location.path('/print-job/' + jobId);
+      //window.open(
+      //  '#/print-job/' + jobId,
+      //  '_blank'
+      //);
     });
   }
 
@@ -98,4 +98,4 @@ function EditJobCtrl($scope, JobService, $http, $routeParams, QuoteService) {
   }, true);
 }
 
-EditJobCtrl.$inject = ['$scope', 'JobService', '$http', '$routeParams', 'QuoteService'];
+EditJobCtrl.$inject = ['$scope', 'JobService', '$location', '$routeParams', 'QuoteService'];

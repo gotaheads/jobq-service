@@ -48,17 +48,6 @@ function CreateJobCtrl($scope, $http, Quote) {
 
 CreateJobCtrl.$inject = ['$scope','$http', 'Quote'];
 
-function PrintJobCtrl($scope, JobService, $http, $routeParams) {
-    $scope.jobId = $routeParams.jobId;
-
-    var url = createUrl('/jobs/' + $scope.jobId);
-    $http.get(url).success(function(job) {
-        $scope.job = job;
-
-        //$scope.quote = job.quotes[0];
-    });
-}
-
 
 function ViewContractCtrl($scope, ContractService, $routeParams,QuoteService) {
     var $log = $scope.$log;
