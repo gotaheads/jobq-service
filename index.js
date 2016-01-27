@@ -18,7 +18,7 @@ var jwtCheck = jwt({
     secret: secret
 });
 jwtCheck.unless = unless;
-app.use(jwtCheck.unless({path: ['*.html', '/auth']}));
+app.use(jwtCheck.unless({path: ['*.html', '/auth', '/favicon.ico', '*.ico', '*.css']}));
 app.use('/api', proxy('localhost:3200', {
     forwardPath: function(req, res) {
         //var token = req.headers['token'];
