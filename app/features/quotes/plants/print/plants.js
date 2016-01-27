@@ -8,8 +8,12 @@ function PrintPlantCtrl($scope, QuoteService, $routeParams) {
     $scope.plants = [];
     $scope.created = new Date();
     var plantTotal = {retail:0};
-
+    var works = [];
     $scope.quote.works.forEach(function(i) {
+      if(i.plants.length > 0) {
+        works.push(i);
+      }
+
       i.plants.forEach(function(j) {
         $scope.plants.push(j);
       });
@@ -18,7 +22,7 @@ function PrintPlantCtrl($scope, QuoteService, $routeParams) {
       }
 
     });
-
+    $scope.works = works;
     $scope.plantTotal = plantTotal;
   });
 
