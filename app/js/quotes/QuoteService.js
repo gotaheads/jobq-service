@@ -321,14 +321,15 @@ angular.module('jobq.quote.services').factory('QuoteService',
 
       $scope.loadWork = function (idx) {
         $scope.$log.info("load Work labours " + idx);
-        $scope.workIdx = idx;
-        $scope.work = $scope.editing.works[idx];
-
-        $scope.qot.initItemNumbers($scope.work, 'labours');
-        $scope.newLabourEntry =
-          Quote.newLabour($scope.work.labours.length,
-            $scope.userProfile.business);
-        QuoteService.focusItem();
+        $location.path('/edit-labours/'+$scope.editing._id+'/'+idx);
+        //$scope.workIdx = idx;
+        //$scope.work = $scope.editing.works[idx];
+        //
+        //$scope.qot.initItemNumbers($scope.work, 'labours');
+        //$scope.newLabourEntry =
+        //  Quote.newLabour($scope.work.labours.length,
+        //    $scope.userProfile.business);
+        //QuoteService.focusItem();
       }
 
     }
