@@ -44,6 +44,8 @@ var myApp = angular.module('jobq', ['$strap.directives', 'ui.bootstrap', 'ngGrid
     $routeProvider.when('/print-job/:jobId', {templateUrl: 'partials/print-job.html', controller: PrintJobCtrl});
     $routeProvider.when('/job-quotes/:jobId', {templateUrl: 'partials/job-quotes.html', controller: EditJobCtrl});
 
+    $routeProvider.when('/view-quote/:quoteId/:workIdx',
+      {templateUrl: 'features/quotes/view/view-quote.html', controller: ViewQuoteCtrl});
     $routeProvider.when('/view-quote/:quoteId',
       {templateUrl: 'features/quotes/view/view-quote.html', controller: ViewQuoteCtrl});
     $routeProvider.when('/edit-contract/:quoteId',

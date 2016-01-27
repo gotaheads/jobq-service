@@ -27,7 +27,7 @@ function EditWorksCtrl($scope, QuoteService) {
     }
 
     $scope.loadWork = function(idx) {
-        $scope.$log.info("load Work " + idx);
+        $scope.$log.info("load Work edit works " + idx);
         $scope.work = $scope.editing.works[idx];
     }
 

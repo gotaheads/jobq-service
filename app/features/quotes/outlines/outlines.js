@@ -1,4 +1,4 @@
-function EditOutlineCtrl($scope, QuoteService, $http, $routeParams) {
+function EditOutlineCtrl($scope, QuoteService, $location, $routeParams) {
   $scope.$log.info("EditOutlineCtrl ");
 
   QuoteService.findOrCreate($scope);
@@ -22,11 +22,12 @@ function EditOutlineCtrl($scope, QuoteService, $http, $routeParams) {
   }
 
   $scope.loadWork = function(idx) {
-    $scope.$log.info("load Work " + idx);
-    $scope.work = $scope.editing.works[idx];
+    $scope.$log.info("load Work outlines " + idx);
+    //$scope.work = $scope.editing.works[idx];
     //$scope.work = $scope.utils.findById($scope.editing.works, id);
+    $location.path('/edit-outlines/' + $scope.editing._id + '/' + idx);
   }
 
 }
 
-EditOutlineCtrl.$inject = ['$scope', 'QuoteService', '$http', '$routeParams'];
+EditOutlineCtrl.$inject = ['$scope', 'QuoteService', '$location', '$routeParams'];

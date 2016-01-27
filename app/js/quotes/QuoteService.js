@@ -288,7 +288,7 @@ angular.module('jobq.quote.services').factory('QuoteService',
                 QuoteService.load($scope, 'items');
 
                 $scope.loadWork = function(idx) {
-                    $scope.$log.info("load Work " + idx);
+                    $scope.$log.info("load Work items " + idx);
                     $scope.workIdx = idx;
                     $scope.work = $scope.editing.works[idx];
 
@@ -320,7 +320,7 @@ angular.module('jobq.quote.services').factory('QuoteService',
                 QuoteService.load($scope, 'labours');
 
                 $scope.loadWork = function(idx) {
-                    $scope.$log.info("load Work " + idx);
+                    $scope.$log.info("load Work labours " + idx);
                     $scope.workIdx = idx;
                     $scope.work = $scope.editing.works[idx];
 
@@ -339,7 +339,7 @@ angular.module('jobq.quote.services').factory('QuoteService',
                 QuoteService.load($scope, 'plants');
 
                 $scope.loadWork = function(idx) {
-                    $scope.$log.info("load Work " + idx);
+                    $scope.$log.info("load Work plants " + idx);
                     $scope.workIdx = idx;
                     $scope.work = $scope.editing.works[idx];
                     $scope.work.plants = Plants.sort($scope.work.plants);
