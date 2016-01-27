@@ -17,6 +17,7 @@
           <th class="right">Item Total</th>
           <th class="right">Labour Total</th>
           <th class="right">Plant Total</th>
+          <th class="right">Retail Total</th>
         </tr>
         </thead>
         <tbody>
@@ -43,7 +44,9 @@
             <a ng-bind="work.plantTotal.retail | currency | nodecimal"
                ng-href="#/edit-plants/{{quoteId}}/{{$index}}"></a>
           </td>
+          <td class="right" ng-bind="work.itemTotal.retail+work.labourTotal+work.plantTotal.retail | currency | nodecimal">
 
+          </td>
         </tr>
         </tbody>
       </table>

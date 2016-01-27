@@ -53,12 +53,12 @@ var myApp = angular.module('jobq', ['$strap.directives', 'ui.bootstrap', 'ngGrid
     $routeProvider.when('/view-quote/:quoteId',
       {templateUrl: 'features/quotes/view/view-quote.html', controller: ViewQuoteCtrl});
     $routeProvider.when('/edit-contract/:quoteId',
-    {templateUrl: 'partials/edit-contract.html', controller: EditContractCtrl});
+    {templateUrl: 'features/contracts/edit/edit-contract.html', controller: EditContractCtrl});
     $routeProvider.when('/edit-outlines/:quoteId/:workIdx',
       {templateUrl: 'features/quotes/outlines/outlines.html', controller: EditOutlineCtrl});
 
     $routeProvider.when('/print-contract/:quoteId',
-    {templateUrl: 'partials/print-contract.html', controller: ViewContractCtrl});
+    {templateUrl: 'features/contracts/print/print-contract.html', controller: ViewContractCtrl});
     $routeProvider.when('/view-contract/:quoteId', {templateUrl: 'partials/view-contract.html', controller: ViewContractCtrl});
     
     $routeProvider.when('/edit-works/:quoteId', {templateUrl: 'features/quotes/works/works.html', controller: EditWorksCtrl});
@@ -214,9 +214,13 @@ myApp.run(['$rootScope', '$location', '$log', '$filter', '$http',
      }
 
      var actions = ['edit-quote','edit-labours','edit-plants','edit-outlines'];
+
+     $rootScope.showWorks = function(action) {
+       return (actions.indexOf(action) === -1?false:true);
+     }
+
      $rootScope.workSelected = function(workIdx, idx, actionClass) {
-       var action = $rootScope.currentAction;
-       if(actions.indexOf(action) === -1) {
+       if(!$rootScope.showWorks($rootScope.currentAction)) {
          return '';
        }
 

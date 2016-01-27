@@ -5,17 +5,15 @@
       <adress>{{quote.address}}</adress>
     </p>
 
-    <div class="span1 number">
-      {{quote.works.length}}
+    <div class="span1 number" ng-bind="quote.works.length">
     </div>
-    <div class="span1 number">
-      {{quote.budget | noFractionCurrency}}
+    <div class="span1 number" ng-bind="quote.budget | noFractionCurrency">
     </div>
-    <div class="span1 number">
-      {{quote.totalPrice | noFractionCurrency}}
+    <div class="span1 number" ng-bind="quote.totalPrice | noFractionCurrency">
+
     </div>
-    <div class="span1 number">
-      {{quote.finalPrice | noFractionCurrency}}
+    <div class="span1 number" ng-bind="quote.finalPrice | noFractionCurrency">
+
     </div>
   </div>
   <div class="row-fluid job-header-label">
@@ -44,15 +42,15 @@
       <a class="btn btn-success" ng-href="#/edit-job/{{jobId}}">
         <i class="icon-list"></i> Job Details</a>
     </span>
-    <span class="span1">
-      <a class="btn btn-info" ng-href="#/edit-contract/{{quoteId}}">
-      <i class="icon-legal"></i> Edit Contract</a></span>
-    <span class="span1"><a class="btn btn-warning" ng-href="#/print-contract/{{quoteId}}">
-      <i class="icon-print"></i> Print Contract</a></span>
     <span class="span1"><a class="btn btn-primary" ng-href="#/view-quote/{{quoteId}}">
       <i class="icon-list"></i> Quote Summary</a></span>
     <span class="span1"><a class="btn btn-info" ng-href="#/edit-works/{{quoteId}}">
       <i class="icon-edit"></i> Edit Works</a></span>
+    <span class="span1">
+      <a class="btn btn-info" ng-href="#/edit-contract/{{quoteId}}">
+        <i class="icon-legal"></i> Edit Contract</a></span>
+    <span class="span1"><a class="btn btn-warning" ng-href="#/print-contract/{{quoteId}}">
+      <i class="icon-print"></i> Print Contract</a></span>
 
     <!-- works class="span1" ng-repeat="w in quote.works">
       <a class="btn btn-default">{{chop(w.title,10)}}</a>

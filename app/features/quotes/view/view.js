@@ -5,6 +5,9 @@ function ViewQuoteCtrl($scope, QuoteService) {
     return moment(date).fromNow();
   }
 
+
+
+
 }
 ViewQuoteCtrl.$inject = ['$scope', 'QuoteService'];
 
