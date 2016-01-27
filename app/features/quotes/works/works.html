@@ -1,12 +1,12 @@
-<div ng-include src="'partials/job-header.html'"></div>
+<div ng-include src="'features/quotes/quote-header.html'"></div>
 
 <div class="container-fluid">
     <div class="row-fluid">
-        <div class="span3">
+        <!-- div class="span3">
             <div ng-include src="'partials/quote-menu.html'"></div>
             <div ng-include src="'partials/quote-works.html'"></div>
-        </div>
-        <div class="span9">
+        </div -->
+        <div class="span12">
             <h3 class="span11">Works to include</h3>
             <form class="well form-inline span12 custom-form">
                 <div class="control-group ">
@@ -17,8 +17,7 @@
                 </div>
 
                 
-                <ul class="works icon-container"
-                    >
+                <ul class="works icon-container">
                     <li class="span11" style="margin-left: 0px;">
                         <span class="span1">#</span>
                         <span class="span3" style="margin-left: 0px;">Title</span>
@@ -33,10 +32,10 @@
 
                         <span ng-include src="'partials/items-actions.html'"></span>
 
-                        <span  class=" text-info">
+                        <!-- span  class=" text-info">
                             {{w.finalPrice | currency | nodecimal}}
-                            <!-- span>Final Price</span -->
-                        </span>
+
+                        </span -->
                     </li>
                 </ul>
             </form>
