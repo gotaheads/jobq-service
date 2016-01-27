@@ -341,13 +341,14 @@ angular.module('jobq.quote.services').factory('QuoteService',
 
       $scope.loadWork = function (idx) {
         $scope.$log.info("load Work plants " + idx);
-        $scope.workIdx = idx;
-        $scope.work = $scope.editing.works[idx];
-        $scope.work.plants = Plants.sort($scope.work.plants);
-        $scope.qot.initItemNumbers($scope.work, 'plants');
-        $scope.newPlantEntry = Quote.newPlant($scope.work.plants.length,
-          $scope.userProfile.business);
-        QuoteService.focusItem();
+        $location.path('/edit-plants/'+$scope.editing._id+'/'+idx);
+        //$scope.workIdx = idx;
+        //$scope.work = $scope.editing.works[idx];
+        //$scope.work.plants = Plants.sort($scope.work.plants);
+        //$scope.qot.initItemNumbers($scope.work, 'plants');
+        //$scope.newPlantEntry = Quote.newPlant($scope.work.plants.length,
+        //  $scope.userProfile.business);
+        //QuoteService.focusItem();
 
       }
 
