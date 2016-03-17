@@ -63,7 +63,7 @@ angular.module('jobq.quote.services').factory('QuoteService',
         changed = true;
       }
 
-      if (!c.payments) {
+      if (!c.payments || c.payments.length === 0) {
         c.payments = tempalte.payments;
         changed = true;
       }
