@@ -26,7 +26,7 @@ servicesModule.factory('JobService',
     }
 
     JobService.saveJob = function(job) {
-        var toSave = angular.clone(job);
+        var toSave = angular.copy(job);
         toSave.quote.works.forEach(function (work) {
             delete work.$$hashKey;
         })
