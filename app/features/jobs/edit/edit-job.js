@@ -58,10 +58,6 @@ function EditJobCtrl($scope, JobService, $location, $routeParams, QuoteService) 
       var job = result.data;
       $scope.$log.info("saveJob finished " + jobId);
       $location.path('/print-job/' + jobId);
-      //window.open(
-      //  '#/print-job/' + jobId,
-      //  '_blank'
-      //);
     });
   }
 
@@ -80,7 +76,6 @@ function EditJobCtrl($scope, JobService, $location, $routeParams, QuoteService) 
 
     JobService.saveJob(job).then(function (result) {
       $scope.$log.info("saveJob finished " + result.data);
-
       QuoteService.updateStatus($scope.quote, job);
       QuoteService.updateQuoteStatus(job);
     });

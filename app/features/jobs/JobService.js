@@ -26,9 +26,12 @@ servicesModule.factory('JobService',
     }
 
     JobService.saveJob = function(job) {
+        var toSave = angular.clone(job);
+        toSave.quote.works.forEach(function (work) {
+            delete work.$$hashKey;
+        })
 
-
-        var json = JSON.stringify(job);
+        var json = JSON.stringify(toSave);
         $log.info('saveJob json is ' + json);
         var url = createUrl('/jobs/' + job._id);
         return $http.put(url, json);
