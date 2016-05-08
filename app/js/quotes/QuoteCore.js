@@ -9,7 +9,7 @@ angular.module('jobq.quote.core').factory('Quote',
     function ($log, $rootScope, Plants) {
         var Quote = {};
 
-        var newQuota = function() {
+        var newQuote = function() {
             return {
                 "client": "",
                 "address": "",
@@ -35,7 +35,7 @@ angular.module('jobq.quote.core').factory('Quote',
         }
 
         Quote.newQuota =function(job) {
-            var quota = newQuota();
+            var quota = newQuote();
             quota._jobId = job._id;
             quota.budget = job.budget;
             quota.client = job.client;

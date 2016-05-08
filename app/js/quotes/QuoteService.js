@@ -42,10 +42,10 @@ angular.module('jobq.quote.services').factory('QuoteService',
       if (contract.sections.length == 1 && !contract.sections[0].content) {
         return false;
       }
+      if(contract.sections.length == 0) {
+        return false;
+      }
       return true;
-
-//            return (!contract.sections ||
-//                   (contract.sections.length == 1 && !contract.sections[0]));
     }
 
     function loadContractTemplate(quote) {
