@@ -289,14 +289,6 @@ angular.module('jobq.quote.services').factory('QuoteService',
       $scope.loadWork = function (idx) {
         $scope.$log.info("load Work items " + idx);
         $location.path('/edit-quote/'+$scope.editing._id+'/'+idx);
-        //$scope.workIdx = idx;
-        //$scope.work = $scope.editing.works[idx];
-        //
-        //$scope.qot.initItemNumbers($scope.work, 'items');
-        //
-        //$scope.newEntry = Quote.newItem($scope.work.items.length,
-        //  $scope.userProfile.business);
-        //QuoteService.focusItem();
       }
     }
 
