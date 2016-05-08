@@ -104,6 +104,7 @@ myApp.run(['$rootScope', '$location', '$log', '$filter', '$http',
         //$http.defaults.headers.common['token'] = userProfile.token;
         $http.defaults.headers.common['Authorization'] = 'Bearer ' + UserProfiles.userProfile().token;
     }
+     
     $rootScope.userProfile = {business:{itemTypes:[],chargeRates:{}}};
     
     $rootScope.showMenu = true;

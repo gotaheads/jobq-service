@@ -271,9 +271,16 @@ angular.module('jobq.quote.core').factory('Quote',
                 if(workIdx) {
                     idx = workIdx;
                 }
+                if(!idx) {
+                    idx = 0;
+                }
                 
                 $scope.work = $scope.editing.works[idx];
-                
+
+                if(!$scope.work) {
+                    $scope.work = $scope.editing.works[idx] = Quote.newWork();
+                }
+
                 switch(toLoad) {
                     case 'plants':
                         $scope.qot.initItemNumbers($scope.work, 'plants');
