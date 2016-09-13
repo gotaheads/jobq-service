@@ -78,7 +78,11 @@ function EditJobCtrl($scope, JobService, $location, $routeParams, QuoteService) 
       $scope.$log.info("saveJob finished " + result.data);
       QuoteService.updateStatus($scope.quote, job);
       QuoteService.updateQuoteStatus(job);
-      QuoteService.save($scope.quote);
+      var toSave = angular.copy($scope.quote);
+      toSave.works.forEach(function (work) {
+        delete work.$$hashKey;
+      })
+      QuoteService.save(toSave);
     });
   };
 

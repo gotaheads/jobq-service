@@ -23,7 +23,7 @@ git push origin master
 
 ./patch.sh 
 
-npm run dist
+#npm run dist
 
 git add --all .
 #git rm -r $(git ls-files --deleted)
