@@ -78,6 +78,7 @@ function EditJobCtrl($scope, JobService, $location, $routeParams, QuoteService) 
       $scope.$log.info("saveJob finished " + result.data);
       QuoteService.updateStatus($scope.quote, job);
       QuoteService.updateQuoteStatus(job);
+      QuoteService.save($scope.quote);
     });
   };
 
