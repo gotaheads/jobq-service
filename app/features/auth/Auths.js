@@ -5,8 +5,7 @@ angular.module('jobq.auth', []).factory('Auths',
   function ($rootScope, $routeParams, $http, $log, $location, $q,
             Sessions, Validations, UserProfiles) {
 
-            var Auths = {}, isDefined = Validations.isDefined
-                ;
+            var Auths = {}, isDefined = Validations.isDefined;
 
             Auths.authenticate = function(user) {
                 UserProfiles.clear();

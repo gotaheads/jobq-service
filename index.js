@@ -7,10 +7,9 @@ var jsonwebtoken = require('jsonwebtoken');
 var jwt = require("express-jwt");
 var unless = require('express-unless');
 
-var db = require('mongoskin').db('mongodb://localhost:27017/dfl1');
-
+const dbpath = 'dfl1';
+var db = require('mongoskin').db(`mongodb://localhost:27017/${dbpath}`);
 var secret = 'jobq-secret-aws-u14123654789874';
-
 var name = 'DFL';
 
 app.use(express.static('app'));
@@ -39,7 +38,6 @@ app.use('/api', proxy('localhost:3200', {
 app.use(bodyParser.json())
 var api = require('./api/index')(name, db)
 app.use('/api2', api);
-
 
 app.post('/auth', jsonParser, function (req, res) {
     var user = req.body;
