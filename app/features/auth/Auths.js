@@ -14,10 +14,7 @@ angular.module('jobq.auth', []).factory('Auths',
                     var userProfile = res.data;
                     $log.info('userProfile: ', userProfile, userProfile.token);
                     UserProfiles.save(userProfile);
-
-                    //$http.defaults.headers.common['token'] = userProfile.token;
                     $http.defaults.headers.common['Authorization'] = 'Bearer ' + userProfile.token;
-
                     return true;
                 })
             }
@@ -30,7 +27,6 @@ angular.module('jobq.auth', []).factory('Auths',
             Auths.logout = function() {
                 UserProfiles.clear();
             }
-
 
             Auths.forwardToLogin = function(path) {
                 if(path.indexOf('login') === -1 && !Auths.isAuthenticated()) {

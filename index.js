@@ -62,14 +62,6 @@ app.post('/auth', jsonParser, function (req, res) {
         .send('Invalid login.');
 });
 
-//app.get('/api', function (req, res) {
-//    db.collection('userprofiles').find().toArray(function(err, result) {
-//        if (err) throw err;
-//        console.log(result);
-//        res.json(result);
-//    });
-//});
-
 var server = app.listen(8100, function () {
     var host = server.address().address;
     var port = server.address().port;
