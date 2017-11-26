@@ -79,9 +79,9 @@ var myApp = angular.module('jobq', ['$strap.directives', 'ui.bootstrap', 'ngGrid
   }]);
 
 myApp.run(['$rootScope', '$location', '$log', '$filter', '$http',
-           'Quote','Coolections','QuoteActions', 'Auths','UserProfiles',
+           'Quote','Coolections','QuoteActions', 'Auths','UserProfiles', 'Apis',
    function($rootScope, $location, $log, $filter,$http,
-            Quote, Coolections, QuoteActions, Auths, UserProfiles) {
+            Quote, Coolections, QuoteActions, Auths, UserProfiles, Apis) {
     $rootScope.authenticated = Auths.isAuthenticated();
     Auths.forwardToLogin($location.path());
 
@@ -110,11 +110,10 @@ myApp.run(['$rootScope', '$location', '$log', '$filter', '$http',
     $rootScope.showMenu = true;
     
     $rootScope.loadUserProfile = function()  {
-        var url = createUrl('/userprofiles')
+        var url = Apis.createApiUrl('/userprofiles');
         return $http.get(url).then(function(res) {
             var profile = res.data[0];
             return $rootScope.userProfile = profile;
-            //return $rootScope.userProfile;
         },function(res) {
             $location.path('/login');
         });

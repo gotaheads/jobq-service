@@ -1,5 +1,5 @@
 angular.module('jobq').factory('Apis',
-  function ($http, $log) {
+  function ($http, $log, UserProfiles) {
 
     var Apis = {}
       ;
@@ -9,5 +9,11 @@ angular.module('jobq').factory('Apis',
 
     Apis.createApi2Url = createApi2Url;
 
-    return Apis;
+    Apis.createApiUrl = function createUrl(path) {
+        var apiPath = UserProfiles.userProfile().path;
+        $log.info('Apis.createApiUrl apiPath: ', apiPath);
+        return '/api/' + apiPath + path;
+    }
+
+      return Apis;
   });

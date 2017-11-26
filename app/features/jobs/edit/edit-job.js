@@ -9,8 +9,6 @@ function EditJobCtrl($scope, JobService, $location, $routeParams, QuoteService) 
 
   $scope.$log.info("EditJobCtrl " + $scope.jobId);
 
-  var url = createUrl('/jobs/' + $scope.jobId);
-
   JobService.load(jobId).then(function (job) {
     $scope.job = job;
     $scope.quote = job.quote;

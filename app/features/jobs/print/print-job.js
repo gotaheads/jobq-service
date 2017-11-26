@@ -1,11 +1,9 @@
-function PrintJobCtrl($scope, JobService, $http, $routeParams) {
+function PrintJobCtrl($scope, $log, JobService, $routeParams) {
   $scope.jobId = $routeParams.jobId;
+  $log.info('PrintJobCtrl $scope.jobId: ', $scope.jobId);
 
-  var url = createUrl('/jobs/' + $scope.jobId);
-  $http.get(url).success(function(job) {
+  JobService.loadJobOnly($scope.jobId).success(function(job) {
     $scope.job = job;
-
-    //$scope.quote = job.quotes[0];
   });
 }
 

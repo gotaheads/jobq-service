@@ -1,6 +1,6 @@
 'use strict';
 
-function CreateJobCtrl($scope, $http, Quote) {
+function CreateJobCtrl($scope, $http, Quote, Apis) {
     $scope.title = 'Create new job';
     
     console.log("CreateJobCtrl");
@@ -19,7 +19,7 @@ function CreateJobCtrl($scope, $http, Quote) {
     };
               
     $scope.save = function() {
-        var url = createUrl('/jobs'),job = $scope.job;
+        var url = Apis.createApiUrl('/jobs'),job = $scope.job;
 
         $http.post(url, $scope.job)
         .success(function(data, status, headers, config) {
@@ -28,11 +28,11 @@ function CreateJobCtrl($scope, $http, Quote) {
                 var quote = Quote.newQuota(job);
                 console.log('job saved d:' + ' id '+ jobId);
 
-                $http.post(createUrl('/quotes'), quote)
+                $http.post(Apis.createApiUrl('/quotes'), quote)
                     .success(function(data, status, headers, config) {
                         var quoteId = data.id;
                         job._quoteId = quoteId;
-                        $http.put(createUrl('/jobs/'+jobId), job)
+                        $http.put(Apis.createApiUrl('/jobs/'+jobId), job)
                             .success(function(data, status, headers, config) {
                                 console.log('job saved d:' + ' id '+ quoteId);
                                 $scope.location.path('edit-job/' + jobId);
@@ -46,7 +46,7 @@ function CreateJobCtrl($scope, $http, Quote) {
     };    
 }
 
-CreateJobCtrl.$inject = ['$scope','$http', 'Quote'];
+CreateJobCtrl.$inject = ['$scope','$http', 'Quote', 'Apis'];
 
 
 
