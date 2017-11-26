@@ -120,6 +120,8 @@ myApp.run(['$rootScope', '$location', '$log', '$filter', '$http',
         });
     }
 
+    //$rootScope.loadUserProfile();
+
     $rootScope.findChargeRateByLabour = function(labour) {
         var f;
         $rootScope.userProfile.business.chargeRates.forEach(function(i) {
@@ -139,9 +141,6 @@ myApp.run(['$rootScope', '$location', '$log', '$filter', '$http',
         });
         return f;
     }
-
-
-    $rootScope.loadUserProfile();
 
     $rootScope.stringify = function(data) {
         return  JSON.stringify(data);
