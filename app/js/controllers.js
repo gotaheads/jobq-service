@@ -50,9 +50,12 @@ CreateJobCtrl.$inject = ['$scope','$http', 'Quote', 'Apis'];
 
 
 
-function SettingsCtrl($scope, $http, QuoteService) {
+function SettingsCtrl($scope, $http, QuoteService, Apis, UserProfiles) {
     var $log = $scope.$log;
-    console.log("SettingsCtrl");
+
+    //$scope.userProfile = UserProfiles.userProfile();
+
+    console.log("SettingsCtrl $scope.userProfile: ", $scope.userProfile);
     
     $scope.business = {
     };
@@ -93,7 +96,7 @@ function SettingsCtrl($scope, $http, QuoteService) {
     
     $scope.save = function() {
         var profile = $scope.userProfile;
-        var url = createUrl('/userprofiles/'+profile._id);
+        var url = Apis.createApiUrl('/userprofiles/'+profile._id);
         $http.put(url, profile)
         .success(function(data, status) {
             console.log('settings saved d:' + data + ' s:' + status);
@@ -242,4 +245,4 @@ function SettingsCtrl($scope, $http, QuoteService) {
                                
 }
 
-SettingsCtrl.$inject = ['$scope','$http', 'QuoteService'];
+SettingsCtrl.$inject = ['$scope','$http', 'QuoteService', 'Apis', UserProfiles];
