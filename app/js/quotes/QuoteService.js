@@ -4,13 +4,12 @@ var servicesModuleQuote =
   angular.module('jobq.quote.services', ['ngResource']);
 angular.module('jobq.quote.services').factory('QuoteService',
   function ($rootScope, $routeParams, $http, $log,
-            Quote, $location, Quotes, Plants) {
+            Quote, $location, Quotes, Apis) {
 
     var QuoteService = {};
     $rootScope.quote = {};
     $rootScope.loadForEdit = true;
     $rootScope.editingChanged = false;
-    //$rootScope.editing = {};
 
     var margins = [{"value": 0, "label": 'Margin 0%'},
       {"value": 0.1, "label": 'Margin 10%'},
@@ -23,7 +22,7 @@ angular.module('jobq.quote.services').factory('QuoteService',
 
     QuoteService.find = function (quoteId) {
       $log.info('find quoteId is ' + quoteId);
-      var url = createUrl('/quotes/' + quoteId);
+      var url = Apis.createApiUrl('/quotes/' + quoteId);
       return $http.get(url);
     }
 
@@ -89,16 +88,13 @@ angular.module('jobq.quote.services').factory('QuoteService',
     }
 
     QuoteService.updateQuoteStatus = function (job) {
-      $log.info('updateQuoteStatus: ' + job.status);
+      $log.info('QuoteService.updateQuoteStatus: ' + job.status);
       QuoteService.updateStatus($rootScope.quote, job);
-
-      //QuoteService.updateStatus($rootScope.editing, job);
-
       $rootScope.loadForEdit = true;
     }
 
     QuoteService.loadForEdit = function ($scope, toLoad, quote) {
-      $log.info('loadForEdit start: ' + toLoad);
+      $log.info('QuoteService.loadForEdit start: ' + toLoad);
 
       $rootScope.editing = quote;
       $rootScope.quote = $rootScope.editing;
@@ -171,7 +167,6 @@ angular.module('jobq.quote.services').factory('QuoteService',
 
         QuoteService.loadForEdit($scope, toLoad, $rootScope.editing);
 
-
         return true;
       }
 
@@ -191,8 +186,6 @@ angular.module('jobq.quote.services').factory('QuoteService',
         })
 
       Quotes.save(quote).then(function (result) {
-        //var quote = result.data.quote;
-
         $log.info("QuoteService save finished updating:" + quote._id + ' u: ' + quote.updated);
 
         $rootScope.loadForEdit = true;
@@ -215,16 +208,7 @@ angular.module('jobq.quote.services').factory('QuoteService',
 
     QuoteService.openPrint = function (quote) {
       $location.path('print-contract/' + quote._id);
-      //window.open(
-      //    '#/print-contract/' + quote._id,
-      //    '_blank'
-      //);
-//            window.open(
-//              'contract.html#/contract/' + quote.id,
-//              '_blank'
-//            );
     }
-
 
     QuoteService.load = function ($scope, toLoad) {
       $scope.$log.info("QuoteService.load : quoteId: " + $scope.quoteId +
@@ -281,7 +265,6 @@ angular.module('jobq.quote.services').factory('QuoteService',
 
       $scope.margins = margins;
 
-
       $scope.qot.createItemGrid($scope);
 
       QuoteService.load($scope, 'items');
@@ -314,14 +297,6 @@ angular.module('jobq.quote.services').factory('QuoteService',
       $scope.loadWork = function (idx) {
         $scope.$log.info("load Work labours " + idx);
         $location.path('/edit-labours/'+$scope.editing._id+'/'+idx);
-        //$scope.workIdx = idx;
-        //$scope.work = $scope.editing.works[idx];
-        //
-        //$scope.qot.initItemNumbers($scope.work, 'labours');
-        //$scope.newLabourEntry =
-        //  Quote.newLabour($scope.work.labours.length,
-        //    $scope.userProfile.business);
-        //QuoteService.focusItem();
       }
 
     }
@@ -334,14 +309,6 @@ angular.module('jobq.quote.services').factory('QuoteService',
       $scope.loadWork = function (idx) {
         $scope.$log.info("load Work plants " + idx);
         $location.path('/edit-plants/'+$scope.editing._id+'/'+idx);
-        //$scope.workIdx = idx;
-        //$scope.work = $scope.editing.works[idx];
-        //$scope.work.plants = Plants.sort($scope.work.plants);
-        //$scope.qot.initItemNumbers($scope.work, 'plants');
-        //$scope.newPlantEntry = Quote.newPlant($scope.work.plants.length,
-        //  $scope.userProfile.business);
-        //QuoteService.focusItem();
-
       }
 
     }
@@ -353,7 +320,7 @@ angular.module('jobq.quote.services').factory('QuoteService',
     QuoteService.save = function (quote) {
       var json = JSON.stringify(quote);
       $log.info('save json is ' + json);
-      return $http.put(createUrl('/quotes/' + quote._id), json);
+      return $http.put(Apis.createApiUrl('/quotes/' + quote._id), json);
     }
 
     return QuoteService;
