@@ -120,7 +120,7 @@ myApp.run(['$rootScope', '$location', '$log', '$filter', '$http',
         });
     }
 
-    //$rootScope.loadUserProfile();
+    $rootScope.loadUserProfile();
 
     $rootScope.findChargeRateByLabour = function(labour) {
         var f;
