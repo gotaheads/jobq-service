@@ -3,11 +3,11 @@ angular.module('jobq').factory('Apis',
 
     var Apis = {}
       ;
-    function createUrl(path) {
+    function createApi2Url(path) {
       return '/api2' + path;
     }
 
-    Apis.createUrl = createUrl;
+    Apis.createApi2Url = createApi2Url;
 
     return Apis;
   });
