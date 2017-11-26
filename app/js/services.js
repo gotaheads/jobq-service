@@ -47,9 +47,9 @@ angular.module('jobq.services', ['ngResource'])
 
 servicesModule.factory('ContractService',
     ['$rootScope', '$routeParams', '$http', '$log',
-     'QuoteService',
+     'QuoteService','Apis',
     function ($rootScope, $routeParams, $http, $log,
-              QuoteService) {
+              QuoteService,Apis) {
 
     var ContractService = {};
 
@@ -68,13 +68,13 @@ servicesModule.factory('ContractService',
 
     ContractService.find = function(quoteId) {
         $log.info('find quoteId is ' + quoteId);
-        return $http.get(createUrl('/quotes/' + quoteId));
+        return $http.get(Apis.createApiUrl('/quotes/' + quoteId));
     }
 
     ContractService.save = function(param) {
         var json = JSON.stringify(param),id = param._id;
         $log.info('save id: ' + id  + '  '+ json);
-        return $http.put(createUrl('/quotes/'+ id), param);
+        return $http.put(Apis.createApiUrl('/quotes/'+ id), param);
     }
 
     return ContractService;

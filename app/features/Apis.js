@@ -9,7 +9,7 @@ angular.module('jobq').factory('Apis',
 
     Apis.createApi2Url = createApi2Url;
 
-    Apis.createApiUrl = function createUrl(path) {
+    Apis.createApiUrl = function (path) {
         var apiPath = UserProfiles.userProfile().path;
         $log.info('Apis.createApiUrl apiPath: ', apiPath);
         return '/api/' + apiPath + path;

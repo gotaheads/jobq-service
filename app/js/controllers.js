@@ -109,7 +109,7 @@ function SettingsCtrl($scope, $http, QuoteService, Apis, UserProfiles) {
     };
 
     $scope.$watch('userProfile.businessId', function(evt, cur, prev) {
-
+        $log.error('$scope.$watch userProfile.businessId - loading user profile, remove this if no longer needed...')
         $scope.loadUserProfile().then(function(profile) {
 
             $scope.business = profile.business;
@@ -245,4 +245,4 @@ function SettingsCtrl($scope, $http, QuoteService, Apis, UserProfiles) {
                                
 }
 
-SettingsCtrl.$inject = ['$scope','$http', 'QuoteService', 'Apis', UserProfiles];
+SettingsCtrl.$inject = ['$scope','$http', 'QuoteService', 'Apis', 'UserProfiles'];
