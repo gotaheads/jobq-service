@@ -6,13 +6,13 @@
                 <textarea ng-model="template.intro" name="intro" rows="5" cols="50"
                           class="input-no-width rounded shaded left clearboth span12">
                 </textarea>
-                <div class="icon-container">
+                <div class="vertical-middle">
                 <label>Contents ({{template.sections.length}})</label>
                 <button class="btn btn-primary" ng-click="add()">
                     <i class="icon-plus"></i> Add New Section</button>
                 </div>
                 <hr>
-                <div class="icon-container section-container top20"
+                <div class="vertical-middle section-container top20"
                     ng-repeat='c in template.sections' st-fade="$index">
                     <textarea ng-model="c.content" name="content" rows="1" cols="50"
                               class="input-no-width rounded shaded left clearboth span10"
