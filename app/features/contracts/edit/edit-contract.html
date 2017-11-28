@@ -17,12 +17,17 @@
                 <input type="text"
                        class="span12" id="dear"
                        placeholder="Dear"
-                       ng-model="editing.contract.dear">
+                       ng-model="editing.contract.dear"
+                       select-on-click
+                       init-focus
+                       capitalize-first>
                 <label>Title</label>
                 <input type="text"
                        class="span12" id="title"
                        placeholder="Title"
-                       ng-model="editing.contract.title">
+                       ng-model="editing.contract.title"
+                       select-on-click
+                       capitalize-first>
                 
                 <div ng-include src="'partials/edit-contract-content.html'"></div>
 

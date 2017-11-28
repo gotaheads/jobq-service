@@ -93,7 +93,15 @@ function SettingsCtrl($scope, $http, QuoteService, Apis, UserProfiles) {
             margin:0.1
         });
     }
-    
+
+    $scope.addNewPayment = function() {
+        $log.info('addNewPayment' );
+        $scope.template.payments.push({
+            title:'',
+            portion:0.1
+        });
+    }
+
     $scope.save = function() {
         var profile = $scope.userProfile;
         var url = Apis.createApiUrl('/userprofiles/'+profile._id);
@@ -108,141 +116,6 @@ function SettingsCtrl($scope, $http, QuoteService, Apis, UserProfiles) {
         });
     };
 
-    // $scope.$watch('userProfile.businessId', function(evt, cur, prev) {
-    //     $log.error('$scope.$watch userProfile.businessId - loading user profile, remove this if no longer needed...')
-    //     $scope.loadUserProfile().then(function(profile) {
-    //
-    //         $scope.business = profile.business;
-    //         $scope.template = profile.template;
-    //
-    //         if($scope.business.itemTypes == undefined) {
-    //             $scope.business.itemTypes = [];
-    //             $scope.business.itemTypes.push({
-    //                 type:'Material',
-    //                 margin:0.1
-    //             });
-    //             $scope.business.itemTypes.push({
-    //                 type:'Equipment Hire',
-    //                 margin:0.1
-    //             });
-    //             $scope.business.itemTypes.push({
-    //                 type:'Per square metre',
-    //                 margin:0.1
-    //             });
-    //         }
-    //
-    //         if($scope.business.chargeRates == undefined) {
-    //             $scope.business.chargeRates = [];
-    //             $scope.business.chargeRates.push({
-    //                 labour:'Landscape Supervisor',
-    //                 rate:65
-    //             });
-    //             $scope.business.chargeRates.push({
-    //                 labour:'Landscape Tradesperson',
-    //                 rate:65
-    //             });
-    //             $scope.business.chargeRates.push({
-    //                 labour:'Landscape Labourer',
-    //                 rate:45
-    //             });
-    //             $scope.business.chargeRates.push({
-    //                 labour:'Gardern assessment callout fee',
-    //                 rate:250
-    //             });
-    //             $scope.business.chargeRates.push({
-    //                 labour:'Landscape Apprentice 1-2',
-    //                 rate:40
-    //             });
-    //             $scope.business.chargeRates.push({
-    //                 labour:'Landscape Apprentice 3-4',
-    //                 rate:45
-    //             });
-    //
-    //             $scope.business.chargeRates.push({
-    //                 labour:'Qualified Horticulturist',
-    //                 rate:65
-    //             });
-    //             $scope.business.chargeRates.push({
-    //                 labour:'Studen/Trainee/Apprentice',
-    //                 rate:50
-    //             });
-    //         }
-    //
-    //
-    //         if($scope.template == undefined) {
-    //             $scope.template = {};
-    //         }
-    //         if($scope.template.paymentIntro == undefined) {
-    //             $scope.template.paymentIntro = contractDefault.paymentIntro;
-    //         }
-    //         if($scope.template.payments == undefined) {
-    //             $scope.template.payments = contractDefault.payments;
-    //         }
-    //         if(QuoteService.hasContents($scope.template)) {
-    //             $scope.template.sections = contractDefault.sections;
-    //         }
-    //         if($scope.template.intro == undefined) {
-    //             $scope.template.intro = contractDefault.intro;
-    //         }
-    //
-    //
-    //
-    //     });
-    //
-    // });
-
-
-    // var contractDefault = {
-    //     'intro':'I have prepared the following quotation for construction works. All works quoted are based on design and dimensions presented previously and approved by you.',
-    //     'paymentIntro':'If you choose to accept quotation payment is as follows: ',
-    //     'payments':[{
-    //         'title':'Booking deposit',
-    //         'portion':'0.1'
-    //     },
-    //
-    //     {
-    //         'title':'On commencement of works',
-    //         'portion':'0.3'
-    //     },
-    //
-    //     {
-    //         'title':'Progress payment to be arranged',
-    //         'portion':'0.5'
-    //     },
-    //
-    //     {
-    //         'title':'Final payment on final inspection',
-    //         'portion':'0.1'
-    //     },],
-    //     'sections':[{
-    //         content:'On receipt of deposit a start date will be confirmed and schedule of works set. Approved work aside, I will leave the rest of the property in the same state and condition as it was before commencement of landscape works.  I take responsibility for any damage caused by me to the property while undertaking landscape works.'
-    //     },
-    //
-    //     {
-    //         content:'Any variations to works and subsequent price variations will be agreed upon by both parties prior to variation.'
-    //     },
-    //
-    //     {
-    //         content:'Please note this quote is valid for two months.'
-    //     },
-    //
-    //     {
-    //         content:'If you have any questions regarding this quote or works to be undertaken please contact me on 0408122643 or 94170157.'
-    //     },
-    //
-    //     {
-    //         content:'I look forward to hearing from you.'
-    //     },
-    //
-    //     {
-    //         content:'Kind regards,'
-    //     },
-    //
-    //     {
-    //         content:$scope.userProfile.business.owner
-    //     }]
-    // }
-                               
 }
 
 SettingsCtrl.$inject = ['$scope','$http', 'QuoteService', 'Apis', 'UserProfiles'];

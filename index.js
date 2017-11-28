@@ -4,8 +4,8 @@ var app = express();
 var bodyParser = require('body-parser');
 var jsonParser = bodyParser.json();
 var jsonwebtoken = require('jsonwebtoken');
-var jwt = require("express-jwt");
-var unless = require('express-unless');
+//var jwt = require("express-jwt");
+//var unless = require('express-unless');
 
 const proxyHost = 'localhost:3200';
 const proxyUrl = `http://${proxyHost}`;
@@ -14,28 +14,21 @@ const R = require('ramda');
 
 const dbpath = 'dfl1';
 var db = require('mongoskin').db(`mongodb://localhost:27017/${dbpath}`);
-var secret = 'jobq-secret-aws-u14123654789874';
 var name = 'DFL';
 
 app.use(express.static('app'));
-var jwtCheck = jwt({
-    secret: secret
-});
-jwtCheck.unless = unless;
-app.use(jwtCheck.unless({path: ['*.html', '/auth', '/favicon.ico', '*.ico', '*.css']}));
+
+// var secret = 'jobq-secret-aws-u14123654789874';
+// var jwtCheck = jwt({
+//     secret: secret
+// });
+//
+// jwtCheck.unless = unless;
+
+app.use(require('./api/app-jwt').unless({path: ['*.html', '/auth', '/favicon.ico', '*.ico', '*.css']}));
+
 app.use('/api', proxy(proxyHost, {
     forwardPath: function(req, res) {
-        //var token = req.headers['token'];
-        //console.log('api token: %s', token)
-        //jwt.verify(token, secret, function(err, decoded) {
-        //    if(err) {
-        //        res.status(403).send('Not authorised.');
-        //        return;
-        //    }
-        //    console.log('user: ' + decoded.user);
-        //});
-        //var decoded = jwt.verify(token, secret);
-
         return require('url').parse(req.url).path;
     }
 }));
