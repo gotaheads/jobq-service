@@ -7,8 +7,8 @@ http://localhost:8100
 ```
 
 ```
-index.js
-auth by /jobq/users
+x index.js
+x auth by /jobq/users
 
 app.js
 loadUserProfile
@@ -16,8 +16,8 @@ loadUserProfile
 controllers.js
 $scope.$watch('userProfile.businessId',...
    
-core.js
-createUrl
+x core.js
+x createUrl
 
 Apis.js
 Apis.createApi2Url

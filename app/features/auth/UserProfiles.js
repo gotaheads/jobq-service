@@ -12,6 +12,8 @@ angular.module('jobq')
             return Sessions.find(sessionKey);
         }
 
+        $rootScope.userProfile = userProfile();
+
         UserProfiles.userProfile = function() {
             return userProfile();
         }
@@ -21,9 +23,17 @@ angular.module('jobq')
         }
 
         UserProfiles.save = function(userProfile) {
-            userProfile.recentJobs = [];
+            $log.info('UserProfiles.save in session userProfile: ', userProfile);
             $rootScope.userProfile = userProfile;
             Sessions.save(sessionKey, userProfile);
+        }
+
+        UserProfiles.authenticated = function(userProfile) {
+            $log.info('UserProfiles.authenticated saving to session userProfile: ', userProfile);
+            userProfile.recentJobs = [];
+            UserProfiles.save(userProfile);
+            // $rootScope.userProfile = userProfile;
+            // Sessions.save(sessionKey, userProfile);
         }
 
         UserProfiles.addRecentJobs = function(jobId, client) {
