@@ -1,93 +1,86 @@
+require('dotenv').config();
+
 var express = require('express');
 var proxy = require('express-http-proxy');
 var app = express();
 var bodyParser = require('body-parser');
-var jsonParser = bodyParser.json();
-var jsonwebtoken = require('jsonwebtoken');
+//var jsonParser = bodyParser.json();
+//var jsonwebtoken = require('jsonwebtoken');
 //var jwt = require("express-jwt");
 //var unless = require('express-unless');
 
-const proxyHost = 'localhost:3200';
-const proxyUrl = `http://${proxyHost}`;
+ const proxyHost = 'localhost:3200';
+// const proxyUrl = `http://${proxyHost}`;
 const request = require('superagent');
 const R = require('ramda');
 
 const dbpath = 'dfl1';
 var db = require('mongoskin').db(`mongodb://localhost:27017/${dbpath}`);
 var name = 'DFL';
+//const secret = 'jobq-secret-aws-u14123654789874';
 
 app.use(express.static('app'));
-
-// var secret = 'jobq-secret-aws-u14123654789874';
-// var jwtCheck = jwt({
-//     secret: secret
-// });
-//
-// jwtCheck.unless = unless;
-
-app.use(require('./api/app-jwt').unless({path: ['*.html', '/auth', '/favicon.ico', '*.ico', '*.css']}));
-
+app.use(require('./api/app-jwt')(process.env.SECRET).unless({path: ['*.html', '/auth', '/favicon.ico', '*.ico', '*.css']}));
 app.use('/api', proxy(proxyHost, {
     forwardPath: function(req, res) {
         return require('url').parse(req.url).path;
     }
 }));
-
 app.use(bodyParser.json())
-var api = require('./api/index')(name, db)
-app.use('/api2', api);
+app.use('/api2', require('./api/index')(name, db))
+app = require('./api/auth/index')(app, proxyHost, process.env.SECRET)
 
-var dbauth = require('mongoskin').db(`mongodb://localhost:27017/jobq`);
-
-app.post('/auth', jsonParser, function (req, res) {
-    var user = req.body;
-    let authenticated;
-
-    console.log('/auth %s %s', user.username, user.password);
-    request.get(`${proxyUrl}/jobq/users`).then(res => {
-        const users = R.prop('body',res)
-        console.log('users: %j', users);
-        authenticated = users.filter(toCheck => {
-                            return R.equals(toCheck.username, R.prop('username', user)) &&
-                                   R.equals(toCheck.password, R.prop('password', user))
-        })[0];
-        console.log('authenticated: %j, R.isEmpty(authenticated): %s', authenticated, R.isEmpty(authenticated));
-        return R.isEmpty(authenticated)?Promise.reject({}):
-            request.get(`${proxyUrl}/${authenticated.path}/userprofiles`);
-    }).then(res2 => {
-        const userProfiles = R.prop('body',res2);
-        console.log('userProfiles: %j', R.prop('length',userProfiles));
-        const userProfile = userProfiles[0];
-        userProfile.loggedIn = new Date();
-        console.log('userProfile.business: %j', R.prop('business', userProfile));
-        const token = jsonwebtoken.sign({ user: user }, secret);
-        userProfile.token = token;
-        userProfile.path = authenticated.path;
-        res.status(200).json(userProfile);
-        console.log('all good');
-    })
-      .catch(_=> {
-          console.log('rejected');
-          res.status(403).send('Invalid login.');
-      });
-
-    //
-    // if(user.username === 'admin' && user.password === 'dflgertrude') {
-    //     var token = jsonwebtoken.sign({ user: user }, secret);
-    //     db.collection('userprofiles').find().toArray(function(err, result) {
-    //         if (err) throw err;
-    //         var userProfile = result[0];
-    //         userProfile.loggedIn = new Date();
-    //         console.log('userProfile', R.prop('business', userProfile));
-    //         userProfile.token = token;
-    //         res.status(200).json(userProfile);
-    //     });
-    //     return;
-    // }
-    //
-    // res.status(403).send('Invalid login.');
-});
-
+// var dbauth = require('mongoskin').db(`mongodb://localhost:27017/jobq`);
+// //
+// // app.post('/auth', jsonParser, function (req, res) {
+// //     var user = req.body;
+// //     let authenticated;
+// //
+// //     console.log('/auth %s %s', user.username, user.password);
+// //     request.get(`${proxyUrl}/jobq/users`).then(res => {
+// //         const users = R.prop('body',res)
+// //         console.log('users: %j', users);
+// //         authenticated = users.filter(toCheck => {
+// //                             return R.equals(toCheck.username, R.prop('username', user)) &&
+// //                                    R.equals(toCheck.password, R.prop('password', user))
+// //         })[0];
+// //         console.log('authenticated: %j, R.isEmpty(authenticated): %s', authenticated, R.isEmpty(authenticated));
+// //         return R.isEmpty(authenticated)?Promise.reject({}):
+// //             request.get(`${proxyUrl}/${authenticated.path}/userprofiles`);
+// //     }).then(res2 => {
+// //         const userProfiles = R.prop('body',res2);
+// //         console.log('userProfiles: %j', R.prop('length',userProfiles));
+// //         const userProfile = userProfiles[0];
+// //         userProfile.loggedIn = new Date();
+// //         console.log('userProfile.business: %j', R.prop('business', userProfile));
+// //         const token = jsonwebtoken.sign({ user: user }, secret);
+// //         userProfile.token = token;
+// //         userProfile.path = authenticated.path;
+// //         res.status(200).json(userProfile);
+// //         console.log('all good');
+// //     })
+// //       .catch(_=> {
+// //           console.log('rejected');
+// //           res.status(403).send('Invalid login.');
+// //       });
+// //
+// //     //
+// //     // if(user.username === 'admin' && user.password === 'dflgertrude') {
+// //     //     var token = jsonwebtoken.sign({ user: user }, secret);
+// //     //     db.collection('userprofiles').find().toArray(function(err, result) {
+// //     //         if (err) throw err;
+// //     //         var userProfile = result[0];
+// //     //         userProfile.loggedIn = new Date();
+// //     //         console.log('userProfile', R.prop('business', userProfile));
+// //     //         userProfile.token = token;
+// //     //         res.status(200).json(userProfile);
+// //     //     });
+// //     //     return;
+// //     // }
+// //     //
+// //     // res.status(403).send('Invalid login.');
+// // });
+// //
 var server = app.listen(8100, function () {
     var host = server.address().address;
     var port = server.address().port;

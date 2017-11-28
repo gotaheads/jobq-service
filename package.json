@@ -24,6 +24,7 @@
     "body-parser": "^1.14.1",
     "curlrequest": "^0.5.2",
     "dateformat": "~1.0.11",
+    "dotenv": "^4.0.0",
     "expect.js": "~0.3.1",
     "express": "^4.13.3",
     "express-http-proxy": "^0.6.0",

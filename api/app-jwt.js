@@ -2,10 +2,9 @@
  * Created by gota on 28/11/17.
  */
 'use strict';
-module.exports = (() => {
+module.exports = ((secret) => {
     const unless = require('express-unless');
     const jwt = require('express-jwt');
-    const secret = 'jobq-secret-aws-u14123654789874';
     const jwtCheck = jwt({
         secret: secret
     });
@@ -13,4 +12,4 @@ module.exports = (() => {
 
     console.log('app-jwt start');
     return jwtCheck;
-})()
+})
