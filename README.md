@@ -10,12 +10,13 @@ http://localhost:8100
 ```
 x index.js
 x auth by /jobq/users
-dfl1
+
 const dbpath = 'dfl1';
+const db = require('mongoskin').db(`mongodb://localhost:27017/${dbpath}`);
+const name = 'DFL';
 
 index.html
 DFL Job Quoting/Contract
-
 
 x app.js
 x loadUserProfile

@@ -32,20 +32,13 @@ module.exports = (function (api, proxyHost, secret) {
                     request.get(`${proxyUrl}/${authenticated.path}/userprofiles`);
             }).then(res2 => {
                 const userProfiles = R.prop('body',res2);
-
                 console.log('userProfiles: %j', R.prop('length',userProfiles));
 
                 const userProfile = userProfiles[0];
-
+                userProfile.path = user.path = authenticated.path;
                 userProfile.loggedIn = new Date();
+                userProfile.token = jsonwebtoken.sign({ user: user }, secret)
                 console.log('userProfile.business: %j', R.prop('business', userProfile));
-
-                const token = jsonwebtoken.sign({ user: user }, secret);
-
-                userProfile.token = token;
-
-                userProfile.path = authenticated.path;
-
                 res.status(200).json(userProfile);
                 console.log('all good');
             })

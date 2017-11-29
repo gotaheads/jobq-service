@@ -1,8 +1,8 @@
 var express = require('express')
 
-module.exports = (function(name, database) {
+module.exports = (function() {
     'use strict';
     var api = express.Router()
-    api = require('./quotes/index')(api, database);
+    api = require('./quotes/index')(api);
     return api;
-});
+})();

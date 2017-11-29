@@ -32,6 +32,7 @@
     "express-unless": "^0.3.0",
     "http-server": "~0.8.0",
     "jsonwebtoken": "^5.4.1",
+    "lodash": "^4.17.4",
     "mocha": "~2.2.5",
     "mongodb": "~2.0.31",
     "mongodb-rest": "git://github.com/gotaheads/mongodb-rest.git#master",
