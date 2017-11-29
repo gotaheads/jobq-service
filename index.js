@@ -5,10 +5,6 @@ const proxy = require('express-http-proxy');
 var app = express();
 const bodyParser = require('body-parser');
 
-// const dbpath = 'dfl1';
-// const db = require('mongoskin').db(`${process.env.MONGODB_HOST}/${dbpath}`);
-// const name = 'DFL';
-
 app.use(express.static('app'));
 app.use(require('./api/app-jwt')(process.env.SECRET).unless({path: ['*.html', '/auth', '/favicon.ico', '*.ico', '*.css']}));
 

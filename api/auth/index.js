@@ -9,7 +9,7 @@ module.exports = (function (api, proxyHost, secret) {
     var jsonwebtoken = require('jsonwebtoken');
     const request = require('superagent');
     const R = require('ramda');
-
+    const passwd = require('./password');
     const proxyUrl = `http://${proxyHost}`;
     var dbauth = require('mongoskin').db(`mongodb://localhost:27017/jobq`);
     var name = 'DFL';
@@ -17,13 +17,15 @@ module.exports = (function (api, proxyHost, secret) {
             var user = req.body;
             let authenticated;
 
-            console.log('/auth %s %s', user.username, user.password);
+            console.log('/auth %s %s %s', user.username, user.password,
+                passwd.cryptPassword(user.password));
             request.get(`${proxyUrl}/jobq/users`).then(res => {
                 const users = R.prop('body',res)
                 console.log('users: %j', users);
                 authenticated = users.filter(toCheck => {
+                    console.log('compare %s', passwd.comparePassword(user.password, toCheck.password));
                     return R.equals(toCheck.username, R.prop('username', user)) &&
-                        R.equals(toCheck.password, R.prop('password', user))
+                        passwd.comparePassword(user.password, toCheck.password)
                 })[0];
 
                 console.log('authenticated: %j, R.isEmpty(authenticated): %s', authenticated, R.isEmpty(authenticated));
@@ -37,7 +39,7 @@ module.exports = (function (api, proxyHost, secret) {
                 const userProfile = userProfiles[0];
                 userProfile.path = user.path = authenticated.path;
                 userProfile.loggedIn = new Date();
-                userProfile.token = jsonwebtoken.sign({ user: user }, secret)
+                userProfile.token = jsonwebtoken.sign(user, secret)
                 console.log('userProfile.business: %j', R.prop('business', userProfile));
                 res.status(200).json(userProfile);
                 console.log('all good');

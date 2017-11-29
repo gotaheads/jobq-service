@@ -14,7 +14,7 @@ module.exports = (function (api) {
                 database = require('../db/index').db(path);
                 quote._id = ObjectID.createFromHexString(id)
 
-            console.log('/quotes/:id put id:%s v:%s, path:%s', id, quote.version, jobId, path)
+            console.log('/quotes/:id put id:%s v:%s, path:%s, user:%j', id, quote.version, jobId, path, user)
 
             database.collection('jobs').findOne({'_id': ObjectID.createFromHexString(jobId)}, function(err, result) {
                 console.log('/quotes/:id job found: %s', result._id);
