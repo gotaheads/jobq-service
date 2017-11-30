@@ -48,22 +48,6 @@ module.exports = (function (api, proxyHost, secret) {
                     console.log('rejected');
                     res.status(403).send('Invalid login.');
                 });
-
-            //
-            // if(user.username === 'admin' && user.password === 'dflgertrude') {
-            //     var token = jsonwebtoken.sign({ user: user }, secret);
-            //     db.collection('userprofiles').find().toArray(function(err, result) {
-            //         if (err) throw err;
-            //         var userProfile = result[0];
-            //         userProfile.loggedIn = new Date();
-            //         console.log('userProfile', R.prop('business', userProfile));
-            //         userProfile.token = token;
-            //         res.status(200).json(userProfile);
-            //     });
-            //     return;
-            // }
-            //
-            // res.status(403).send('Invalid login.');
         });
     return api;
 });
