@@ -12,7 +12,11 @@ app.use('/api', require('./api/app-find-user'))
 app.use('/ap2', require('./api/app-find-user'))
 
 app.use('/api', proxy(process.env.PROXY_HOST, {
-    forwardPath: (req, res) => require('url').parse(req.url).path
+    forwardPath: (req, res) => {
+        const url = require('url').parse(req.url).path
+        console.log('/api req.url: %s proxying to %s, url: %s', req.url, process.env.PROXY_HOST, url);
+        return url;
+    }
 }));
 
 app.use(bodyParser.json())

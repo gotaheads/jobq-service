@@ -15,28 +15,28 @@ module.exports = (function (api, proxyHost, secret) {
     var name = 'DFL';
     api.post('/auth', jsonParser, function (req, res) {
             var user = req.body;
+            const urlUsers = `${proxyUrl}/jobq/users`;
             let authenticated;
 
-            console.log('/auth %s %s %s', user.username, user.password,
-                passwd.cryptPassword(user.password));
-            request.get(`${proxyUrl}/jobq/users`).then(res => {
-                const users = R.prop('body',res)
-                console.log('users: %j', users);
-                authenticated = users.filter(toCheck => {
-                    console.log('compare %s', passwd.comparePassword(user.password, toCheck.password));
-                    return R.equals(toCheck.username, R.prop('username', user)) &&
-                        passwd.comparePassword(user.password, toCheck.password)
-                })[0];
+            console.log('/auth %s %s %s, urlUsers: %s', user.username, user.password,
+                passwd.cryptPassword(user.password), urlUsers);
 
-                console.log('authenticated: %j, R.isEmpty(authenticated): %s', authenticated, R.isEmpty(authenticated));
+            request.get(urlUsers).then(res => {
+                console.log('/auth res.body: %s', res.body)
+                authenticated = passwd.findMaching(user, R.prop('body',res));
 
-                return R.isEmpty(authenticated)?Promise.reject({}):
-                    request.get(`${proxyUrl}/${authenticated.path}/userprofiles`);
+                const urlUserprofiles = `${proxyUrl}/${authenticated.path}/userprofiles`;
+                console.log('authenticated: %j, R.isEmpty(authenticated): %s, urlUserprofiles: %s',
+                    authenticated, R.isEmpty(authenticated),
+                    urlUserprofiles);
+
+                return R.isEmpty(authenticated)?Promise.reject({}):request.get(urlUserprofiles);
             }).then(res2 => {
                 const userProfiles = R.prop('body',res2);
                 console.log('userProfiles: %j', R.prop('length',userProfiles));
 
                 const userProfile = userProfiles[0];
+
                 userProfile.path = user.path = authenticated.path;
                 userProfile.loggedIn = new Date();
                 userProfile.token = jsonwebtoken.sign(user, secret)

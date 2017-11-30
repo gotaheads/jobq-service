@@ -4,7 +4,7 @@
  */
 angular.module('jobq')
     .factory('UserProfiles',
-    function ($log, Validations, Sessions, $rootScope) {
+    function ($log, Validations, Sessions, $rootScope, $document) {
         var isDefined = Validations.isDefined,
             UserProfiles = {}, sessionKey = 'userProfile';
 
@@ -25,6 +25,7 @@ angular.module('jobq')
         UserProfiles.save = function(userProfile) {
             $log.info('UserProfiles.save in session userProfile: ', userProfile);
             $rootScope.userProfile = userProfile;
+            $document.title = userProfile + ' Job Quoting/Contract';
             Sessions.save(sessionKey, userProfile);
         }
 

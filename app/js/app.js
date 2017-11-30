@@ -101,25 +101,10 @@ myApp.run(['$rootScope', '$location', '$log', '$filter', '$http',
 
 
     if(UserProfiles.userProfile()) {
-        //$http.defaults.headers.common['token'] = userProfile.token;
         $http.defaults.headers.common['Authorization'] = 'Bearer ' + UserProfiles.userProfile().token;
     }
-     
-    //$rootScope.userProfile = {business:{itemTypes:[],chargeRates:{}}};
-    
-    $rootScope.showMenu = true;
-    
-    // $rootScope.loadUserProfile = function()  {
-    //     var url = Apis.createApiUrl('/userprofiles');
-    //     return $http.get(url).then(function(res) {
-    //         var profile = res.data[0];
-    //         return $rootScope.userProfile = profile;
-    //     },function(res) {
-    //         $location.path('/login');
-    //     });
-    // }
-    //
-    // $rootScope.loadUserProfile();
+
+    $rootScope.showMenu = false;
 
     $rootScope.findChargeRateByLabour = function(labour) {
         var f;
