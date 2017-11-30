@@ -102,6 +102,7 @@ myApp.run(['$rootScope', '$location', '$log', '$filter', '$http',
 
     if(UserProfiles.userProfile()) {
         $http.defaults.headers.common['Authorization'] = 'Bearer ' + UserProfiles.userProfile().token;
+        UserProfiles.updateTitle();
     }
 
     $rootScope.showMenu = false;

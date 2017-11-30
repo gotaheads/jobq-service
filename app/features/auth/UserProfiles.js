@@ -14,6 +14,10 @@ angular.module('jobq')
 
         $rootScope.userProfile = userProfile();
 
+        UserProfiles.updateTitle = function () {
+            document.title = userProfile().business.business + ' Job Quoting/Contract';
+        }
+
         UserProfiles.userProfile = function() {
             return userProfile();
         }
@@ -25,7 +29,7 @@ angular.module('jobq')
         UserProfiles.save = function(userProfile) {
             $log.info('UserProfiles.save in session userProfile: ', userProfile);
             $rootScope.userProfile = userProfile;
-            $document.title = userProfile + ' Job Quoting/Contract';
+            UserProfiles.updateTitle();
             Sessions.save(sessionKey, userProfile);
         }
 
@@ -33,8 +37,6 @@ angular.module('jobq')
             $log.info('UserProfiles.authenticated saving to session userProfile: ', userProfile);
             userProfile.recentJobs = [];
             UserProfiles.save(userProfile);
-            // $rootScope.userProfile = userProfile;
-            // Sessions.save(sessionKey, userProfile);
         }
 
         UserProfiles.addRecentJobs = function(jobId, client) {
