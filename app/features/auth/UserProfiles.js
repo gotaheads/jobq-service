@@ -29,8 +29,8 @@ angular.module('jobq')
         UserProfiles.save = function(userProfile) {
             $log.info('UserProfiles.save in session userProfile: ', userProfile);
             $rootScope.userProfile = userProfile;
-            UserProfiles.updateTitle();
             Sessions.save(sessionKey, userProfile);
+            UserProfiles.updateTitle();
         }
 
         UserProfiles.authenticated = function(userProfile) {
