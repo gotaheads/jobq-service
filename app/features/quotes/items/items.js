@@ -1,5 +1,8 @@
-function EditItemsCtrl($scope, QuoteService) {
+function EditItemsCtrl($scope, QuoteService, Items) {
   QuoteService.findOrCreateForItems($scope);
+  Items.load().then(function (items) {
+      $scope.$log.info('EditItemsCtrl items: ', items.length)
+  } )
   $scope.typeChanged = function() {
     $scope.$log.info("typeChanged: " + $scope.newEntry.itemType);
     var itemType = $scope.findItemType($scope.newEntry.itemType);
@@ -66,5 +69,5 @@ function EditItemsCtrl($scope, QuoteService) {
 
   }
 }
-EditItemsCtrl.$inject = ['$scope', 'QuoteService'];
+EditItemsCtrl.$inject = ['$scope', 'QuoteService', 'Items'];
 

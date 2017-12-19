@@ -11,7 +11,8 @@ var myApp = angular.module('jobq', ['$strap.directives', 'ui.bootstrap', 'ngGrid
     'jobq.spinnerServices',
     'jobq.quote.core',
     'jobq.auth',
-    'jobq.quotes']).
+    'jobq.quotes',
+    'jobq.items']).
   config(['$routeProvider', '$provide', '$httpProvider', function($routeProvider, $provide, $httpProvider) {
     //$provide.factory('myHttpInterceptor', function($q, $location) {
     //    return function(promise) {

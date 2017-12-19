@@ -9,7 +9,7 @@ app.use(express.static('app'));
 app.use(require('./api/app-jwt')(process.env.SECRET).unless({path: ['*.html', '/auth', '/favicon.ico', '*.ico', '*.css']}));
 
 app.use('/api', require('./api/app-find-user'))
-app.use('/ap2', require('./api/app-find-user'))
+app.use('/api2', require('./api/app-find-user'))
 
 app.use('/api', proxy(process.env.PROXY_HOST, {
     forwardPath: (req, res) => {
@@ -21,7 +21,6 @@ app.use('/api', proxy(process.env.PROXY_HOST, {
 
 app.use(bodyParser.json())
 app.use('/api2', require('./api/index'))
-
 app = require('./api/auth/index')(app, process.env.PROXY_HOST, process.env.SECRET)
 
 var server = app.listen(8100, function () {
